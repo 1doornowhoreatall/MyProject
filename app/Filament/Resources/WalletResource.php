@@ -59,22 +59,22 @@ class WalletResource extends Resource
                 Forms\Components\Section::make()
                     ->schema([
                         Forms\Components\TextInput::make('balance')
-                            ->label('SALDO DE DEPÓSITO')
+                            ->label(__('SALDO DE DEPÓSITO'))
                             ->required()
                             ->numeric()
                             ->default(0.00),
                         Forms\Components\TextInput::make('balance_bonus')
-                            ->label('SALDO DE BÔNUS')
+                            ->label(__('SALDO DE BÔNUS'))
                             ->required()
                             ->numeric()
                             ->default(0.00),
                         Forms\Components\TextInput::make('refer_rewards')
-                            ->label('SALDO DE AFILIADO')
+                            ->label(__('SALDO DE AFILIADO'))
                             ->required()
                             ->numeric()
                             ->default(0.00),
                         Forms\Components\TextInput::make('balance_withdrawal')
-                            ->label('SALDO LIBERADO PARA SAQUE')
+                            ->label(__('SALDO LIBERADO PARA SAQUE'))
                             ->required()
                             ->numeric()
                             ->default(0.00),
@@ -83,8 +83,8 @@ class WalletResource extends Resource
                 Forms\Components\Section::make('Confirmação de Alteração')
                     ->schema([
                         Forms\Components\TextInput::make('admin_password')
-                            ->label('Senha de 2FA')
-                            ->placeholder('Digite a senha de 2FA')
+                            ->label(__('Senha de 2FA'))
+                            ->placeholder(__('Digite a senha de 2FA'))
                             ->password()
                             ->required()
                             // Usa a regra "in:" para validar o valor sem precisar de closure customizada
@@ -100,23 +100,23 @@ class WalletResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label('USUÁRIO')
+                    ->label(__('USUÁRIO'))
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('balance')
-                    ->label('SALDO DE DEPÓSITO')
+                    ->label(__('SALDO DE DEPÓSITO'))
                     ->formatStateUsing(fn(string $state): string => \Helper::amountFormatDecimal($state))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('balance_withdrawal')
-                    ->label('SALDO DE SAQUE')
+                    ->label(__('SALDO DE SAQUE'))
                     ->formatStateUsing(fn(string $state): string => \Helper::amountFormatDecimal($state))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('balance_bonus')
-                    ->label('SALDO DE BÔNUS')
+                    ->label(__('SALDO DE BÔNUS'))
                     ->formatStateUsing(fn(string $state): string => \Helper::amountFormatDecimal($state))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('CADASTRADO EM')
+                    ->label(__('CADASTRADO EM'))
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
@@ -127,8 +127,8 @@ class WalletResource extends Resource
             ->filters([
                 Filter::make('created_at')
                     ->form([
-                        DatePicker::make('created_from')->label('Criado a partir de'),
-                        DatePicker::make('created_until')->label('Criado até'),
+                        DatePicker::make('created_from')->label(__('Criado a partir de')),
+                        DatePicker::make('created_until')->label(__('Criado até')),
                     ])
                     ->query(function (Builder $query, array $data): Builder {
                         return $query
@@ -193,7 +193,7 @@ class WalletResource extends Resource
         try {
             if (env('APP_DEMO')) {
                 Notification::make()
-                    ->title('Atenção')
+                    ->title(__('Atenção'))
                     ->body('Você não pode realizar esta alteração na versão demo')
                     ->danger()
                     ->send();
@@ -206,7 +206,7 @@ class WalletResource extends Resource
                 $this->data['admin_password'] !== env('TOKEN_DE_2FA')
             ) {
                 Notification::make()
-                    ->title('Acesso Negado')
+                    ->title(__('Acesso Negado'))
                     ->body('A senha de 2FA está incorreta. Você não pode atualizar os dados.')
                     ->danger()
                     ->send();
@@ -217,7 +217,7 @@ class WalletResource extends Resource
             if (!empty($setting)) {
                 if ($setting->update($this->data)) {
                     Notification::make()
-                        ->title('Sucesso')
+                        ->title(__('Sucesso'))
                         ->body('Os dados foram atualizados com sucesso!')
                         ->success()
                         ->send();
@@ -225,7 +225,7 @@ class WalletResource extends Resource
             }
         } catch (\Filament\Support\Exceptions\Halt $exception) {
             Notification::make()
-                ->title('Erro ao alterar dados!')
+                ->title(__('Erro ao alterar dados!'))
                 ->body('Erro ao alterar dados!')
                 ->danger()
                 ->send();

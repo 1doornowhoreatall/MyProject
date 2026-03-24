@@ -52,8 +52,8 @@ class DashboardAdmin extends \Filament\Pages\Dashboard
 
                 Section::make('Filtros do painel')
                     ->schema([
-                        DatePicker::make('startDate')->label('Data Inicial'),
-                        DatePicker::make('endDate')->label('Data Final'),
+                        DatePicker::make('startDate')->label(__('Data Inicial')),
+                        DatePicker::make('endDate')->label(__('Data Final')),
                     ])
                     ->columns(2),
             ]);
@@ -66,10 +66,10 @@ class DashboardAdmin extends \Filament\Pages\Dashboard
     {
         return [
             FilterAction::make()
-                ->label('Filtro')
+                ->label(__('Filtro'))
                 ->form([
-                    DatePicker::make('startDate')->label('Data Inicial'),
-                    DatePicker::make('endDate')->label('Data Final'),
+                    DatePicker::make('startDate')->label(__('Data Inicial')),
+                    DatePicker::make('endDate')->label(__('Data Final')),
                 ]),
         ];
     }

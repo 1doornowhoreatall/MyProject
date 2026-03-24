@@ -104,8 +104,8 @@ class SettingMailPage extends Page
                     ->description('Coloque suas credenciais para o envio de e-mails de notificação')
                     ->schema([
                         Select::make('software_smtp_type')
-                            ->label('PROTOCOLO')
-                            ->placeholder('Selecione o mailer')
+                            ->label(__('PROTOCOLO'))
+                            ->placeholder(__('Selecione o mailer'))
                             ->options([
                                 'imap' => 'IMAP',
                                 'smtp' => 'SMTP',
@@ -113,36 +113,36 @@ class SettingMailPage extends Page
                             ])
                             ->required(),
                         TextInput::make('software_smtp_mail_host')
-                            ->label('ENDEREÇO DE SERVIDOR')
-                            ->placeholder('Digite seu mail host')
+                            ->label(__('ENDEREÇO DE SERVIDOR'))
+                            ->placeholder(__('Digite seu mail host'))
                             ->maxLength(191),
                         TextInput::make('software_smtp_mail_port')
-                            ->label('Porta')
-                            ->placeholder('PORTA DE SERVIDOR')
+                            ->label(__('Porta'))
+                            ->placeholder(__('PORTA DE SERVIDOR'))
                             ->maxLength(191),
                         TextInput::make('software_smtp_mail_username')
-                            ->label('Usuário')
-                            ->placeholder('NOME DE USUÁRIO')
+                            ->label(__('Usuário'))
+                            ->placeholder(__('NOME DE USUÁRIO'))
                             ->maxLength(191),
                         TextInput::make('software_smtp_mail_password')
-                            ->label('Senha')
-                            ->placeholder('SENHA DE USUÁRIO')
+                            ->label(__('Senha'))
+                            ->placeholder(__('SENHA DE USUÁRIO'))
                             ->maxLength(191),
                         Select::make('software_smtp_mail_encryption')
-                            ->label('ENCRYPTAÇÃO')
-                            ->placeholder('Selecione a criptografia')
+                            ->label(__('ENCRYPTAÇÃO'))
+                            ->placeholder(__('Selecione a criptografia'))
                             ->options([
                                 'ssl' => 'SSL',
                                 'tls' => 'TLS',
                             ])
                             ->required(),
                         TextInput::make('software_smtp_mail_from_address')
-                            ->label('CABEÇALHO DE E-MAIL')
-                            ->placeholder('Digite o endereço de E-mail de Cabeçalho')
+                            ->label(__('CABEÇALHO DE E-MAIL'))
+                            ->placeholder(__('Digite o endereço de E-mail de Cabeçalho'))
                             ->maxLength(191),
                         TextInput::make('software_smtp_mail_from_name')
-                            ->label('NOME DE CABEÇALHO')
-                            ->placeholder('Digite o nome de Cabeçalho')
+                            ->label(__('NOME DE CABEÇALHO'))
+                            ->placeholder(__('Digite o nome de Cabeçalho'))
                             ->maxLength(191),
                     ])->columns(4),
             ])
@@ -159,7 +159,7 @@ class SettingMailPage extends Page
         try {
             if(env('APP_DEMO')) {
                 Notification::make()
-                    ->title('Atenção')
+                    ->title(__('Atenção'))
                     ->body('Você não pode realizar está alteração na versão demo')
                     ->danger()
                     ->send();
@@ -187,7 +187,7 @@ class SettingMailPage extends Page
 
                 if($setting->update($this->data)) {
                     Notification::make()
-                        ->title('ACESSE ONDAGAMES.COM')
+                        ->title(__('ACESSE ONDAGAMES.COM'))
                         ->body('Suas chaves foram alteradas com sucesso!')
                         ->success()
                         ->send();
@@ -195,7 +195,7 @@ class SettingMailPage extends Page
             }else{
                 if(SettingMail::create($this->data)) {
                     Notification::make()
-                        ->title('ACESSE ONDAGAMES.COM')
+                        ->title(__('ACESSE ONDAGAMES.COM'))
                         ->body('Suas chaves foram criadas com sucesso!')
                         ->success()
                         ->send();
@@ -205,7 +205,7 @@ class SettingMailPage extends Page
 
         } catch (Halt $exception) {
             Notification::make()
-                ->title('Erro ao alterar dados!')
+                ->title(__('Erro ao alterar dados!'))
                 ->body('Erro ao alterar dados!')
                 ->danger()
                 ->send();

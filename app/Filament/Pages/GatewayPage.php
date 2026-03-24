@@ -127,36 +127,36 @@ class GatewayPage extends Page
                         '),)
                             ->schema([
                                 TextInput::make('ondapay_uri')
-                                    ->label('CLIENTE URL')
-                                    ->placeholder('Digite a url da api')
+                                    ->label(__('CLIENTE URL'))
+                                    ->placeholder(__('Digite a url da api'))
                                     ->maxLength(191)
                                     ->columnSpanFull(),
                                 TextInput::make('ondapay_client')
-                                    ->label('CLIENTE ID')
-                                    ->placeholder('Digite o client ID')
+                                    ->label(__('CLIENTE ID'))
+                                    ->placeholder(__('Digite o client ID'))
                                     ->maxLength(191)
                                     ->columnSpanFull(),
                                 TextInput::make('ondapay_secret')
-                                    ->label('CLIENTE SECRETO')
-                                    ->placeholder('Digite o client secret')
+                                    ->label(__('CLIENTE SECRETO'))
+                                    ->placeholder(__('Digite o client secret'))
                                     ->maxLength(191)
                                     ->columnSpanFull(),
                             ]),
                         Section::make('DIGITO PAY | SUPORTE RUIM')
                             ->schema([
                                 TextInput::make('digito_uri')
-                                    ->label('CLIENTE URL')
-                                    ->placeholder('Digite a url da api')
+                                    ->label(__('CLIENTE URL'))
+                                    ->placeholder(__('Digite a url da api'))
                                     ->maxLength(191)
                                     ->columnSpanFull(),
                                 TextInput::make('digito_client')
-                                    ->label('CLIENTE ID')
-                                    ->placeholder('Digite o client ID')
+                                    ->label(__('CLIENTE ID'))
+                                    ->placeholder(__('Digite o client ID'))
                                     ->maxLength(191)
                                     ->columnSpanFull(),
                                 TextInput::make('digito_secret')
-                                    ->label('CLIENTE SECRETO')
-                                    ->placeholder('Digite o client secret')
+                                    ->label(__('CLIENTE SECRETO'))
+                                    ->placeholder(__('Digite o client secret'))
                                     ->maxLength(191)
                                     ->columnSpanFull(),
                             ]),
@@ -166,18 +166,18 @@ class GatewayPage extends Page
                         <b>Seu Webhook:  ' . url("/bspay/callback", [], true) . "</b>"))
                             ->schema([
                                 TextInput::make('bspay_uri')
-                                    ->label('CLIENTE URL')
-                                    ->placeholder('Digite a url da api')
+                                    ->label(__('CLIENTE URL'))
+                                    ->placeholder(__('Digite a url da api'))
                                     ->maxLength(191)
                                     ->columnSpanFull(),
                                 TextInput::make('bspay_cliente_id')
-                                    ->label('CLIENTE ID')
-                                    ->placeholder('Digite o client ID')
+                                    ->label(__('CLIENTE ID'))
+                                    ->placeholder(__('Digite o client ID'))
                                     ->maxLength(191)
                                     ->columnSpanFull(),
                                 TextInput::make('bspay_cliente_secret')
-                                    ->label('CLIENTE SECRETO')
-                                    ->placeholder('Digite o client secret')
+                                    ->label(__('CLIENTE SECRETO'))
+                                    ->placeholder(__('Digite o client secret'))
                                     ->maxLength(191)
                                     ->columnSpanFull(),
                             ]),
@@ -186,28 +186,28 @@ class GatewayPage extends Page
                         <b>Seu Webhook:  ' . url("/ezzepay/webhook", [], true) . "</b>"))
                             ->schema([
                                 TextInput::make('ezze_uri')
-                                    ->label('CLIENTE URL')
-                                    ->placeholder('Digite a url da api')
+                                    ->label(__('CLIENTE URL'))
+                                    ->placeholder(__('Digite a url da api'))
                                     ->maxLength(191)
                                     ->columnSpanFull(),
                                 TextInput::make('ezze_client')
-                                    ->label('CLIENTE ID')
-                                    ->placeholder('Digite o client ID')
+                                    ->label(__('CLIENTE ID'))
+                                    ->placeholder(__('Digite o client ID'))
                                     ->maxLength(191)
                                     ->columnSpanFull(),
                                 TextInput::make('ezze_secret')
-                                    ->label('CLIENTE SECRETO')
-                                    ->placeholder('Digite o client secret')
+                                    ->label(__('CLIENTE SECRETO'))
+                                    ->placeholder(__('Digite o client secret'))
                                     ->maxLength(191)
                                     ->columnSpanFull(),
                                 TextInput::make('ezze_user')
-                                    ->label('USUARIO DO WEBHOOK')
-                                    ->placeholder('Digite o usuário de autenticação do webhook')
+                                    ->label(__('USUARIO DO WEBHOOK'))
+                                    ->placeholder(__('Digite o usuário de autenticação do webhook'))
                                     ->maxLength(191)
                                     ->columnSpanFull(),
                                 TextInput::make('ezze_senha')
-                                    ->label('SENHA DO WEBHOOK')
-                                    ->placeholder('Digite a senha de autenticação do webhook')
+                                    ->label(__('SENHA DO WEBHOOK'))
+                                    ->placeholder(__('Digite a senha de autenticação do webhook'))
                                     ->maxLength(191)
                                     ->columnSpanFull(),
                             ]),
@@ -218,18 +218,18 @@ class GatewayPage extends Page
                         <b>Para fazer saques libere o IP</b>'))
                             ->schema([
                                 TextInput::make('suitpay_uri')
-                                    ->label('CLIENTE URL')
-                                    ->placeholder('Digite a url da api')
+                                    ->label(__('CLIENTE URL'))
+                                    ->placeholder(__('Digite a url da api'))
                                     ->maxLength(191)
                                     ->columnSpanFull(),
                                 TextInput::make('suitpay_cliente_id')
-                                    ->label('CLIENTE ID')
-                                    ->placeholder('Digite o client ID')
+                                    ->label(__('CLIENTE ID'))
+                                    ->placeholder(__('Digite o client ID'))
                                     ->maxLength(191)
                                     ->columnSpanFull(),
                                 TextInput::make('suitpay_cliente_secret')
-                                    ->label('CLIENTE SECRETO')
-                                    ->placeholder('Digite o client secret')
+                                    ->label(__('CLIENTE SECRETO'))
+                                    ->placeholder(__('Digite o client secret'))
                                     ->maxLength(191)
                                     ->columnSpanFull(),
                             ]),
@@ -237,8 +237,8 @@ class GatewayPage extends Page
                         Section::make('Confirmação de Alteração')
                             ->schema([
                                 TextInput::make('admin_password')
-                                    ->label('Senha de 2FA a que esta no arquivo (.env)')
-                                    ->placeholder('Digite a senha de 2FA')
+                                    ->label(__('Senha de 2FA a que esta no arquivo (.env)'))
+                                    ->placeholder(__('Digite a senha de 2FA'))
                                     ->password()
                                     ->required()
                                     ->dehydrateStateUsing(fn($state) => null), // Para que o valor não seja persistido
@@ -261,7 +261,7 @@ class GatewayPage extends Page
         try {
             if (env('APP_DEMO')) {
                 Notification::make()
-                    ->title('Atenção')
+                    ->title(__('Atenção'))
                     ->body('Você não pode realizar esta alteração na versão demo')
                     ->danger()
                     ->send();
@@ -274,7 +274,7 @@ class GatewayPage extends Page
                 $this->data['admin_password'] !== env('TOKEN_DE_2FA')
             ) {
                 Notification::make()
-                    ->title('Acesso Negado')
+                    ->title(__('Acesso Negado'))
                     ->body('A senha de 2FA está incorreta. Você não pode atualizar os dados.')
                     ->danger()
                     ->send();
@@ -285,7 +285,7 @@ class GatewayPage extends Page
             if (!empty($setting)) {
                 if ($setting->update($this->data)) {
                     Notification::make()
-                        ->title('ACESSE ONDAGAMES.COM')
+                        ->title(__('ACESSE ONDAGAMES.COM'))
                         ->body('Suas configurações foram atualizadas com sucesso!')
                         ->success()
                         ->send();
@@ -293,7 +293,7 @@ class GatewayPage extends Page
             } else {
                 if (Gateway::create($this->data)) {
                     Notification::make()
-                        ->title('ACESSE ONDAGAMES.COM')
+                        ->title(__('ACESSE ONDAGAMES.COM'))
                         ->body('Suas configurações foram criadas com sucesso!')
                         ->success()
                         ->send();
@@ -301,7 +301,7 @@ class GatewayPage extends Page
             }
         } catch (\Filament\Support\Exceptions\Halt $exception) {
             Notification::make()
-                ->title('Erro ao alterar dados!')
+                ->title(__('Erro ao alterar dados!'))
                 ->body('Erro ao alterar dados!')
                 ->danger()
                 ->send();

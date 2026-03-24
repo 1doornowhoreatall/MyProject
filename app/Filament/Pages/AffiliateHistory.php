@@ -57,11 +57,11 @@ class AffiliateHistory extends Page implements HasTable
         ->defaultSort('created_at', 'desc')
 
         ->columns([
-            TextColumn::make("id")->label("ID"),
-            TextColumn::make("name")->label("Nome")->searchable(),
-            TextColumn::make("email")->label("Email")->searchable(),
-            TextColumn::make("wallet.refer_rewards")->label("Saldo")->money("BRL")->sortable(),
-            TextColumn::make("affiliateHistory.logs")->label("RevShare")->formatStateUsing(function($record) {
+            TextColumn::make("id")->label(__("ID")),
+            TextColumn::make("name")->label(__("Nome"))->searchable(),
+            TextColumn::make("email")->label(__("Email"))->searchable(),
+            TextColumn::make("wallet.refer_rewards")->label(__("Saldo"))->money("BRL")->sortable(),
+            TextColumn::make("affiliateHistory.logs")->label(__("RevShare"))->formatStateUsing(function($record) {
                 $count = 0;
                 $affiliates = ModelsAffiliateHistory::where("inviter", $record->id)->where("status", 1)->get();
                 foreach($affiliates as $item){
@@ -77,7 +77,7 @@ class AffiliateHistory extends Page implements HasTable
                 ->orderByRaw("FIELD(affiliate_histories.commission_type, 'revshare') " . $direction)
                 ->select('affiliate_histories.commission_type', 'affiliate_histories.commission', 'users.*');
             }),
-            TextColumn::make("affiliateHistory.commission")->label("CPA")->formatStateUsing(function($record) {
+            TextColumn::make("affiliateHistory.commission")->label(__("CPA"))->formatStateUsing(function($record) {
                 $count = 0;
                 $affiliates = ModelsAffiliateHistory::where("inviter", $record->id)->where("status", 1)->get();
                 foreach($affiliates as $item){
@@ -92,10 +92,10 @@ class AffiliateHistory extends Page implements HasTable
                 ->orderByRaw("FIELD(affiliate_histories.commission_type, 'cpa') " . $direction)
                 ->select('affiliate_histories.commission_type', 'affiliate_histories.commission', 'users.*');
             }),
-            TextColumn::make("inviter")->label("Afiliados")->formatStateUsing(function ($record) {
+            TextColumn::make("inviter")->label(__("Afiliados"))->formatStateUsing(function ($record) {
                 return User::where("inviter", $record->id)->count();
             })->default(0),
-            TextColumn::make("created_at")->label("Criado em")->dateTime()->sortable()
+            TextColumn::make("created_at")->label(__("Criado em"))->dateTime()->sortable()
 
         ])->actions([
            DetailsActin::make(),

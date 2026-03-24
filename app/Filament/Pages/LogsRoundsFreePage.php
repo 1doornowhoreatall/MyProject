@@ -27,11 +27,11 @@ class LogsRoundsFreePage extends Page implements HasTable
         return $table
             ->query(LogsRoundsFree::query()) 
             ->columns([
-                TextColumn::make('username')->label('Usuário')->searchable(),
-                TextColumn::make('game_code')->label('Jogo')->searchable(),
-                CheckboxColumn::make('status')->label("Status")->disabled(),
-                TextColumn::make('message')->label('Mensagem'),
-                TextColumn::make('created_at')->label('Data')->dateTime('d/m/Y H:i'),
+                TextColumn::make('username')->label(__('Usuário'))->searchable(),
+                TextColumn::make('game_code')->label(__('Jogo'))->searchable(),
+                CheckboxColumn::make('status')->label(__("Status"))->disabled(),
+                TextColumn::make('message')->label(__('Mensagem')),
+                TextColumn::make('created_at')->label(__('Data'))->dateTime('d/m/Y H:i'),
             ])
             ->defaultSort('created_at', 'desc');
     }

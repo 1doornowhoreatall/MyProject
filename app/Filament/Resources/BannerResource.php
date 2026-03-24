@@ -91,11 +91,11 @@ class BannerResource extends Resource
                             Forms\Components\Group::make()
                                 ->schema([
                                     Forms\Components\TextInput::make('link')
-                                        ->label('Link')
-                                        ->placeholder('Digite o link do banner')
+                                        ->label(__('Link'))
+                                        ->placeholder(__('Digite o link do banner'))
                                         ->maxLength(191),
                                     Forms\Components\Select::make('type')
-                                        ->label('Selecione o tipo')
+                                        ->label(__('Selecione o tipo'))
                                         ->options([
                                             'carousel' => 'Banner na Carousel',
                                             'home' => 'Banner na Home',
@@ -104,7 +104,7 @@ class BannerResource extends Resource
                                 ])->columns(2)->columnSpanFull(),
 
                             Forms\Components\Textarea::make('description')
-                                ->placeholder('Digite uma descrição')
+                                ->placeholder(__('Digite uma descrição'))
                                 ->maxLength(65535)
                                 ->columnSpanFull(),
                         ])->columns(2),
@@ -124,11 +124,11 @@ class BannerResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('image')
-                    ->label('Imagem'),
+                    ->label(__('Imagem')),
                 Tables\Columns\TextColumn::make('link')
-                    ->label('Link'),
+                    ->label(__('Link')),
                 Tables\Columns\TextColumn::make('type')
-                    ->label('Tipo'),
+                    ->label(__('Tipo')),
             ])
             ->filters([
                 //

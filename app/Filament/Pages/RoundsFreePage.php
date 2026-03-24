@@ -61,14 +61,14 @@ class RoundsFreePage extends Page implements HasForms, HasTable
                 Section::make('Rodadas Grátis')
                     ->schema([
                         Select::make('email')
-                            ->label('Player')
+                            ->label(__('Player'))
                             ->options($users)
                             ->searchable()
                             ->required()
                             ->rules(['required','email']),
 
                         Select::make('game_code')
-                            ->label('Jogo')
+                            ->label(__('Jogo'))
                             ->options($games)
                             ->searchable()
                             ->required()
@@ -80,7 +80,7 @@ class RoundsFreePage extends Page implements HasForms, HasTable
                             ]),
 
                         TextInput::make('rounds')
-                            ->label('Quantidade de rodadas')
+                            ->label(__('Quantidade de rodadas'))
                             ->numeric()
                             // ✅ trava entre 1 e 30
                             ->rules(['required','integer','between:1,30'])
@@ -91,7 +91,7 @@ class RoundsFreePage extends Page implements HasForms, HasTable
                 Section::make('Confirmação de Alteração')
                     ->schema([
                         TextInput::make('admin_password')
-                            ->label('Senha de 2FA')
+                            ->label(__('Senha de 2FA'))
                             ->password()
                             ->required()
                             ->dehydrateStateUsing(fn ($state) => null),
@@ -111,11 +111,11 @@ class RoundsFreePage extends Page implements HasForms, HasTable
     protected function getTableColumns(): array
     {
         return [
-            TextColumn::make('game.game_name')->label('Nome do Jogo')->sortable(),
-            TextColumn::make('game_code')->label('Código do Jogo')->sortable(),
-            TextColumn::make('spins')->label('Rodadas')->sortable(),
-            TextColumn::make('value')->label('Valor')->money('BRL', true)->sortable(),
-            TextColumn::make('created_at')->label('Criado em')->dateTime('d/m/Y H:i')->sortable(),
+            TextColumn::make('game.game_name')->label(__('Nome do Jogo'))->sortable(),
+            TextColumn::make('game_code')->label(__('Código do Jogo'))->sortable(),
+            TextColumn::make('spins')->label(__('Rodadas'))->sortable(),
+            TextColumn::make('value')->label(__('Valor'))->money('BRL', true)->sortable(),
+            TextColumn::make('created_at')->label(__('Criado em'))->dateTime('d/m/Y H:i')->sortable(),
         ];
     }
 
@@ -123,9 +123,9 @@ class RoundsFreePage extends Page implements HasForms, HasTable
     {
         return [
             DeleteAction::make()
-                ->label('Apagar')
+                ->label(__('Apagar'))
                 ->requiresConfirmation()
-                ->modalHeading('Confirmar Exclusão')
+                ->modalHeading(__('Confirmar Exclusão'))
                 ->modalSubheading('Tem certeza que deseja apagar esta configuração?'),
         ];
     }
@@ -134,8 +134,8 @@ class RoundsFreePage extends Page implements HasForms, HasTable
     {
         return [
             CreateAction::make()
-                ->label('Criar configuração')
-                ->modalHeading('Nova Configuração de Rodadas Grátis')
+                ->label(__('Criar configuração'))
+                ->modalHeading(__('Nova Configuração de Rodadas Grátis'))
                 ->modalWidth('lg')
                 ->disableCreateAnother()
                 ->using(function (array $data) {
@@ -144,7 +144,7 @@ class RoundsFreePage extends Page implements HasForms, HasTable
                 ->form([
                     // ✅ opções filtradas + regra exists com where()
                     Select::make('game_code')
-                        ->label('Jogo')
+                        ->label(__('Jogo'))
                         ->options(
                             Game::where('status', 1)
                                 ->where('has_freespins', 1)
@@ -160,13 +160,13 @@ class RoundsFreePage extends Page implements HasForms, HasTable
                         ]),
 
                     TextInput::make('spins')
-                        ->label('Quantidade de Rodadas')
+                        ->label(__('Quantidade de Rodadas'))
                         ->numeric()
                         ->rules(['required','integer','between:1,30']) // ✅ máx. 30
                         ->required(),
 
                     TextInput::make('value')
-                        ->label('Valor (R$)')
+                        ->label(__('Valor (R$)'))
                         ->numeric()
                         ->rules(['required','numeric','min:0'])
                         ->required(),
@@ -179,7 +179,7 @@ class RoundsFreePage extends Page implements HasForms, HasTable
         try {
             if (env('APP_DEMO')) {
                 Notification::make()
-                    ->title('Atenção')
+                    ->title(__('Atenção'))
                     ->body('Não é possível alterar em modo demo.')
                     ->danger()
                     ->send();
@@ -191,7 +191,7 @@ class RoundsFreePage extends Page implements HasForms, HasTable
                 $this->data['admin_password'] !== env('TOKEN_DE_2FA')
             ) {
                 Notification::make()
-                    ->title('Acesso Negado')
+                    ->title(__('Acesso Negado'))
                     ->body('Senha de 2FA incorreta.')
                     ->danger()
                     ->send();
@@ -218,7 +218,7 @@ class RoundsFreePage extends Page implements HasForms, HasTable
 
             if ($result['status']) {
                 Notification::make()
-                    ->title('Rodadas grátis')
+                    ->title(__('Rodadas grátis'))
                     ->body('Agendamento realizado com sucesso.')
                     ->success()
                     ->send();
@@ -227,14 +227,14 @@ class RoundsFreePage extends Page implements HasForms, HasTable
                 $this->form->fill();
             } else {
                 Notification::make()
-                    ->title('Rodadas grátis')
+                    ->title(__('Rodadas grátis'))
                     ->body($result['message'] ?? 'Falha ao agendar.')
                     ->danger()
                     ->send();
             }
         } catch (Halt $e) {
             Notification::make()
-                ->title('Erro')
+                ->title(__('Erro'))
                 ->body('Não foi possível completar a operação.')
                 ->danger()
                 ->send();

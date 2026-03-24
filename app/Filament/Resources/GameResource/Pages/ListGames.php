@@ -25,7 +25,7 @@ class ListGames extends ListRecords
         return [
             CreateAction::make()
                 ->icon('heroicon-o-plus')
-                ->label('Novo Jogo'),
+                ->label(__('Novo Jogo')),
         ];
     }
 

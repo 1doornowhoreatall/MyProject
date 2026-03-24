@@ -46,15 +46,15 @@ class ProviderResource extends Resource
                 Forms\Components\Section::make('CRIE OU EDITE UM PROVEDOR')
                     ->schema([
                         Forms\Components\TextInput::make('code')
-                            ->label('CODIGO DO PROVEDOR')
-                            ->placeholder('Digite o Código')
+                            ->label(__('CODIGO DO PROVEDOR'))
+                            ->placeholder(__('Digite o Código'))
                             ->maxLength(50),
                         Forms\Components\TextInput::make('name')
-                            ->placeholder('Digite o Nome')
-                            ->label('NOME DO PROVEDOR')
+                            ->placeholder(__('Digite o Nome'))
+                            ->label(__('NOME DO PROVEDOR'))
                             ->maxLength(50),
                         Forms\Components\Toggle::make('status')
-                            ->label('STATUS DO PROVEDOR')
+                            ->label(__('STATUS DO PROVEDOR'))
                             ->inline(false)
                             ->required(),
                     ])
@@ -73,13 +73,13 @@ class ProviderResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('code')
-                    ->label('CÓDIGO DO PROVEDOR')
+                    ->label(__('CÓDIGO DO PROVEDOR'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('name')
-                    ->label('NOME DO PROVEDOR')
+                    ->label(__('NOME DO PROVEDOR'))
                     ->searchable(),
                 Tables\Columns\IconColumn::make('status')
-                    ->label('STATUS DO PROVEDOR')
+                    ->label(__('STATUS DO PROVEDOR'))
                     ->boolean(),
             ])
             ->actions([

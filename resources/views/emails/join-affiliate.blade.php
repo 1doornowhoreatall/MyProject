@@ -5,9 +5,9 @@
     <meta charset="utf-8">
 </head>
 <body>
-    <h2>Afiliado</h2>
+    <h2>{{ __('Affiliate') }}</h2>
     <p>
-        Usuário quer ser afiliado. Entre em contato pelo email: {{ $email }}
+        {{ __('User wants to be an affiliate. Contact them at email:') }} {{ $email }}
     </p>
 </body>
 </html>

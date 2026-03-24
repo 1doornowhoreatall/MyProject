@@ -142,35 +142,35 @@ public function form(Form $form): Form
                         ->description(new HtmlString('<b>Seu Webhook:  ' . url("/playfiver/webhook", [], true) . "</b>"))
                         ->schema([
                             TextInput::make('playfiver_code')
-                                ->label('CÓDIGO DO AGENTE')
-                                ->placeholder('Digite aqui o código do agente')
+                                ->label(__('CÓDIGO DO AGENTE'))
+                                ->placeholder(__('Digite aqui o código do agente'))
                                 ->maxLength(191),
                             TextInput::make('playfiver_token')
-                                ->label('AGENTE TOKEN')
-                                ->placeholder('Digite aqui o token do agente')
+                                ->label(__('AGENTE TOKEN'))
+                                ->placeholder(__('Digite aqui o token do agente'))
                                 ->maxLength(191),
                             TextInput::make('playfiver_secret')
-                                ->label('AGENTE SECRETO')
-                                ->placeholder('Digite aqui o código secreto do agente')
+                                ->label(__('AGENTE SECRETO'))
+                                ->placeholder(__('Digite aqui o código secreto do agente'))
                                 ->maxLength(191),
                         ])->columns(3),
                     Section::make('CONFIGURAÇÃO DO AGENTE')
                         ->description('Você pode configurar o RTP, os limites e os bônus nesta área. (As informações podem estar desatualizadas em relação às da própria PlayFiver.)')
                         ->schema([
                             TextInput::make('rtp')
-                                ->label('RTP')
+                                ->label(__('RTP'))
                                 ->disabled(fn () => $locked),
                             TextInput::make('limit_amount')
-                                ->label('Quantia de limite')
+                                ->label(__('Quantia de limite'))
                                 ->disabled(fn () => $locked),
                             TextInput::make('limit_hours')
-                                ->label('Quantas horas vale o limite')
+                                ->label(__('Quantas horas vale o limite'))
                                 ->disabled(fn () => $locked),
                             Toggle::make('limit_enable')
-                                ->label('Limite ativo')
+                                ->label(__('Limite ativo'))
                                 ->disabled(fn () => $locked),
                             Toggle::make('bonus_enable')
-                                ->label('Bônus ativo')
+                                ->label(__('Bônus ativo'))
                                 ->disabled(fn () => $locked),
                             Placeholder::make('')
                                 ->extraAttributes(['class' => 'flex justify-end'])
@@ -194,8 +194,8 @@ public function form(Form $form): Form
             Section::make('Confirmação de Alteração')
                 ->schema([
                     TextInput::make('admin_password')
-                        ->label('Senha de 2FA a que esta no arquivo (.env)')
-                        ->placeholder('Digite a senha de 2FA')
+                        ->label(__('Senha de 2FA a que esta no arquivo (.env)'))
+                        ->placeholder(__('Digite a senha de 2FA'))
                         ->password()
                         ->required()
                         // Esse método faz com que o valor não seja persistido no model
@@ -228,13 +228,13 @@ public function saveInfo() {
         }
 
         Notification::make()
-            ->title('Atenção')
+            ->title(__('Atenção'))
             ->body('Ocorreu um erro ao tentar atualizar os dados da playfiver')
             ->danger()
             ->send();
     }catch(Exception $e){
         Notification::make()
-            ->title('Atenção')
+            ->title(__('Atenção'))
             ->body('Ocorreu um erro ao tentar atualizar os dados da playfiver')
             ->danger()
             ->send();
@@ -272,7 +272,7 @@ public function saveInfo() {
         } catch(Exception $e) {
             Log::error('Erro ao atualizar informações da PlayFiver:', ['exception' => $e->getMessage()]);
             Notification::make()
-                ->title('Atenção')
+                ->title(__('Atenção'))
                 ->body('Ocorreu um erro ao tentar recuperar os dados da playfiver')
                 ->danger()
                 ->send();
@@ -289,7 +289,7 @@ public function saveInfo() {
             // Se a aplicação estiver em modo demo, bloqueia a alteração.
             if (env('APP_DEMO')) {
                 Notification::make()
-                    ->title('Atenção')
+                    ->title(__('Atenção'))
                     ->body('Você não pode realizar esta alteração na versão demo')
                     ->danger()
                     ->send();
@@ -303,7 +303,7 @@ public function saveInfo() {
                 $this->data['admin_password'] !== env('TOKEN_DE_2FA')
             ) {
                 Notification::make()
-                    ->title('Acesso Negado')
+                    ->title(__('Acesso Negado'))
                     ->body('A senha de 2FA está incorreta. Você não pode atualizar os dados.')
                     ->danger()
                     ->send();
@@ -315,7 +315,7 @@ public function saveInfo() {
             if (!empty($setting)) {
                 if ($setting->update($this->data)) {
                     Notification::make()
-                        ->title('ACESSE ONDAGAMES.COM')
+                        ->title(__('ACESSE ONDAGAMES.COM'))
                         ->body('Suas chaves foram alteradas com sucesso!')
                         ->success()
                         ->send();
@@ -323,7 +323,7 @@ public function saveInfo() {
             } else {
                 if (GamesKey::create($this->data)) {
                     Notification::make()
-                        ->title('ACESSE ONDAGAMES.COM')
+                        ->title(__('ACESSE ONDAGAMES.COM'))
                         ->body('Suas chaves foram criadas com sucesso!')
                         ->success()
                         ->send();
@@ -331,7 +331,7 @@ public function saveInfo() {
             }
         } catch (Halt $exception) {
             Notification::make()
-                ->title('Erro ao alterar dados!')
+                ->title(__('Erro ao alterar dados!'))
                 ->body('Erro ao alterar dados!')
                 ->danger()
                 ->send();

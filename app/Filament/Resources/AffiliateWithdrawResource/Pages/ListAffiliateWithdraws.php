@@ -14,7 +14,7 @@ class ListAffiliateWithdraws extends ListRecords
     {
         return [
 //            Actions\Action::make('request_withdraw')
-//                ->label('Solicitar saque')
+//                ->label(__('Solicitar saque'))
 //                ->action(function () {
 //                   dd("1233");
 //                })

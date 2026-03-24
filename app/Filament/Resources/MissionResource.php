@@ -29,17 +29,17 @@ class MissionResource extends Resource
     {
         return $form->schema([
             TextInput::make('title')
-                ->label('Título')
+                ->label(__('Título'))
                 ->required()
                 ->maxLength(255),
 
             Textarea::make('description')
-                ->label('Descrição')
+                ->label(__('Descrição'))
                 ->rows(5)
                 ->nullable(),
 
             Select::make('type')
-                ->label('Tipo de Missão')
+                ->label(__('Tipo de Missão'))
                 ->options([
                     'deposit' => 'Missão de Depósito',
                     'game_bet' => 'Missão de Aposta por Jogo',
@@ -58,7 +58,7 @@ class MissionResource extends Resource
                 }),
 
             Select::make('game_id')
-                ->label('Selecione o Jogo')
+                ->label(__('Selecione o Jogo'))
                 ->options(
                     \DB::table('games')->pluck('game_name', 'game_id')->toArray() // Pluck com game_id como chave e game_name como valor
                 )
@@ -67,7 +67,7 @@ class MissionResource extends Resource
                 ->visible(fn ($get) => in_array($get('type'), ['game_bet', 'rounds_played', 'win_amount', 'loss_amount'])), // Mostra para tipos que envolvem jogos
 
             TextInput::make('target_amount')
-                ->label('Valor-Alvo (R$ ou Rodadas)')
+                ->label(__('Valor-Alvo (R$ ou Rodadas)'))
                 ->numeric()
                 ->helperText(fn ($get) => match ($get('type')) {
                     'rounds_played' => 'Número de rodadas que o usuário precisa jogar.',
@@ -78,19 +78,19 @@ class MissionResource extends Resource
                 ->required(),
 
             TextInput::make('reward')
-                ->label('Recompensa (R$)')
+                ->label(__('Recompensa (R$)'))
                 ->numeric()
                 ->helperText('Valor que o usuário receberá ao concluir a missão.')
                 ->required(),
 
             FileUpload::make('image')
-                ->label('Imagem da Missão')
+                ->label(__('Imagem da Missão'))
                 ->image()
                 ->directory('/uploads/missoes') // Diretório onde as imagens serão salvas
-                ->placeholder('Carregue uma imagem'),
+                ->placeholder(__('Carregue uma imagem')),
 
             Select::make('status')
-                ->label('Status')
+                ->label(__('Status'))
                 ->options([
                     'active' => 'Ativa',
                     'inactive' => 'Inativa',
@@ -104,14 +104,14 @@ class MissionResource extends Resource
     {
         return $table->columns([
             ImageColumn::make('image')
-                ->label('Imagem')
+                ->label(__('Imagem'))
                 ->rounded(),
             TextColumn::make('title')
-                ->label('Título')
+                ->label(__('Título'))
                 ->searchable()
                 ->sortable(),
             TextColumn::make('type')
-                ->label('Tipo de Missão')
+                ->label(__('Tipo de Missão'))
                 ->formatStateUsing(fn ($state) => [
                     'deposit' => 'Missão de Depósito',
                     'game_bet' => 'Missão de Aposta por Jogo',
@@ -121,16 +121,16 @@ class MissionResource extends Resource
                     'loss_amount' => 'Missão de Perda por Jogo',
                 ][$state] ?? $state),
             TextColumn::make('target_amount')
-                ->label('Valor-Alvo')
+                ->label(__('Valor-Alvo'))
                 ->formatStateUsing(fn ($state, $record) => match ($record->type) {
                     'rounds_played' => "{$state} Rodadas",
                     default => "R$ {$state}",
                 }),
             TextColumn::make('reward')
-                ->label('Recompensa')
+                ->label(__('Recompensa'))
                 ->money('BRL'),
             TextColumn::make('status')
-                ->label('Status')
+                ->label(__('Status'))
                 ->formatStateUsing(fn ($state) => [
                     'active' => 'Ativa',
                     'inactive' => 'Inativa',

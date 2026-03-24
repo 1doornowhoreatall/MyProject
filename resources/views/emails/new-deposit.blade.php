@@ -10,8 +10,8 @@
             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto;">
                 <tr>
                     <td style="background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;">
-                        <h2 style="margin-bottom: 20px;">NOVO DEPOSITO</h2>
-                        <p>Olá Administrador, Informamos que um novo depósito no valor de <strong>{{ $valor }}</strong>, realizado pelo usuário <strong>{{ $usuario }}</strong>, foi registrado em sua conta.</p>
+                        <h2 style="margin-bottom: 20px;">{{ __('NEW DEPOSIT') }}</h2>
+                        <p>{{ __('Hello Administrator, we inform you that a new deposit of') }} <strong>{{ $valor }}</strong>, {{ __('made by the user') }} <strong>{{ $usuario }}</strong>, {{ __('has been registered in your account.') }}</p>
                     </td>
                 </tr>
             </table>

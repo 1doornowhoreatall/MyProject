@@ -40,17 +40,17 @@ class IndicationsTableWidget extends BaseWidget
             ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label('USUÁRIO CONVIDADO')
+                    ->label(__('USUÁRIO CONVIDADO'))
                     ->color('info')
                     ->badge()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('user.email')
-                    ->label('E-MAIL DO CONVIDADO')
+                    ->label(__('E-MAIL DO CONVIDADO'))
                     ->color('info')
                     ->badge()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('commission_type')
-                    ->label('COMISSÃO RECEBIDA')	
+                    ->label(__('COMISSÃO RECEBIDA'))	
                     ->badge()
                     ->color('success')
                     ->formatStateUsing(function ($state) {
@@ -61,13 +61,13 @@ class IndicationsTableWidget extends BaseWidget
                     })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('commission_paid')
-                    ->label('VALOR RECEBIDO')
+                    ->label(__('VALOR RECEBIDO'))
                     ->money('BRL')
                     ->badge()
                     ->color('success')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('user.status')
-                    ->label('STATUS')	
+                    ->label(__('STATUS'))	
                     ->badge()
                     ->color('success')
                     ->formatStateUsing(function ($state) {
@@ -78,15 +78,15 @@ class IndicationsTableWidget extends BaseWidget
                     })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('FOI CONVIDADO EM')
+                    ->label(__('FOI CONVIDADO EM'))
                     ->dateTime()
                     ->sortable(),
             ])
             ->filters([
                 Filter::make('created_at')
                     ->form([
-                        DatePicker::make('created_from')->label('Data Inicial'),
-                        DatePicker::make('created_until')->label('Data Final'),
+                        DatePicker::make('created_from')->label(__('Data Inicial')),
+                        DatePicker::make('created_until')->label(__('Data Final')),
                     ])
                     ->query(function (Builder $query, array $data): Builder {
                         return $query

@@ -67,26 +67,26 @@ class DetailsAffiliate extends Page implements HasTable
        
         ->columns([
 
-            TextColumn::make("commission_type")->label("Tipo de Comissão")->formatStateUsing(function($record) {
+            TextColumn::make("commission_type")->label(__("Tipo de Comissão"))->formatStateUsing(function($record) {
                 if ($record->commission_type == "revshare") {
                     return "RevShare";
                 } else {
                     return "CPA";
                 }  
             })->default("Indefinido"),
-            TextColumn::make("commission")->label("Valor da comissão")->formatStateUsing(function($record) {
+            TextColumn::make("commission")->label(__("Valor da comissão"))->formatStateUsing(function($record) {
                 $count = number_format($record->commission, 2, ",", ",");
                 
                 return "R$". $count;
             })->default(0),
-            TextColumn::make("type")->label("Tipo")->formatStateUsing(function($record){
+            TextColumn::make("type")->label(__("Tipo"))->formatStateUsing(function($record){
                 if($record->type == "decrement"){
                     return "Ganho";
                 }else{
                     return "Perca";
                 }
             }),
-            TextColumn::make("created_at")->label("Data")->dateTime()
+            TextColumn::make("created_at")->label(__("Data"))->dateTime()
            
 
         ])->actions([
@@ -96,8 +96,8 @@ class DetailsAffiliate extends Page implements HasTable
             Filter::make('created_at')
             
             ->form([
-                DatePicker::make('created_from')->label("Criado a partir de"),
-                DatePicker::make('created_until')->label("Criado até"),
+                DatePicker::make('created_from')->label(__("Criado a partir de")),
+                DatePicker::make('created_until')->label(__("Criado até")),
             ])
             ->query(function (Builder $query, array $data): Builder {
                 return $query

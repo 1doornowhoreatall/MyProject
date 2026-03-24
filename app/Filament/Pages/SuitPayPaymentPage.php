@@ -67,8 +67,8 @@ class SuitPayPaymentPage extends Page
                 Section::make('Detalhes de Pagamento')
                     ->schema([
                         Select::make('user_id')
-                            ->label('Usuários')
-                            ->placeholder('Selecione um usuário')
+                            ->label(__('Usuários'))
+                            ->placeholder(__('Selecione um usuário'))
                             ->relationship(name: 'user', titleAttribute: 'name')
                             ->options(
                                 fn($get) => User::query()
@@ -79,12 +79,12 @@ class SuitPayPaymentPage extends Page
                             ->live()
                             ->required(),
                         TextInput::make('pix_key')
-                            ->label('Chave Pix')
-                            ->placeholder('Digite a chave Pix')
+                            ->label(__('Chave Pix'))
+                            ->placeholder(__('Digite a chave Pix'))
                             ->required(),
                         Select::make('pix_type')
-                            ->label('Tipo de Chave')
-                            ->placeholder('Selecione o tipo de chave')
+                            ->label(__('Tipo de Chave'))
+                            ->placeholder(__('Selecione o tipo de chave'))
                             ->options([
                                 'document' => 'Documento',
                                 'phoneNumber' => 'Telefone',
@@ -92,13 +92,13 @@ class SuitPayPaymentPage extends Page
                                 'paymentCode' => 'Código de pagamento',
                             ]),
                         TextInput::make('amount')
-                            ->label('Valor')
-                            ->placeholder('Digite um valor')
+                            ->label(__('Valor'))
+                            ->placeholder(__('Digite um valor'))
                             ->required()
                             ->numeric(),
                         Textarea::make('observation')
-                            ->label('Observação')
-                            ->placeholder('Deixe uma observação caso tenha')
+                            ->label(__('Observação'))
+                            ->placeholder(__('Deixe uma observação caso tenha'))
                             ->rows(5)
                             ->cols(10)
                             ->columnSpanFull()
@@ -114,7 +114,7 @@ class SuitPayPaymentPage extends Page
     {
         if(env('APP_DEMO')) {
             Notification::make()
-                ->title('Atenção')
+                ->title(__('Atenção'))
                 ->body('Você não pode realizar está alteração na versão demo')
                 ->danger()
                 ->send();
@@ -139,20 +139,20 @@ class SuitPayPaymentPage extends Page
 
             if($resp) {
                 Notification::make()
-                    ->title('Saque solicitado')
+                    ->title(__('Saque solicitado'))
                     ->body('Saque solicitado com sucesso')
                     ->success()
                     ->send();
             }else{
                 Notification::make()
-                    ->title('Erro no saque')
+                    ->title(__('Erro no saque'))
                     ->body('Erro ao solicitar o saque')
                     ->danger()
                     ->send();
             }
         }else{
             Notification::make()
-                ->title('Erro ao salvar')
+                ->title(__('Erro ao salvar'))
                 ->body('Erro ao salvar a requisição do saque')
                 ->danger()
                 ->send();

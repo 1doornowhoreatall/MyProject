@@ -32,70 +32,70 @@ class MinesConfigResource extends Resource
             ->schema([
                 // Campos editáveis
                 Forms\Components\TextInput::make('meta_arrecadacao')
-                    ->label('Meta de Arrecadação')
+                    ->label(__('Meta de Arrecadação'))
                     ->numeric()
                     ->required(),
 
                 Forms\Components\TextInput::make('percentual_distribuicao')
-                    ->label('% de Distribuição')
+                    ->label(__('% de Distribuição'))
                     ->numeric()
                     ->required(),
 
                 Forms\Components\TextInput::make('minas_distribuicao')
-                    ->label('Minas (Distribuição)')
+                    ->label(__('Minas (Distribuição)'))
                     ->numeric()
                     ->required(),
 
                 Forms\Components\TextInput::make('minas_arrecadacao')
-                    ->label('Minas (Arrecadação)')
+                    ->label(__('Minas (Arrecadação)'))
                     ->numeric()
                     ->required(),
 
                 Forms\Components\TextInput::make('x_por_mina')
-                    ->label('Multiplicador por Mina')
+                    ->label(__('Multiplicador por Mina'))
                     ->numeric()
                     ->step(0.01)
                     ->required(),
 
                 Forms\Components\TextInput::make('x_a_cada_5')
-                    ->label('Acrescimo a cada 5')
+                    ->label(__('Acrescimo a cada 5'))
                     ->numeric()
                     ->step(0.01)
                     ->required(),
 
                 Forms\Components\TextInput::make('bet_loss')
-                    ->label('% de Bet Loss')
+                    ->label(__('% de Bet Loss'))
                     ->numeric()
                     ->step(0.01)
                     ->required(),
 
                 Forms\Components\Toggle::make('modo_influenciador')
-                    ->label('Modo Influenciador')
+                    ->label(__('Modo Influenciador'))
                     ->helperText('Se ativo, o usuário só ganha.')
                     ->default(false),
 
                 Forms\Components\Toggle::make('modo_perdedor')
-                    ->label('Modo Perdedor')
+                    ->label(__('Modo Perdedor'))
                     ->helperText('Se ativo, o usuário só perde.')
                     ->default(false),
 
                 // Campos apenas informativos (disabled)
                 Forms\Components\TextInput::make('modo_atual')
-                    ->label('Modo Atual')
+                    ->label(__('Modo Atual'))
                     ->disabled(),
 
                 Forms\Components\TextInput::make('total_arrecadado')
-                    ->label('Total Arrecadado')
+                    ->label(__('Total Arrecadado'))
                     ->numeric()
                     ->disabled(),
 
                 Forms\Components\TextInput::make('total_distribuido')
-                    ->label('Total Distribuído')
+                    ->label(__('Total Distribuído'))
                     ->numeric()
                     ->disabled(),
 
                 Forms\Components\DateTimePicker::make('start_cycle_at')
-                    ->label('Início do Ciclo')
+                    ->label(__('Início do Ciclo'))
                     ->disabled(),
             ]);
     }
@@ -105,7 +105,7 @@ class MinesConfigResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\BadgeColumn::make('modo_atual')
-                    ->label('Modo Atual')
+                    ->label(__('Modo Atual'))
                     ->formatStateUsing(function ($state) {
                         return match ($state) {
                             'arrecadacao'  => 'Arrecadação',
@@ -123,21 +123,21 @@ class MinesConfigResource extends Resource
                     ]),
 
                 Tables\Columns\TextColumn::make('meta_arrecadacao')
-                    ->label('Meta de Arrecadação'),
+                    ->label(__('Meta de Arrecadação')),
                 Tables\Columns\TextColumn::make('percentual_distribuicao')
-                    ->label('% de Distribuição'),
+                    ->label(__('% de Distribuição')),
                 Tables\Columns\TextColumn::make('minas_distribuicao')
-                    ->label('Minas (Distribuição)'),
+                    ->label(__('Minas (Distribuição)')),
                 Tables\Columns\TextColumn::make('minas_arrecadacao')
-                    ->label('Minas (Arrecadação)'),
+                    ->label(__('Minas (Arrecadação)')),
                 Tables\Columns\TextColumn::make('x_por_mina')
-                    ->label('X por Mina'),
+                    ->label(__('X por Mina')),
                 Tables\Columns\TextColumn::make('x_a_cada_5')
-                    ->label('X a cada 5'),
+                    ->label(__('X a cada 5')),
                 Tables\Columns\TextColumn::make('bet_loss')
-                    ->label('% Bet Loss'),
+                    ->label(__('% Bet Loss')),
                 Tables\Columns\TextColumn::make('start_cycle_at')
-                    ->label('Ciclo Iniciado'),
+                    ->label(__('Ciclo Iniciado')),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

@@ -25,12 +25,12 @@ class MyBetsTableWidget extends BaseWidget
             ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('gameDetails.game_name')
-                    ->label('NOME DO JOGO')
+                    ->label(__('NOME DO JOGO'))
                     ->color('info')
                     ->badge()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')
-                    ->label('RESULTADO')
+                    ->label(__('RESULTADO'))
                     ->badge()
                     ->formatStateUsing(function ($state) {
                         return match($state) {
@@ -48,7 +48,7 @@ class MyBetsTableWidget extends BaseWidget
                     })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type_money')
-                    ->label('CARTEIRA USADA')
+                    ->label(__('CARTEIRA USADA'))
                     ->badge()
                     ->color('info')
                     ->formatStateUsing(function ($state) {
@@ -61,14 +61,14 @@ class MyBetsTableWidget extends BaseWidget
                     })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('amount')
-                    ->label('VALOR DA APOSTA')
+                    ->label(__('VALOR DA APOSTA'))
                     ->money('BRL')
                     ->badge()
                     ->color('success')
                     ->sortable()  // Torna a coluna ordenável
                     ->searchable(),
                 Tables\Columns\TextColumn::make('providers')
-                    ->label('STATUS')
+                    ->label(__('STATUS'))
                     ->badge()
                     ->color('success')
                     ->formatStateUsing(function ($state) {
@@ -79,23 +79,23 @@ class MyBetsTableWidget extends BaseWidget
                     })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('APOSTADO EM')
+                    ->label(__('APOSTADO EM'))
                     ->dateTime()
                     ->sortable(),
             ])
             ->filters([
                 Filter::make('type_ganho')
-                    ->label('APOSTAS GANHAS')
+                    ->label(__('APOSTAS GANHAS'))
                     ->query(fn (Builder $query): Builder => $query->where('type', '=', 'win')),
 
                 Filter::make('type_perda')
-                    ->label('APOSTAS PERDIDAS')
+                    ->label(__('APOSTAS PERDIDAS'))
                     ->query(fn (Builder $query): Builder => $query->where('type', '=', 'bet')),
 
                 Filter::make('created_at')
                     ->form([
-                        DatePicker::make('created_from')->label('Data Inicial'),
-                        DatePicker::make('created_until')->label('Data Final'),
+                        DatePicker::make('created_from')->label(__('Data Inicial')),
+                        DatePicker::make('created_until')->label(__('Data Final')),
                     ])
                     ->query(function (Builder $query, array $data): Builder {
                         return $query

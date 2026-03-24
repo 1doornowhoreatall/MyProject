@@ -69,7 +69,7 @@ class RolloverSetting extends Page implements HasForms
         try {
             if(env('APP_DEMO')) {
                 Notification::make()
-                    ->title('Atenção')
+                    ->title(__('Atenção'))
                     ->body('Você não pode realizar está alteração na versão demo')
                     ->danger()
                     ->send();
@@ -82,7 +82,7 @@ class RolloverSetting extends Page implements HasForms
                 Cache::put('setting', $setting);
 
                 Notification::make()
-                    ->title('ACESSE ONDAGAMES.COM')
+                    ->title(__('ACESSE ONDAGAMES.COM'))
                     ->body('Aletarções realizadas com sucesso!')
                     ->success()
                     ->send();
@@ -144,7 +144,7 @@ class RolloverSetting extends Page implements HasForms
                     ->description('Proteção para evitar saques sem apostas e lavagem de dinheiro.')
                     ->schema([
                         TextInput::make('rollover_deposit')
-                            ->label('ROLL-OVER DEPÓSITO')
+                            ->label(__('ROLL-OVER DEPÓSITO'))
                             ->numeric()
                             ->default(1)
                             ->suffix('x')
@@ -153,14 +153,14 @@ class RolloverSetting extends Page implements HasForms
                         
                         Group::make()->schema([ // Adiciona o group para rollover e rollover_protection
                             TextInput::make('rollover')
-                                ->label('ROLL-OVER BÔNUS')
+                                ->label(__('ROLL-OVER BÔNUS'))
                                 ->numeric()
                                 ->default(1)
                                 ->suffix('x')
                                 ->helperText('a quantidade de multiplicação do Bônus --> recomendado = 5')
                                 ->maxLength(191),
                             TextInput::make('rollover_protection')
-                                ->label('Proteção de Rollover para Bônus')
+                                ->label(__('Proteção de Rollover para Bônus'))
                                 ->numeric()
                                 ->default(1)
                                 ->suffix('x')
@@ -169,7 +169,7 @@ class RolloverSetting extends Page implements HasForms
                         ])->columns(2),
     
                         Toggle::make('disable_rollover')
-                            ->label('Desativar Rollover')
+                            ->label(__('Desativar Rollover'))
                             ->helperText('Se tiver desmarcado é porque está ativo o Rollover de Bônus e Depósito')
                     ])->columns(2),
             ])

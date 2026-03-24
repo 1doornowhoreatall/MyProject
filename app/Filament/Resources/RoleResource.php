@@ -117,7 +117,7 @@ class RoleResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')
-                    ->label('ID')
+                    ->label(__('ID'))
                     ->searchable(),
                 TextColumn::make('name')
                     ->label(__('filament-spatie-roles-permissions::filament-spatie.field.name'))

@@ -91,7 +91,7 @@ class SettingSpin extends Page
         try {
             if(env('APP_DEMO')) {
                 Notification::make()
-                    ->title('Atenção')
+                    ->title(__('Atenção'))
                     ->body('Você não pode realizar está alteração na versão demo')
                     ->danger()
                     ->send();
@@ -109,7 +109,7 @@ class SettingSpin extends Page
 
                 if($setting->update(['prizes' => $updatedData])) {
                     Notification::make()
-                        ->title('ACESSE ONDAGAMES.COM')
+                        ->title(__('ACESSE ONDAGAMES.COM'))
                         ->body('Dados alterados com sucesso!')
                         ->success()
                         ->send();
@@ -119,7 +119,7 @@ class SettingSpin extends Page
             }
         } catch (Halt $exception) {
             Notification::make()
-                ->title('Erro ao alterar dados!')
+                ->title(__('Erro ao alterar dados!'))
                 ->body('Erro ao alterar dados!')
                 ->danger()
                 ->send();
@@ -139,10 +139,10 @@ class SettingSpin extends Page
                         Repeater::make('prizesArray')
                             ->schema([
                                 TextInput::make('currency')
-                                    ->label('Moeda')
+                                    ->label(__('Moeda'))
                                     ->required(),
                                 TextInput::make('value')
-                                    ->label('Valor')
+                                    ->label(__('Valor'))
                                     ->numeric()
                                     ->required(),
                             ])

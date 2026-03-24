@@ -32,21 +32,21 @@ class VipResource extends Resource
         return $form
             ->schema([
                 TextInput::make('title')
-                    ->label('Título do VIP')
+                    ->label(__('Título do VIP'))
                     ->required(),
                 Textarea::make('description')
-                    ->label('Descrição')
+                    ->label(__('Descrição'))
                     ->rows(3),
                 TextInput::make('required_missions')
-                    ->label('Missões Necessárias')
+                    ->label(__('Missões Necessárias'))
                     ->numeric()
                     ->required(),
                 TextInput::make('weekly_reward')
-                    ->label('Recompensa Semanal')
+                    ->label(__('Recompensa Semanal'))
                     ->numeric()
                     ->required(),
                 FileUpload::make('image')
-                    ->label('Imagem do VIP')
+                    ->label(__('Imagem do VIP'))
                     ->directory('uploads/vips')
                     ->image()
                     ->imagePreviewHeight('100')
@@ -59,19 +59,19 @@ class VipResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('title')
-                    ->label('Título')
+                    ->label(__('Título'))
                     ->searchable(),
                 TextColumn::make('description')
-                    ->label('Descrição')
+                    ->label(__('Descrição'))
                     ->limit(50),
                 TextColumn::make('required_missions')
-                    ->label('Missões Necessárias')
+                    ->label(__('Missões Necessárias'))
                     ->sortable(),
                 TextColumn::make('weekly_reward')
-                    ->label('Recompensa Semanal')
+                    ->label(__('Recompensa Semanal'))
                     ->sortable(),
                 ImageColumn::make('image')
-                    ->label('Imagem')
+                    ->label(__('Imagem'))
                     ->size(50),
             ])
             ->filters([])

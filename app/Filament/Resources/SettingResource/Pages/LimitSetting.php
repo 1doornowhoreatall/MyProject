@@ -70,7 +70,7 @@ class LimitSetting extends Page implements HasForms
         try {
             if (env('APP_DEMO')) {
                 Notification::make()
-                    ->title('Atenção')
+                    ->title(__('Atenção'))
                     ->body('Você não pode realizar está alteração na versão demo')
                     ->danger()
                     ->send();
@@ -83,7 +83,7 @@ class LimitSetting extends Page implements HasForms
                 Cache::put('setting', $setting);
 
                 Notification::make()
-                    ->title('Dados alterados')
+                    ->title(__('Dados alterados'))
                     ->body('Dados alterados com sucesso!')
                     ->success()
                     ->send();
@@ -146,10 +146,10 @@ class LimitSetting extends Page implements HasForms
                     ->description('Voce pode definir quanto um usuário pode sacar por período.')
                     ->schema([
                         TextInput::make('withdrawal_limit')
-                            ->label('QUANTO USUÁRIO PODE SACAR?')
+                            ->label(__('QUANTO USUÁRIO PODE SACAR?'))
                             ->numeric(),
                         Select::make('withdrawal_period')
-                            ->label('QUAL O PERIODO DE SAQUE?')
+                            ->label(__('QUAL O PERIODO DE SAQUE?'))
                             ->options([
                                 'daily' => 'DIA',
                                 'weekly' => 'SEMANA',

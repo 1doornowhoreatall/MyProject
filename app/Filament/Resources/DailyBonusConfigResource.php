@@ -36,14 +36,14 @@ class DailyBonusConfigResource extends Resource
     {
         return $form->schema([
             Forms\Components\TextInput::make('bonus_value')
-                ->label('Valor do Bônus')
+                ->label(__('Valor do Bônus'))
                 ->numeric()
                 ->step(0.01)
                 ->default(0)
                 ->required(),
 
             Forms\Components\TextInput::make('cycle_hours')
-                ->label('Intervalo (Horas)')
+                ->label(__('Intervalo (Horas)'))
                 ->numeric()
                 ->default(24)
                 ->minValue(1)
@@ -62,9 +62,9 @@ class DailyBonusConfigResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('bonus_value')
-                    ->label('Bônus (R$)'),
+                    ->label(__('Bônus (R$)')),
                 Tables\Columns\TextColumn::make('cycle_hours')
-                    ->label('Intervalo (h)'),
+                    ->label(__('Intervalo (h)')),
             ])
             ->filters([])
             ->actions([

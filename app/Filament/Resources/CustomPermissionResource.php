@@ -112,7 +112,7 @@ class CustomPermissionResource  extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')
-                    ->label('ID')
+                    ->label(__('ID'))
                     ->searchable(),
                 TextColumn::make('name')
                     ->label(__('filament-spatie-roles-permissions::filament-spatie.field.name'))
@@ -124,7 +124,7 @@ class CustomPermissionResource  extends Resource
             ])
             ->filters([
                 Filter::make('models')
-                    ->label('Models')
+                    ->label(__('Models'))
                     ->form(function () {
                         $commands = new \Althinect\FilamentSpatieRolesPermissions\Commands\Permission();
                         $models = $commands->getAllModels();

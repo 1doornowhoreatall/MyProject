@@ -27,38 +27,38 @@ class SystemTools extends Page
     {
         return [
             Actions\Action::make('clear_app_cache')
-                ->label('Limpar cache da aplicação')
+                ->label(__('Limpar cache da aplicação'))
                 ->icon('heroicon-o-trash')
                 ->color('danger')
                 ->requiresConfirmation()
                 ->action(function (CacheNuker $nuker) {
                     $nuker->run(['deep' => true, 'sessions' => false, 'queues' => false]);
-                    Notification::make()->title('Cache limpo com sucesso')->success()->send();
+                    Notification::make()->title(__('Cache limpo com sucesso'))->success()->send();
                 }),
 
             Actions\Action::make('clear_sessions')
-                ->label('Limpar sessões')
+                ->label(__('Limpar sessões'))
                 ->icon('heroicon-o-user-minus')
                 ->color('warning')
                 ->requiresConfirmation()
                 ->action(function (CacheNuker $nuker) {
                     $nuker->run(['deep' => false, 'sessions' => true, 'queues' => false]);
-                    Notification::make()->title('Sessões limpas')->success()->send();
+                    Notification::make()->title(__('Sessões limpas'))->success()->send();
                 }),
 
             Actions\Action::make('clear_advanced')
-                ->label('Limpeza avançada (event/opcache)')
+                ->label(__('Limpeza avançada (event/opcache)'))
                 ->icon('heroicon-o-bolt')
                 ->color('info')
                 ->requiresConfirmation()
                 ->action(function (CacheNuker $nuker) {
                     // “avançado”: sem sessões/filas; optimize+event+opcache já rodam no service
                     $nuker->run(['deep' => false, 'sessions' => false, 'queues' => false]);
-                    Notification::make()->title('Limpeza avançada concluída')->success()->send();
+                    Notification::make()->title(__('Limpeza avançada concluída'))->success()->send();
                 }),
 
             Actions\Action::make('rebuild_caches')
-                ->label('Recriar caches (config/rotas/views)')
+                ->label(__('Recriar caches (config/rotas/views)'))
                 ->icon('heroicon-o-arrow-path')
                 ->color('primary')
                 ->requiresConfirmation()
@@ -68,7 +68,7 @@ class SystemTools extends Page
                     try { \Artisan::call('view:cache'); } catch (\Throwable $e) {}
                     try { \Artisan::call('event:cache'); } catch (\Throwable $e) {}
                     try { \Artisan::call('optimize'); } catch (\Throwable $e) {}
-                    Notification::make()->title('Caches recompilados')->success()->send();
+                    Notification::make()->title(__('Caches recompilados'))->success()->send();
                 }),
         ];
     }

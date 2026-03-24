@@ -79,7 +79,7 @@ class Settings extends Page implements HasForms
                 Section::make('Detalhes do Site')
                     ->schema([
                         TextInput::make('software_name')
-                            ->label('Nome')
+                            ->label(__('Nome'))
                             ->required()
                             ->maxLength(191)
                             
@@ -88,39 +88,39 @@ class Settings extends Page implements HasForms
                 Section::make('Logos')
                     ->schema([
                         FileUpload::make('software_favicon')
-                            ->label('Favicon')
-                            ->placeholder('Carregue um favicon')
+                            ->label(__('Favicon'))
+                            ->placeholder(__('Carregue um favicon'))
                             ->image(),
                         FileUpload::make('software_logo_white')
-                            ->label('Logo Branca')
-                            ->placeholder('Carregue uma logo branca')
+                            ->label(__('Logo Branca'))
+                            ->placeholder(__('Carregue uma logo branca'))
                             ->image(),
                         FileUpload::make('software_logo_black')
-                            ->label('Logo Escura')
-                            ->placeholder('Carregue uma logo escura')
+                            ->label(__('Logo Escura'))
+                            ->placeholder(__('Carregue uma logo escura'))
                             ->image(),
                     ])->columns(3),
 
                 Section::make('Depositos e Saques')
                     ->schema([
                         TextInput::make('min_deposit')
-                            ->label('Min Deposito')
+                            ->label(__('Min Deposito'))
                             ->numeric()
                             ->maxLength(191),
                         TextInput::make('max_deposit')
-                            ->label('Max Deposito')
+                            ->label(__('Max Deposito'))
                             ->numeric()
                             ->maxLength(191),
                         TextInput::make('min_withdrawal')
-                            ->label('Min Saque')
+                            ->label(__('Min Saque'))
                             ->numeric()
                             ->maxLength(191),
                         TextInput::make('max_withdrawal')
-                            ->label('Max Saque')
+                            ->label(__('Max Saque'))
                             ->numeric()
                             ->maxLength(191),
                         TextInput::make('rollover')
-                            ->label('Rollover')
+                            ->label(__('Rollover'))
                             ->numeric()
                             ->maxLength(191),
                     ])->columns(5),
@@ -129,31 +129,31 @@ class Settings extends Page implements HasForms
                     ->description('Configurações de Futebol')
                     ->schema([
                         TextInput::make('soccer_percentage')
-                            ->label('Futebol Comissão (%)')
+                            ->label(__('Futebol Comissão (%)'))
                             ->numeric()
                             ->suffix('%')
                             ->maxLength(191),
 
                         Toggle::make('turn_on_football')
                             ->inline(false)
-                            ->label('Ativar Futebol'),
+                            ->label(__('Ativar Futebol')),
                     ])->columns(2),
 
                 Section::make('Taxas')
                     ->description('Configurações de Ganhos da Plataforma')
                     ->schema([
                         TextInput::make('revshare_percentage')
-                            ->label('RevShare (%)')
+                            ->label(__('RevShare (%)'))
                             ->numeric()
                             ->suffix('%')
                             ->maxLength(191),
                         Toggle::make('revshare_reverse')
                             ->inline(false)
-                            ->label('Ativar RevShare Negativo')
+                            ->label(__('Ativar RevShare Negativo'))
                             ->helperText('Esta opção possibilita que o afiliado acumule saldos negativos decorrentes das perdas geradas pelos seus indicados.')
                         ,
                         TextInput::make('ngr_percent')
-                            ->label('NGR (%)')
+                            ->label(__('NGR (%)'))
                             ->numeric()
                             ->suffix('%')
                             ->maxLength(191),
@@ -161,12 +161,12 @@ class Settings extends Page implements HasForms
                 Section::make('Dados Gerais')
                     ->schema([
                         TextInput::make('initial_bonus')
-                            ->label('Bônus Inicial (%)')
+                            ->label(__('Bônus Inicial (%)'))
                             ->numeric()
                             ->suffix('%')
                             ->maxLength(191),
                         TextInput::make('currency_code')
-                            ->label('Moeda')
+                            ->label(__('Moeda'))
                             ->maxLength(191),
                         Select::make('decimal_format')->options([
                             'dot' => 'Dot',
@@ -176,19 +176,19 @@ class Settings extends Page implements HasForms
                             'right' => 'Right',
                         ]),
                         Toggle::make('disable_spin')
-                            ->label('Disable Spin')
+                            ->label(__('Disable Spin'))
                         ,
                         Toggle::make('suitpay_is_enable')
-                            ->label('SuitPay Ativo')
+                            ->label(__('SuitPay Ativo'))
                         ,
                         Toggle::make('ezzepay_is_enable')
-                        ->label('EzzePay Ativo')
+                        ->label(__('EzzePay Ativo'))
                         ,
                         Toggle::make('digito_is_enable')
-                        ->label('DigitoPay Ativo')
+                        ->label(__('DigitoPay Ativo'))
                         ,
                         Toggle::make('bspay_is_enable')
-                            ->label('BsPay Ativo')
+                            ->label(__('BsPay Ativo'))
                         ,
                     ])->columns(4),
             ])
@@ -253,7 +253,7 @@ class Settings extends Page implements HasForms
         try {
             if(env('APP_DEMO')) {
                 Notification::make()
-                    ->title('Atenção')
+                    ->title(__('Atenção'))
                     ->body('Você não pode realizar está alteração na versão demo')
                     ->danger()
                     ->send();
@@ -292,7 +292,7 @@ class Settings extends Page implements HasForms
                     Cache::put('setting', $setting);
 
                     Notification::make()
-                        ->title('ACESSE ONDAGAMES.COM')
+                        ->title(__('ACESSE ONDAGAMES.COM'))
                         ->body('Dados alterados com sucesso!')
                         ->success()
                         ->send();
@@ -305,7 +305,7 @@ class Settings extends Page implements HasForms
 
         } catch (Halt $exception) {
             Notification::make()
-                ->title('Erro ao alterar dados!')
+                ->title(__('Erro ao alterar dados!'))
                 ->body('Erro ao alterar dados!')
                 ->danger()
                 ->send();

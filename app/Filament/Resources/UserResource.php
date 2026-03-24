@@ -27,11 +27,11 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
-    protected static ?string $navigationGroup = 'Administração';
+    protected static ?string $navigationGroup = 'Administration';
 
-    protected static ?string $navigationLabel = 'GESTÃO DE USUÁRIOS';
+    protected static ?string $navigationLabel = 'USER MANAGEMENT';
 
-    protected static ?string $modelLabel = 'Usuários';
+    protected static ?string $modelLabel = 'Users';
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -113,13 +113,13 @@ class UserResource extends Resource
                 Forms\Components\Section::make()
                     ->schema([
                         Forms\Components\TextInput::make('name')
-                            ->label('NOME DE USUÁRIO')
-                            ->placeholder('Digite o nome')
+                            ->label(__('USERNAME'))
+                            ->placeholder(__('Enter name'))
                             ->required()
                             ->maxLength(191),
                         Forms\Components\TextInput::make('email')
-                            ->label('E-MAIL DE USUÁRIO')
-                            ->placeholder('Digite o e-mail')
+                            ->label(__('USER EMAIL'))
+                            ->placeholder(__('Enter email'))
                             ->email()
                             ->required()
                             ->maxLength(191),
@@ -127,26 +127,26 @@ class UserResource extends Resource
                 Forms\Components\Section::make()
                     ->schema([
                         Forms\Components\TextInput::make('affiliate_cpa')
-                            ->label('CPA PERSONALIZADO')
+                            ->label(__('CUSTOM CPA'))
                             ->required()
                             ->numeric(),
                         Forms\Components\TextInput::make('affiliate_baseline')
-                            ->label('DEPÓSITO MÍNIMO PARA RECEBER CPA')
+                            ->label(__('MINIMUM DEPOSIT TO RECEIVE CPA'))
                             ->required()
                             ->numeric(),
                     ])->columns(2),
                 Forms\Components\Section::make()
                     ->schema([
                         Forms\Components\Toggle::make('status')
-                            ->label('STATUS   /////////   SE VOCÊ DESATIVAR O USUÁRIO, ELE NÃO PODERÁ MAIS ACESSAR A PLATAFORMA.')
+                            ->label(__('STATUS   /////////   IF YOU DISABLE THE USER, THEY WILL NO LONGER BE ABLE TO ACCESS THE PLATFORM.'))
                             ->columnSpanFull(),
                     ]),
                 // Seção para validação da senha de 2FA ou confirmação de alteração
-                Forms\Components\Section::make('Confirmação de Alteração')
+                Forms\Components\Section::make('Change Confirmation')
                     ->schema([
                         Forms\Components\TextInput::make('admin_password')
-                        ->label('Senha de 2FA de Confirmação')
-                        ->placeholder('Digite a senha de confirmação')
+                        ->label(__('Confirmation 2FA Password'))
+                        ->placeholder(__('Enter confirmation password'))
                         ->password()
                         ->required()
                         ->rules([
@@ -168,28 +168,28 @@ class UserResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label('USUÁRIO')
+                    ->label(__('USER'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
-                    ->label('E-MAIL')
+                    ->label(__('EMAIL'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('wallet.total_balance')
-                    ->label('SALDO DISPONÍVEL')
+                    ->label(__('AVAILABLE BALANCE'))
                     ->money('BRL'),
                 Tables\Columns\TextColumn::make('wallet.refer_rewards')
-                    ->label('SALDO DE AFILIADO')
+                    ->label(__('AFFILIATE BALANCE'))
                     ->money('BRL')
                     ->sortable(),  // Torna a coluna de saldo ordenável
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('CADRASTRO-SE EM')
+                    ->label(__('REGISTERED AT'))
                     ->dateTime()
                     ->sortable(),
             ])
             ->filters([
                 Filter::make('created_at')
                     ->form([
-                        DatePicker::make('created_from')->label('Criado a partir de'),
-                        DatePicker::make('created_until')->label('Criado até'),
+                        DatePicker::make('created_from')->label(__('Created from')),
+                        DatePicker::make('created_until')->label(__('Created until')),
                     ])
                     ->query(function (Builder $query, array $data): Builder {
                         return $query
@@ -206,11 +206,11 @@ class UserResource extends Resource
                         $indicators = [];
 
                         if ($data['created_from'] ?? null) {
-                            $indicators['created_from'] = 'Criado a partir de ' . Carbon::parse($data['created_from'])->toFormattedDateString();
+                            $indicators['created_from'] = 'Created from ' . Carbon::parse($data['created_from'])->toFormattedDateString();
                         }
 
                         if ($data['created_until'] ?? null) {
-                            $indicators['created_until'] = 'Criado até ' . Carbon::parse($data['created_until'])->toFormattedDateString();
+                            $indicators['created_until'] = 'Created until ' . Carbon::parse($data['created_until'])->toFormattedDateString();
                         }
 
                         return $indicators;
@@ -218,24 +218,24 @@ class UserResource extends Resource
             ])
             ->actions([
                 Tables\Actions\Action::make('details')
-                    ->label('VER INFORMAÇÕES')
+                    ->label(__('VIEW INFORMATION'))
                     ->icon('heroicon-o-eye')
                     ->color('gray')
                     ->form([
                         Forms\Components\TextInput::make('senha')
-                            ->label('Digite a senha de 2fa')
+                            ->label(__('Enter 2fa password'))
                             ->password()
                             ->required(),
                     ])
                     ->requiresConfirmation()
-                    ->modalHeading('Ver informações do usuário')
-                    ->modalButton('Continuar')
+                    ->modalHeading(__('View user information'))
+                    ->modalButton(__('Continue'))
                     ->action(function (User $user, array $data) {
                         if ($data['senha'] !== env('TOKEN_DE_2FA')) {
                             Notification::make()
-                                ->title('Senha incorreta')
+                                ->title(__('Incorrect password'))
                                 ->danger()
-                                ->body('A senha informada está incorreta.')
+                                ->body('The provided password is incorrect.')
                                 ->send();
                             return;
                         }
@@ -247,21 +247,21 @@ class UserResource extends Resource
                 Tables\Actions\ActionGroup::make([
                     // Custom Action para Visualizar
                     Tables\Actions\Action::make('view')
-                        ->label('Visualizar')
+                        ->label(__('View'))
                         ->icon('heroicon-o-eye')
                         ->form([
                             Forms\Components\TextInput::make('senha')
-                                ->label('Digite a senha a senha de 2fa')
+                                ->label(__('Enter 2fa password'))
                                 ->password()
                                 ->required(),
                         ])
                         ->requiresConfirmation()
-                        ->modalHeading('Visualizar usuário')
-                        ->modalButton('Continuar')
+                        ->modalHeading(__('View user'))
+                        ->modalButton(__('Continue'))
                         ->action(function (User $user, array $data) {
                             if ($data['senha'] !== env('TOKEN_DE_2FA')) {
                                 Notification::make()
-                                    ->title('Senha incorreta')
+                                    ->title(__('Senha incorreta'))
                                     ->danger()
                                     ->body('A senha informada está incorreta.')
                                     ->send();
@@ -273,21 +273,21 @@ class UserResource extends Resource
                         }),
                     // Custom Action para Editar
                     Tables\Actions\Action::make('edit')
-                        ->label('Editar')
+                        ->label(__('Edit'))
                         ->icon('heroicon-o-pencil-square')
                         ->form([
                             Forms\Components\TextInput::make('senha')
-                                ->label('Digite a senha a senha de 2fa')
+                                ->label(__('Enter 2fa password'))
                                 ->password()
                                 ->required(),
                         ])
                         ->requiresConfirmation()
-                        ->modalHeading('Editar usuário')
-                        ->modalButton('Continuar')
+                        ->modalHeading(__('Edit user'))
+                        ->modalButton(__('Continue'))
                         ->action(function (User $user, array $data) {
                             if ($data['senha'] !== env('TOKEN_DE_2FA')) {
                                 Notification::make()
-                                    ->title('Senha incorreta')
+                                    ->title(__('Senha incorreta'))
                                     ->danger()
                                     ->body('A senha informada está incorreta.')
                                     ->send();

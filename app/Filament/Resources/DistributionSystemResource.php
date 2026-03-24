@@ -41,46 +41,46 @@ class DistributionSystemResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Toggle::make('ativo')
-                    ->label('Sistema Ativado')
+                    ->label(__('Sistema Ativado'))
                     ->helperText('Ligue ou desligue o sistema de distribuição.')
                     ->live(),
 
                 Forms\Components\TextInput::make('meta_arrecadacao')
-                    ->label('Meta de Arrecadação')
+                    ->label(__('Meta de Arrecadação'))
                     ->numeric()
                     ->step(1)
                     ->rules(['integer']),
 
                 Forms\Components\TextInput::make('percentual_distribuicao')
-                    ->label('% de Distribuição')
+                    ->label(__('% de Distribuição'))
                     ->numeric()
                     ->step(1)
                     ->rules(['integer']),
 
 
                 Forms\Components\TextInput::make('rtp_arrecadacao')
-                    ->label('RTP de Arrecadação')
+                    ->label(__('RTP de Arrecadação'))
                     ->numeric()
                     ->step(1)
                     ->rules(['integer']),
                 Forms\Components\TextInput::make('rtp_distribuicao')
-                    ->label('RTP de Distribuição')
+                    ->label(__('RTP de Distribuição'))
                     ->numeric()
                     ->step(1)
                     ->rules(['integer']),
 
                 Forms\Components\TextInput::make('total_arrecadado')
-                    ->label('Total Arrecadado')
+                    ->label(__('Total Arrecadado'))
                     ->numeric()
                     ->disabled(),
 
                 Forms\Components\TextInput::make('total_distribuido')
-                    ->label('Total Distribuído')
+                    ->label(__('Total Distribuído'))
                     ->numeric()
                     ->disabled(),
 
                 Forms\Components\Select::make('modo')
-                    ->label('Modo Atual')
+                    ->label(__('Modo Atual'))
                     ->options([
                         'arrecadacao' => 'Arrecadação',
                         'distribuicao' => 'Distribuição',
@@ -98,30 +98,30 @@ class DistributionSystemResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\BadgeColumn::make('ativo')
-                    ->label('Status')
+                    ->label(__('Status'))
                     ->formatStateUsing(fn ($state) => $state ? 'Ativado' : 'Desativado')
                     ->color(fn ($state) => $state ? 'success' : 'danger'),
 
                 Tables\Columns\TextColumn::make('meta_arrecadacao')
-                    ->label('Meta de Arrecadação'),
+                    ->label(__('Meta de Arrecadação')),
 
                 Tables\Columns\TextColumn::make('percentual_distribuicao')
-                    ->label('% de Distribuição'),
+                    ->label(__('% de Distribuição')),
 
                 Tables\Columns\TextColumn::make('rtp_arrecadacao')
-                    ->label('RTP de Arrecadação'),
+                    ->label(__('RTP de Arrecadação')),
 
                 Tables\Columns\TextColumn::make('rtp_distribuicao')
-                    ->label('RTP de Distribuição'),
+                    ->label(__('RTP de Distribuição')),
 
                 Tables\Columns\TextColumn::make('total_arrecadado')
-                    ->label('Total Arrecadado'),
+                    ->label(__('Total Arrecadado')),
 
                 Tables\Columns\TextColumn::make('total_distribuido')
-                    ->label('Total Distribuído'),
+                    ->label(__('Total Distribuído')),
 
                 Tables\Columns\BadgeColumn::make('modo')
-                    ->label('Modo Atual')
+                    ->label(__('Modo Atual'))
                     ->formatStateUsing(fn ($state) => $state === 'arrecadacao' ? 'Arrecadação' : 'Distribuição')
                     ->color(fn ($state) => $state === 'arrecadacao' ? 'primary' : 'success'),
             ])

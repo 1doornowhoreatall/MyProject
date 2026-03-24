@@ -42,23 +42,23 @@ class CategoryResource extends Resource
                 Forms\Components\Section::make()
                     ->schema([
                         Forms\Components\TextInput::make('name')
-                            ->label('NOME DA CATEGORIA')
+                            ->label(__('NOME DA CATEGORIA'))
                             ->required()
                             ->unique(ignorable: fn ($record) => $record)
                             ->maxLength(191),
                         Forms\Components\TextInput::make('description')
-                            ->label('DESCRIÇÃO DA CATEGORIA')
+                            ->label(__('DESCRIÇÃO DA CATEGORIA'))
                             ->required()
                             ->maxLength(191),
                         Forms\Components\FileUpload::make('image')
-                            ->label('IMAGEM DA CATEGORIA')
+                            ->label(__('IMAGEM DA CATEGORIA'))
                             ->image(),
                         Forms\Components\TextInput::make('slug')
-                            ->label('NOME EXIBIDO NA HOME')
+                            ->label(__('NOME EXIBIDO NA HOME'))
                             ->maxLength(191),
                         Forms\Components\TextInput::make('url')
-                            ->label('LINK OPCIONAL')
-                            ->placeholder('https://exemplo.com')
+                            ->label(__('LINK OPCIONAL'))
+                            ->placeholder(__('https://exemplo.com'))
                             ->url()
                             ->maxLength(191),
                     ])->columns(2)
@@ -76,12 +76,12 @@ class CategoryResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label('NOME DA CATEGORIA')
+                    ->label(__('NOME DA CATEGORIA'))
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('image')
-                    ->label('IMAGEM DA CATEGORIA'),
+                    ->label(__('IMAGEM DA CATEGORIA')),
                 Tables\Columns\TextColumn::make('url')
-                    ->label('LINK OPCIONAL')
+                    ->label(__('LINK OPCIONAL'))
                     ->url(fn ($record) => $record->url ?? '#') // Adiciona link ou "#" se estiver vazio
                     ->openUrlInNewTab(),
             ])

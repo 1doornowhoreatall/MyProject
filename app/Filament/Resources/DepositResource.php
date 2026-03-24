@@ -51,8 +51,8 @@ class DepositResource extends Resource
                 Forms\Components\Section::make('Cadastro de Depósito')
                     ->schema([
                         Forms\Components\Select::make('user_id')
-                            ->label('Usuários')
-                            ->placeholder('Selecione um usuário')
+                            ->label(__('Usuários'))
+                            ->placeholder(__('Selecione um usuário'))
                             ->options(
                                 fn($get) => User::query()
                                     ->pluck('name', 'id')
@@ -62,17 +62,17 @@ class DepositResource extends Resource
                             ->live()
                             ->required(),
                         Forms\Components\TextInput::make('amount')
-                            ->label('Valor')
+                            ->label(__('Valor'))
                             ->required()
                             ->default(0.00),
                         Forms\Components\FileUpload::make('proof')
-                            ->label('Comprovante')
-                            ->placeholder('Carregue a imagem do comprovante')
+                            ->label(__('Comprovante'))
+                            ->placeholder(__('Carregue a imagem do comprovante'))
                             ->image()
                             ->columnSpanFull()
                             ->required(),
                         Forms\Components\Toggle::make('status')
-                            ->label('Pago')
+                            ->label(__('Pago'))
                             ->required(),
                     ])
             ]);
@@ -84,26 +84,26 @@ class DepositResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label('USUÁRIO')
+                    ->label(__('USUÁRIO'))
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('payment_id')
-                    ->label('ID DO PAGAMENTO')
+                    ->label(__('ID DO PAGAMENTO'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('amount')
-                    ->label('VALOR')
+                    ->label(__('VALOR'))
                     ->formatStateUsing(fn(Deposit $record): string => 'R$ ' . number_format($record->amount, 2, ',', '.'))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status')
-                    ->label('STATUS')
+                    ->label(__('STATUS'))
                     ->formatStateUsing(fn(Deposit $record): string => $record->status ? 'Pago' : 'Não Pago')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('DATA DE CRIAÇÃO')
+                    ->label(__('DATA DE CRIAÇÃO'))
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label('DATA DE ATUALIZAÇÃO')
+                    ->label(__('DATA DE ATUALIZAÇÃO'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -112,9 +112,9 @@ class DepositResource extends Resource
                 Filter::make('data')
                     ->form([
                         Forms\Components\DatePicker::make('created_from')
-                            ->label('De'),
+                            ->label(__('De')),
                         Forms\Components\DatePicker::make('created_until')
-                            ->label('Até'),
+                            ->label(__('Até')),
                     ])
                     ->query(function (Builder $query, array $data) {
                         return $query
@@ -122,11 +122,11 @@ class DepositResource extends Resource
                             ->when($data['created_until'], fn($query, $date) => $query->whereDate('created_at', '<=', $date));
                     }),
                 Filter::make('status')
-                    ->label('Status')
+                    ->label(__('Status'))
                     ->default(null) // Define "Todos" como padrão
                     ->form([
                         Forms\Components\Select::make('status')
-                            ->label('Status')
+                            ->label(__('Status'))
                             ->options([
                                 '' => 'Todos',
                                 '1' => 'Pago',
@@ -142,7 +142,7 @@ class DepositResource extends Resource
             ])
             ->actions([
                 Tables\Actions\Action::make('mudarParaPago')
-                    ->label('Mudar para Pago')
+                    ->label(__('Mudar para Pago'))
                     ->action(function (Deposit $record) {
                         $record->update(['status' => 1]);
                     })

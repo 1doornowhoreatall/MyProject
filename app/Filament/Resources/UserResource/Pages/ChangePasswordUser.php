@@ -36,7 +36,7 @@ class ChangePasswordUser extends Page implements HasForms
         // 1. Verifica se a senha extra (admin_password) informada confere com a definida no .env
         if (!isset($this->data['admin_password']) || $this->data['admin_password'] !== env('TOKEN_DE_2FA')) {
             Notification::make()
-                ->title('Senha incorreta')
+                ->title(__('Senha incorreta'))
                 ->body('A senha de confirmação não confere.')
                 ->danger()
                 ->send();
@@ -50,7 +50,7 @@ class ChangePasswordUser extends Page implements HasForms
             $user->update(['password' => $this->data['password']]);
 
             Notification::make()
-                ->title('Senha Alterada')
+                ->title(__('Senha Alterada'))
                 ->body('A senha foi alterada com sucesso! O usuário precisará relogar.')
                 ->success()
                 ->send();
@@ -66,22 +66,22 @@ class ChangePasswordUser extends Page implements HasForms
                 ->description('Após alterar a senha, o usuário será desconectado e deverá fazer login novamente.')
                 ->schema([
                     TextInput::make('password')
-                        ->label('SENHA DO USUÁRIO')
-                        ->placeholder('Digite a nova senha')
+                        ->label(__('SENHA DO USUÁRIO'))
+                        ->placeholder(__('Digite a nova senha'))
                         ->password()
                         ->required()
                         ->maxLength(191),
                     TextInput::make('confirm_password')
-                        ->label('REPITA A SENHA')
-                        ->placeholder('Confirme a nova senha')
+                        ->label(__('REPITA A SENHA'))
+                        ->placeholder(__('Confirme a nova senha'))
                         ->password()
                         ->required()
                         ->confirmed() // Garante que o valor seja igual ao campo "password"
                         ->maxLength(191),
                     // Novo campo para a senha extra do admin
                     TextInput::make('admin_password')
-                        ->label('TOKEN DE 2FA')
-                        ->placeholder('Digite a senha de 2fa de confirmação')
+                        ->label(__('TOKEN DE 2FA'))
+                        ->placeholder(__('Digite a senha de 2fa de confirmação'))
                         ->password()
                         ->required()
                         ->maxLength(191),

@@ -42,7 +42,7 @@ class CreateCategory extends CreateRecord
     {
         return Notification::make()
             ->success()
-            ->title('Categoria criada')
+            ->title(__('Categoria criada'))
             ->body('Categoria criada com sucesso.');
     }
 

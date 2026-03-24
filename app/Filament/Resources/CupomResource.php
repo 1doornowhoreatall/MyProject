@@ -52,25 +52,25 @@ class CupomResource extends Resource
                     ->schema([
 
                         Forms\Components\TextInput::make('codigo')
-                            ->label('Código do Cupom')
-                            ->placeholder('Digite o código do cupom')
+                            ->label(__('Código do Cupom'))
+                            ->placeholder(__('Digite o código do cupom'))
                             ->required()
                             ->maxLength(191),
 
                         Forms\Components\TextInput::make('valor_bonus')
-                            ->label('Valor do Bônus')
-                            ->placeholder('Digite o valor do bônus')
+                            ->label(__('Valor do Bônus'))
+                            ->placeholder(__('Digite o valor do bônus'))
                             ->numeric()
                             ->required(),
 
                         Forms\Components\DatePicker::make('validade')
-                            ->label('Validade')
-                            ->placeholder('Escolha a data de validade do cupom')
+                            ->label(__('Validade'))
+                            ->placeholder(__('Escolha a data de validade do cupom'))
                             ->required(),
 
                         Forms\Components\TextInput::make('quantidade_uso')
-                            ->label('Quantidade de Usos')
-                            ->placeholder('Digite a quantidade máxima de usos')
+                            ->label(__('Quantidade de Usos'))
+                            ->placeholder(__('Digite a quantidade máxima de usos'))
                             ->numeric()
                             ->required(),
 
@@ -87,20 +87,20 @@ class CupomResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('codigo')
-                    ->label('Código'),
+                    ->label(__('Código')),
 
                 Tables\Columns\TextColumn::make('valor_bonus')
-                    ->label('Valor Bônus'),
+                    ->label(__('Valor Bônus')),
 
                 Tables\Columns\TextColumn::make('validade')
-                    ->label('Validade')
+                    ->label(__('Validade'))
                     ->date(),
 
                 Tables\Columns\TextColumn::make('quantidade_uso')
-                    ->label('Quantidade de Usos'),
+                    ->label(__('Quantidade de Usos')),
 
                 Tables\Columns\TextColumn::make('usos')
-                    ->label('Usos')
+                    ->label(__('Usos'))
             ])
             ->filters([/* Adicionar filtros se necessário */])
             ->actions([

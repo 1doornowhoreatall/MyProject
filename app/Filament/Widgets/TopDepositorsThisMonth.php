@@ -44,12 +44,12 @@ class TopDepositorsThisMonth extends BaseWidget
             ->query(fn () => $query) // passa um Eloquent\Builder (ou Closure)
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label('Usuário')
+                    ->label(__('Usuário'))
                     ->searchable()
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('total')
-                    ->label('Total depositado')
+                    ->label(__('Total depositado'))
                     ->sortable()
                     ->formatStateUsing(fn ($state) => \Helper::amountFormatDecimal((float) $state)),
             ])

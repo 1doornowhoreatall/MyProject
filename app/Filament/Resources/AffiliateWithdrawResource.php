@@ -57,21 +57,21 @@ class AffiliateWithdrawResource extends Resource
             ->query(AffiliateWithdraw::query())
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label('Usuário')
+                    ->label(__('Usuário'))
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('amount')
-                    ->label('Valor')
+                    ->label(__('Valor'))
                     ->formatStateUsing(fn (AffiliateWithdraw $record): string => $record->symbol . ' ' . $record->amount)
                     ->sortable(),
                 Tables\Columns\TextColumn::make('pix_type')
-                    ->label('Tipo de Chave')
+                    ->label(__('Tipo de Chave'))
                     ->formatStateUsing(fn (string $state): string => \Helper::formatPixType($state))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('pix_key')
-                    ->label('Chave Pix'),
+                    ->label(__('Chave Pix')),
                 Tables\Columns\TextColumn::make('status')
-                    ->label('Status')
+                    ->label(__('Status'))
                     ->formatStateUsing(fn (AffiliateWithdraw $record): string => match($record->status) {
                         0 => 'Pendente',
                         1 => 'Aprovado',
@@ -80,23 +80,23 @@ class AffiliateWithdrawResource extends Resource
                     })
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Criado em')
+                    ->label(__('Criado em'))
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label('Atualizado em')
+                    ->label(__('Atualizado em'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 Filter::make('created_at')
-                    ->label('Data de Criação')
+                    ->label(__('Data de Criação'))
                     ->form([
                         Forms\Components\DatePicker::make('created_from')
-                            ->label('De'),
+                            ->label(__('De')),
                         Forms\Components\DatePicker::make('created_until')
-                            ->label('Até'),
+                            ->label(__('Até')),
                     ])
                     ->query(function ($query, array $data) {
                         return $query
@@ -104,7 +104,7 @@ class AffiliateWithdrawResource extends Resource
                             ->when($data['created_until'], fn ($query) => $query->whereDate('created_at', '<=', $data['created_until']));
                     }),
                 Filter::make('status')
-                    ->label('Status')
+                    ->label(__('Status'))
                     ->form([
                         Forms\Components\Select::make('status')
                             ->options([
@@ -112,28 +112,28 @@ class AffiliateWithdrawResource extends Resource
                                 1 => 'Aprovado',
                                 2 => 'Cancelado',
                             ])
-                            ->placeholder('Selecione um status'),
+                            ->placeholder(__('Selecione um status')),
                     ])
                     ->query(fn ($query, $data) => isset($data['status']) ? $query->where('status', $data['status']) : $query),
             ])
             ->actions([
 
                 Action::make('delete')
-                    ->label('Excluir')
+                    ->label(__('Excluir'))
                     ->icon('heroicon-o-trash')
                     ->color('danger')
                     ->visible(fn (AffiliateWithdraw $withdrawal): bool => in_array($withdrawal->status, [0, 1, 2]))
                     ->action(function (AffiliateWithdraw $withdrawal) {
                         $withdrawal->delete();
                         \Filament\Notifications\Notification::make()
-                            ->title('Saque Excluído')
+                            ->title(__('Saque Excluído'))
                             ->success()
                             ->persistent()
                             ->body('O saque foi excluído com sucesso.')
                             ->send();
                     }),
                     Action::make('approve_payment')
-                    ->label('Fazer pagamento')
+                    ->label(__('Fazer pagamento'))
                     ->icon('heroicon-o-check-circle')
                     ->color('success')
                     ->visible(fn(AffiliateWithdraw $record): bool => !$record->status)
@@ -141,7 +141,7 @@ class AffiliateWithdrawResource extends Resource
                     // Cria um form com um campo de senha
                     ->form([
                         Forms\Components\TextInput::make('senha')
-                            ->label('Digite a senha para concluir o saque')
+                            ->label(__('Digite a senha para concluir o saque'))
                             ->password()
                             ->required(),
                     ])
@@ -149,15 +149,15 @@ class AffiliateWithdrawResource extends Resource
                     // Exibe modal
                     ->requiresConfirmation()
                 
-                    ->modalHeading('Confirmação de saque')
-                    ->modalButton('Solicitar Saque')
+                    ->modalHeading(__('Confirmação de saque'))
+                    ->modalButton(__('Solicitar Saque'))
                 
                     // Callback ao submeter o form do modal:
                     ->action(function (AffiliateWithdraw $record, array $data) {
                         // Verifica se preencheu a senha
                         if (! $data['senha']) {
                             \Filament\Notifications\Notification::make()
-                                ->title('Informe a senha')
+                                ->title(__('Informe a senha'))
                                 ->danger()
                                 ->body('Você não digitou a senha.')
                                 ->send();

@@ -55,7 +55,7 @@ class PaymentSetting extends Page implements HasForms
         try {
             if (env('APP_DEMO')) {
                 Notification::make()
-                    ->title('Atenção')
+                    ->title(__('Atenção'))
                     ->body('Você não pode realizar esta alteração na versão demo')
                     ->danger()
                     ->send();
@@ -68,7 +68,7 @@ class PaymentSetting extends Page implements HasForms
                 Cache::put('setting', $setting);
 
                 Notification::make()
-                    ->title('Dados alterados')
+                    ->title(__('Dados alterados'))
                     ->body('Dados alterados com sucesso!')
                     ->success()
                     ->send();
@@ -129,13 +129,13 @@ class PaymentSetting extends Page implements HasForms
                     ->description('Ajuste o valor da comissão CPA e depósito mínimo para o afiliado ganhar o CPA.')
                     ->schema([
                         TextInput::make('cpa_baseline')
-                            ->label('DEPÓSITO MÍNIMO CPA')
+                            ->label(__('DEPÓSITO MÍNIMO CPA'))
                             ->helperText('Valor mínimo que o usuário deve depositar para o afiliado ganhar o CPA.')
                             ->numeric()
                             ->suffix('R$ ')
                             ->maxLength(191),
                         TextInput::make('cpa_value')
-                            ->label('AFILIADO CPA')
+                            ->label(__('AFILIADO CPA'))
                             ->helperText('Valor da comissão CPA que o afiliado ganhará.')
                             ->numeric()
                             ->suffix('R$')
@@ -146,7 +146,7 @@ class PaymentSetting extends Page implements HasForms
                     ->description('Você pode ajustar plataforma de saque, depósito e limites')
                     ->schema([
                         Select::make("saque")
-                            ->label("RESPONSAVEL PELO SISTEMA DE SAQUE")
+                            ->label(__("RESPONSAVEL PELO SISTEMA DE SAQUE"))
                             ->options([
                                 "ezzepay" => "EzzePay",
                                 "suitpay" => "SuitPay",
@@ -156,23 +156,23 @@ class PaymentSetting extends Page implements HasForms
 
                             ]),
                         TextInput::make('min_deposit')
-                            ->label('DEPÓSITO MÍNIMO')
+                            ->label(__('DEPÓSITO MÍNIMO'))
                             ->numeric()
                             ->maxLength(191),
                         TextInput::make('max_deposit')
-                            ->label('DEPÓSITO MÁXIMO')
+                            ->label(__('DEPÓSITO MÁXIMO'))
                             ->numeric()
                             ->maxLength(191),
                         TextInput::make('min_withdrawal')
-                            ->label('SAQUE MÍNIMO')
+                            ->label(__('SAQUE MÍNIMO'))
                             ->numeric()
                             ->maxLength(191),
                         TextInput::make('max_withdrawal')
-                            ->label('SAQUE MÁXIMO')
+                            ->label(__('SAQUE MÁXIMO'))
                             ->numeric()
                             ->maxLength(191),
                         TextInput::make('initial_bonus')
-                            ->label('PORCENTAGEM DE BÔNUS')
+                            ->label(__('PORCENTAGEM DE BÔNUS'))
                             ->numeric()
                             ->suffix('%')
                             ->maxLength(191),
@@ -180,15 +180,15 @@ class PaymentSetting extends Page implements HasForms
                             ->description('Ative ou desative os gateways de sua preferência.')
                             ->schema([
                                 Toggle::make('ezzepay_is_enable')
-                                    ->label('EzzePay'),
+                                    ->label(__('EzzePay')),
                                 Toggle::make('digito_is_enable')
-                                    ->label('DigitoPay'),
+                                    ->label(__('DigitoPay')),
                                 Toggle::make('ondapay_is_enable')
-                                    ->label('OndaPay'),
+                                    ->label(__('OndaPay')),
                                 Toggle::make('bspay_is_enable')
-                                    ->label('bspay'),
+                                    ->label(__('bspay')),
                                 Toggle::make('suitpay_is_enable')
-                                    ->label('SuitPay'),
+                                    ->label(__('SuitPay')),
                             ])->columns(3),
                     ])->columns(2)
             ])

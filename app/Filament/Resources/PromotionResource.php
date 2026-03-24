@@ -45,23 +45,23 @@ class PromotionResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('titulo')
-                    ->label('Título')
+                    ->label(__('Título'))
                     ->required()
                     ->maxLength(191),
                 Forms\Components\TextInput::make('link')
-                    ->label('Link')
-                    ->placeholder('Digite o link da promoção')
+                    ->label(__('Link'))
+                    ->placeholder(__('Digite o link da promoção'))
                     ->url()
                     ->required()
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('imagem')
-                    ->label('Imagem')
+                    ->label(__('Imagem'))
                     ->image()
                     ->required()
                     ->directory('/uploads/promocoes') // Diretório onde as imagens serão salvas
-                    ->placeholder('Carregue uma imagem'),
+                    ->placeholder(__('Carregue uma imagem')),
                 Forms\Components\RichEditor::make('regras_html')
-                    ->label('Regras')
+                    ->label(__('Regras'))
                     ->toolbarButtons([
                         'bold',
                         'italic',
@@ -82,14 +82,14 @@ class PromotionResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('imagem')
-                    ->label('Imagem')
+                    ->label(__('Imagem'))
                     ->rounded(),
                 TextColumn::make('titulo')
-                    ->label('Título')
+                    ->label(__('Título'))
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('link')
-                    ->label('Link')
+                    ->label(__('Link'))
                     ->url(fn ($record) => $record->link, true)
                     ->openUrlInNewTab(),
             ])

@@ -32,7 +32,7 @@ class GameOpenConfigResource extends Resource
     {
         return $form->schema([
             Forms\Components\Toggle::make('requires_deposit_today')
-                ->label('Exigir Depósito Diário?')
+                ->label(__('Exigir Depósito Diário?'))
                 ->helperText('Se ativo, o usuário só poderá abrir jogos se tiver depositado hoje.')
                 ->default(false),
         ]);
@@ -44,7 +44,7 @@ class GameOpenConfigResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\BadgeColumn::make('requires_deposit_today')
-                    ->label('Exigir Depósito Diário')
+                    ->label(__('Exigir Depósito Diário'))
                     ->boolean(),
             ])
             ->actions([

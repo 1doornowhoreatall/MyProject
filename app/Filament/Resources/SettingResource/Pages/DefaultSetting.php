@@ -75,7 +75,7 @@ class DefaultSetting extends Page implements HasForms
         try {
             if(env('APP_DEMO')) {
                 Notification::make()
-                    ->title('Atenção')
+                    ->title(__('Atenção'))
                     ->body('Você não pode realizar está alteração na versão demo')
                     ->danger()
                     ->send();
@@ -134,7 +134,7 @@ class DefaultSetting extends Page implements HasForms
                 Cache::put('setting', $setting);
 
                 Notification::make()
-                    ->title('Dados alterados')
+                    ->title(__('Dados alterados'))
                     ->body('Dados alterados com sucesso!')
                     ->success()
                     ->send();
@@ -201,7 +201,7 @@ class DefaultSetting extends Page implements HasForms
                         ->columns(2)
                         ->schema([
                             TextInput::make('software_name')
-                                ->label('NOME DA PLATAFORMA')
+                                ->label(__('NOME DA PLATAFORMA'))
                                 ->required()
                                 ->maxLength(191),
                     ]),
@@ -209,16 +209,16 @@ class DefaultSetting extends Page implements HasForms
                         ->columns(2)
                         ->schema([
                             FileUpload::make('software_favicon')
-                                ->label('FAVICON (até 1024×1024)')
+                                ->label(__('FAVICON (até 1024×1024)'))
                                 ->image(),
                             Group::make()
                                 ->columnSpan('full')
                                 ->schema([
                                     FileUpload::make('software_logo_white')
-                                        ->label('LOGOTIPO DE CANTO BRANCO (1228×274)')
+                                        ->label(__('LOGOTIPO DE CANTO BRANCO (1228×274)'))
                                         ->image(),
                                     FileUpload::make('software_logo_black')
-                                        ->label('LOGO DE CARREGAMENTO USE GIF ANIMADO (1228×274)')
+                                        ->label(__('LOGO DE CARREGAMENTO USE GIF ANIMADO (1228×274)'))
                                         ->image(),
                                 ]),
                         ]),
@@ -227,11 +227,11 @@ class DefaultSetting extends Page implements HasForms
             Section::make('SEO BÁSICO')
                 ->schema([
                     Textarea::make('meta_description')
-                        ->label('Meta Description')
+                        ->label(__('Meta Description'))
                         ->rows(3)
                         ->maxLength(65535),
                     TextInput::make('meta_keywords')
-                        ->label('Meta Keywords')
+                        ->label(__('Meta Keywords'))
                         ->helperText('Separe as palavras-chave por vírgula')
                         ->maxLength(255),
                 ])
@@ -240,10 +240,10 @@ class DefaultSetting extends Page implements HasForms
             Section::make('Open Graph (Facebook/WhatsApp)')
                 ->schema([
                     TextInput::make('og_title')
-                        ->label('OG Title')
+                        ->label(__('OG Title'))
                         ->maxLength(255),
                     Textarea::make('og_description')
-                        ->label('OG Description')
+                        ->label(__('OG Description'))
                         ->rows(3)
                         ->maxLength(65535),
                 ])
@@ -252,10 +252,10 @@ class DefaultSetting extends Page implements HasForms
             Section::make('Twitter Card')
                 ->schema([
                     TextInput::make('twitter_title')
-                        ->label('Twitter Title')
+                        ->label(__('Twitter Title'))
                         ->maxLength(255),
                     Textarea::make('twitter_description')
-                        ->label('Twitter Description')
+                        ->label(__('Twitter Description'))
                         ->rows(3)
                         ->maxLength(65535),
                 ])
@@ -264,10 +264,10 @@ class DefaultSetting extends Page implements HasForms
             Section::make('Configurações Avançadas')
                 ->schema([
                     Toggle::make('allow_indexing')
-                        ->label('Permitir Indexação (no google, etc.)')
+                        ->label(__('Permitir Indexação (no google, etc.)'))
                         ->helperText('Desmarque para nao deixar o site indexado por mecanismos de busca'),
                     TextInput::make('site_url')
-                        ->label('URL Base do Site (Canonical)')
+                        ->label(__('URL Base do Site (Canonical)'))
                         ->url()
                         ->maxLength(255),
                 ])
