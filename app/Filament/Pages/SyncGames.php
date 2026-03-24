@@ -17,14 +17,14 @@ use ZipArchive;
 class SyncGames extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-refresh';
-    protected static ?string $navigationLabel = 'Gerenciamento de Jogos';
-    protected static ?string $navigationGroup = 'Jogos e Provedores';
-    protected static ?string $title = 'Gerenciamento de Jogos';
+    protected static ?string $navigationLabel = 'Game Management';
+    protected static ?string $navigationGroup = 'Games and Providers';
+    protected static ?string $title = 'Game Management';
     protected static string $view = 'filament.pages.sync-games';
 
     public function downloadAndExtractZip()
     {
-        $this->sendNotification('info', 'Iniciando download do arquivo ZIP...');
+        $this->sendNotification('info', 'Starting ZIP file download...');
 
         // URL do arquivo ZIP
         $zipUrl = 'https://imagensfivers.com/downloads/webp_playfiver.zip';
@@ -41,12 +41,12 @@ class SyncGames extends Page
             $response = Http::withOptions(['timeout' => 120])->get($zipUrl);
 
             if (!$response->successful()) {
-                $this->sendNotification('danger', 'Erro ao baixar o arquivo ZIP. Verifique o link.');
+                $this->sendNotification('danger', 'Error downloading the ZIP file. Check the link.');
                 return;
             }
 
             File::put($zipPath, $response->body());
-            $this->sendNotification('success', 'Arquivo ZIP baixado com sucesso.');
+            $this->sendNotification('success', 'ZIP file downloaded successfully.');
 
             // Extrair o ZIP
             $zip = new ZipArchive;
@@ -57,40 +57,40 @@ class SyncGames extends Page
                 }
                 $zip->extractTo($extractPath);
                 $zip->close();
-                $this->sendNotification('success', 'Imagens extraídas com sucesso.');
+                $this->sendNotification('success', 'Images extracted successfully.');
             } else {
-                $this->sendNotification('danger', 'Falha ao abrir o arquivo ZIP para extração.');
+                $this->sendNotification('danger', 'Failed to open the ZIP file for extraction.');
             }
 
             // Limpar o arquivo ZIP
             File::delete($zipPath);
         } catch (\Exception $e) {
-            $this->sendNotification('danger', 'Erro durante o download ou extração: ' . $e->getMessage());
+            $this->sendNotification('danger', 'Error during download or extraction: ' . $e->getMessage());
         }
     }
     // Botão: Sincronizar Jogos e Provedores
     public function syncGamesAndProviders()
     {
-        $this->sendNotification('info', 'Iniciando sincronização...');
+        $this->sendNotification('info', 'Starting synchronization...');
         $this->syncProviders();
         $this->syncGames();
-        $this->sendNotification('success', 'Sincronização concluída com sucesso.');
+        $this->sendNotification('success', 'Synchronization completed successfully.');
     }
 
     // Botão: Sincronizar Provedores
     public function syncProvidersOnly()
     {
-        $this->sendNotification('info', 'Sincronizando provedores...');
+        $this->sendNotification('info', 'Synchronizing providers...');
         $this->syncProviders();
-        $this->sendNotification('success', 'Provedores sincronizados com sucesso.');
+        $this->sendNotification('success', 'Providers synchronized successfully.');
     }
 
     // Botão: Sincronizar Jogos
     public function syncGamesOnly()
     {
-        $this->sendNotification('info', 'Sincronizando jogos...');
+        $this->sendNotification('info', 'Synchronizing games...');
         $this->syncGames();
-        $this->sendNotification('success', 'Jogos sincronizados com sucesso.');
+        $this->sendNotification('success', 'Games synchronized successfully.');
     }
 
     // Botão: Excluir Todos os Jogos e Provedores
@@ -98,7 +98,7 @@ class SyncGames extends Page
     {
         Provider::truncate();
         Game::truncate();
-        $this->sendNotification('success', 'Todos os jogos e provedores foram excluídos.');
+        $this->sendNotification('success', 'All games and providers have been deleted.');
     }
 
     private function syncProviders()
@@ -107,7 +107,7 @@ class SyncGames extends Page
         $providersData = $providersResponse->json();
 
         if ($providersData['status'] !== 1) {
-            $this->sendNotification('danger', 'Erro ao buscar provedores.');
+            $this->sendNotification('danger', 'Error fetching providers.');
             return;
         }
 
@@ -139,7 +139,7 @@ class SyncGames extends Page
         $gamesData = $gamesResponse->json();
     
         if ($gamesData['status'] !== 1) {
-            $this->sendNotification('danger', 'Erro ao buscar jogos.');
+            $this->sendNotification('danger', 'Error fetching games.');
             return;
         }
     

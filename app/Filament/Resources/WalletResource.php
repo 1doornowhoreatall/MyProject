@@ -22,11 +22,11 @@ class WalletResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-wallet';
 
-    protected static ?string $navigationLabel = 'GESTÃO DE CARTEIRAS';
+    protected static ?string $navigationLabel = 'WALLET MANAGEMENT';
 
-    protected static ?string $modelLabel = 'Carteiras';
+    protected static ?string $modelLabel = 'Wallets';
 
-    protected static ?string $navigationGroup = 'Administração';
+    protected static ?string $navigationGroup = 'Administration';
 
     protected static ?string $slug = 'minha-carteira';
 
@@ -59,32 +59,32 @@ class WalletResource extends Resource
                 Forms\Components\Section::make()
                     ->schema([
                         Forms\Components\TextInput::make('balance')
-                            ->label(__('SALDO DE DEPÓSITO'))
+                            ->label(__('DEPOSIT BALANCE'))
                             ->required()
                             ->numeric()
                             ->default(0.00),
                         Forms\Components\TextInput::make('balance_bonus')
-                            ->label(__('SALDO DE BÔNUS'))
+                            ->label(__('BONUS BALANCE'))
                             ->required()
                             ->numeric()
                             ->default(0.00),
                         Forms\Components\TextInput::make('refer_rewards')
-                            ->label(__('SALDO DE AFILIADO'))
+                            ->label(__('AFFILIATE BALANCE'))
                             ->required()
                             ->numeric()
                             ->default(0.00),
                         Forms\Components\TextInput::make('balance_withdrawal')
-                            ->label(__('SALDO LIBERADO PARA SAQUE'))
+                            ->label(__('WITHDRAWAL BALANCE'))
                             ->required()
                             ->numeric()
                             ->default(0.00),
                     ])->columns(5),
                 // Nova seção para confirmação de alteração com senha de 2FA
-                Forms\Components\Section::make('Confirmação de Alteração')
+                Forms\Components\Section::make('Change Confirmation')
                     ->schema([
                         Forms\Components\TextInput::make('admin_password')
-                            ->label(__('Senha de 2FA'))
-                            ->placeholder(__('Digite a senha de 2FA'))
+                            ->label(__('2FA Password'))
+                            ->placeholder(__('Enter your 2FA password'))
                             ->password()
                             ->required()
                             // Usa a regra "in:" para validar o valor sem precisar de closure customizada
@@ -100,7 +100,7 @@ class WalletResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label(__('USUÁRIO'))
+                    ->label(__('USER'))
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('balance')
@@ -108,7 +108,7 @@ class WalletResource extends Resource
                     ->formatStateUsing(fn(string $state): string => \Helper::amountFormatDecimal($state))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('balance_withdrawal')
-                    ->label(__('SALDO DE SAQUE'))
+                    ->label(__('WITHDRAWAL BALANCE'))
                     ->formatStateUsing(fn(string $state): string => \Helper::amountFormatDecimal($state))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('balance_bonus')
@@ -116,7 +116,7 @@ class WalletResource extends Resource
                     ->formatStateUsing(fn(string $state): string => \Helper::amountFormatDecimal($state))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label(__('CADASTRADO EM'))
+                    ->label(__('REGISTERED ON'))
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
@@ -127,8 +127,8 @@ class WalletResource extends Resource
             ->filters([
                 Filter::make('created_at')
                     ->form([
-                        DatePicker::make('created_from')->label(__('Criado a partir de')),
-                        DatePicker::make('created_until')->label(__('Criado até')),
+                        DatePicker::make('created_from')->label(__('Created from')),
+                        DatePicker::make('created_until')->label(__('Created until')),
                     ])
                     ->query(function (Builder $query, array $data): Builder {
                         return $query
@@ -144,10 +144,10 @@ class WalletResource extends Resource
                     ->indicateUsing(function (array $data): array {
                         $indicators = [];
                         if ($data['created_from'] ?? null) {
-                            $indicators['created_from'] = 'Criado a partir de ' . Carbon::parse($data['created_from'])->toFormattedDateString();
+                            $indicators['created_from'] = 'Created from ' . Carbon::parse($data['created_from'])->toFormattedDateString();
                         }
                         if ($data['created_until'] ?? null) {
-                            $indicators['created_until'] = 'Criado até ' . Carbon::parse($data['created_until'])->toFormattedDateString();
+                            $indicators['created_until'] = 'Created until ' . Carbon::parse($data['created_until'])->toFormattedDateString();
                         }
                         return $indicators;
                     }),
@@ -193,8 +193,8 @@ class WalletResource extends Resource
         try {
             if (env('APP_DEMO')) {
                 Notification::make()
-                    ->title(__('Atenção'))
-                    ->body('Você não pode realizar esta alteração na versão demo')
+                    ->title(__('Attention'))
+                    ->body('You cannot make this change in the demo version')
                     ->danger()
                     ->send();
                 return;
@@ -206,8 +206,8 @@ class WalletResource extends Resource
                 $this->data['admin_password'] !== env('TOKEN_DE_2FA')
             ) {
                 Notification::make()
-                    ->title(__('Acesso Negado'))
-                    ->body('A senha de 2FA está incorreta. Você não pode atualizar os dados.')
+                    ->title(__('Access Denied'))
+                    ->body('The 2FA password is incorrect. You cannot update the data.')
                     ->danger()
                     ->send();
                 return;
@@ -217,16 +217,16 @@ class WalletResource extends Resource
             if (!empty($setting)) {
                 if ($setting->update($this->data)) {
                     Notification::make()
-                        ->title(__('Sucesso'))
-                        ->body('Os dados foram atualizados com sucesso!')
+                        ->title(__('Success'))
+                        ->body('Data has been updated successfully!')
                         ->success()
                         ->send();
                 }
             }
         } catch (\Filament\Support\Exceptions\Halt $exception) {
             Notification::make()
-                ->title(__('Erro ao alterar dados!'))
-                ->body('Erro ao alterar dados!')
+                ->title(__('Error updating data!'))
+                ->body('Error updating data!')
                 ->danger()
                 ->send();
         }

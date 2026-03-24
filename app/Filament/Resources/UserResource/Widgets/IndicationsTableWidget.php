@@ -23,7 +23,7 @@ class IndicationsTableWidget extends BaseWidget
         $this->record = $record;
     }
 
-    protected static ?string $heading = 'CLIENTES TRAZIDOS POR ESTE USUÁRIO';
+    protected static ?string $heading = 'CLIENTS BROUGHT BY THIS USER';
 
     protected static ?int $navigationSort = -1;
 
@@ -40,53 +40,53 @@ class IndicationsTableWidget extends BaseWidget
             ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label(__('USUÁRIO CONVIDADO'))
+                    ->label('INVITED USER')
                     ->color('info')
                     ->badge()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('user.email')
-                    ->label(__('E-MAIL DO CONVIDADO'))
+                    ->label('INVITED EMAIL')
                     ->color('info')
                     ->badge()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('commission_type')
-                    ->label(__('COMISSÃO RECEBIDA'))	
+                    ->label('COMMISSION RECEIVED')	
                     ->badge()
                     ->color('success')
                     ->formatStateUsing(function ($state) {
                         return match($state) {
-                            'cpa' => 'COMISSÃO CPA',
-                            default => 'DESCONHECIDA',
+                            'cpa' => 'CPA COMMISSION',
+                            default => 'UNKNOWN',
                         };
                     })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('commission_paid')
-                    ->label(__('VALOR RECEBIDO'))
-                    ->money('BRL')
+                    ->label('AMOUNT RECEIVED')
+                    ->money('EUR')
                     ->badge()
                     ->color('success')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('user.status')
-                    ->label(__('STATUS'))	
+                    ->label('STATUS')	
                     ->badge()
                     ->color('success')
                     ->formatStateUsing(function ($state) {
                         return match($state) {
-                            'active' => 'VALIDADO',
-                            default => 'INVALIDADO',
+                            'active' => 'VALIDATED',
+                            default => 'INVALIDATED',
                         };
                     })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label(__('FOI CONVIDADO EM'))
+                    ->label('INVITED AT')
                     ->dateTime()
                     ->sortable(),
             ])
             ->filters([
                 Filter::make('created_at')
                     ->form([
-                        DatePicker::make('created_from')->label(__('Data Inicial')),
-                        DatePicker::make('created_until')->label(__('Data Final')),
+                        DatePicker::make('created_from')->label('Start Date'),
+                        DatePicker::make('created_until')->label('End Date'),
                     ])
                     ->query(function (Builder $query, array $data): Builder {
                         return $query
@@ -103,11 +103,11 @@ class IndicationsTableWidget extends BaseWidget
                         $indicators = [];
 
                         if ($data['created_from'] ?? null) {
-                            $indicators['created_from'] = 'Criação Inicial ' . Carbon::parse($data['created_from'])->toFormattedDateString();
+                            $indicators['created_from'] = 'Start Creation ' . Carbon::parse($data['created_from'])->toFormattedDateString();
                         }
 
                         if ($data['created_until'] ?? null) {
-                            $indicators['created_until'] = 'Criação Final ' . Carbon::parse($data['created_until'])->toFormattedDateString();
+                            $indicators['created_until'] = 'End Creation ' . Carbon::parse($data['created_until'])->toFormattedDateString();
                         }
 
                         return $indicators;

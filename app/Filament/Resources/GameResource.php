@@ -25,9 +25,9 @@ class GameResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationLabel = 'TODOS OS JOGOS';
+    protected static ?string $navigationLabel = 'ALL GAMES';
 
-    protected static ?string $modelLabel = 'Todos os Jogos';
+    protected static ?string $modelLabel = 'All Games';
 
     /**
      * @dev
@@ -51,8 +51,8 @@ class GameResource extends Resource
                         Forms\Components\Group::make()
                             ->schema([
                                 Forms\Components\Select::make('provider_id')
-                                    ->label(__('PROVEDOR DO JOGO'))
-                                    ->placeholder(__('Selecione um provedor'))
+                                    ->label(__('GAME PROVIDER'))
+                                    ->placeholder(__('Select a provider'))
                                     ->relationship(name: 'provider', titleAttribute: 'name')
                                     ->options(fn () => Provider::query()->pluck('name', 'id'))
                                     ->searchable()
@@ -63,33 +63,33 @@ class GameResource extends Resource
                                 Forms\Components\Group::make()
                                     ->schema([
                                         Forms\Components\TextInput::make('game_name')
-                                            ->label(__('NOME DO JOGO'))
-                                            ->placeholder(__('Digite o nome do jogo'))
+                                            ->label(__('GAME NAME'))
+                                            ->placeholder(__('Enter the game name'))
                                             ->required()
                                             ->maxLength(191),
                                         Forms\Components\TextInput::make('views')
-                                            ->label(__('VEZES JOGADO'))
+                                            ->label(__('TIMES PLAYED'))
                                             ->required()
                                             ->numeric()
                                             ->default(0),
                                     ])->columns(2),
 
-                                Forms\Components\Section::make('CONFIGURAÇÕES DO JOGO')
-                                    ->description('O ID do jogo e o código do jogo devem ser iguais para que funcione!')
+                                Forms\Components\Section::make('GAME SETTINGS')
+                                    ->description('The game ID and game code must match for it to work!')
                                     ->schema([
                                         Forms\Components\TextInput::make('game_id')
-                                            ->label(__('ID DO JOGO'))
-                                            ->placeholder(__('Digite o ID do jogo'))
+                                            ->label(__('GAME ID'))
+                                            ->placeholder(__('Enter the game ID'))
                                             ->required()
                                             ->maxLength(191),
                                         Forms\Components\TextInput::make('game_code')
-                                            ->placeholder(__('Digite o código do jogo'))
-                                            ->label(__('CÓDIGO DO JOGO'))
+                                            ->placeholder(__('Enter the game code'))
+                                            ->label(__('GAME CODE'))
                                             ->required()
                                             ->maxLength(191),
                                         Forms\Components\Select::make('categories')
-                                            ->label(__('CATEGORIA DO JOGO'))
-                                            ->placeholder(__('Selecione categorias para seu jogo'))
+                                            ->label(__('GAME CATEGORY'))
+                                            ->placeholder(__('Select categories for your game'))
                                             ->multiple()
                                             ->relationship('categories', 'name')
                                             ->searchable()
@@ -98,23 +98,23 @@ class GameResource extends Resource
                                             ->columnSpanFull(),
                                     ])->columns(3),
 
-                                Forms\Components\Section::make('CONFIGURAÇÕES DE EXIBIÇÃO')
-                                    ->description('Configurações de exibição do jogo na plataforma.')
+                                Forms\Components\Section::make('DISPLAY SETTINGS')
+                                    ->description('Display settings for the game on the platform.')
                                     ->schema([
-                                        Forms\Components\Toggle::make('show_home')->label(__('MOSTRAR NA HOME')),
-                                        Forms\Components\Toggle::make('is_featured')->label(__('DESTAQUE NA HOME')),
-                                        Forms\Components\Toggle::make('status')->label(__('STATUS DO JOGO'))->default(true)->required(),
-                                        Forms\Components\Toggle::make('original')->label(__('Jogo original'))->default(false)->required(),
+                                        Forms\Components\Toggle::make('show_home')->label(__('SHOW ON HOME')),
+                                        Forms\Components\Toggle::make('is_featured')->label(__('FEATURED ON HOME')),
+                                        Forms\Components\Toggle::make('status')->label(__('GAME STATUS'))->default(true)->required(),
+                                        Forms\Components\Toggle::make('original')->label(__('Original Game'))->default(false)->required(),
                                     ])->columns(3),
 
                                 // === BLOCO: capa via upload OU URL externa ===
-                                Forms\Components\Section::make('CAPA DO JOGO')
+                                Forms\Components\Section::make('GAME COVER')
                                     ->schema([
                                         Forms\Components\Select::make('cover_mode')
-                                            ->label(__('Como deseja definir a capa?'))
+                                            ->label(__('How would you like to set the cover?'))
                                             ->options([
-                                                'upload' => 'Enviar capa',
-                                                'url'    => 'Usar URL da imagem',
+                                                'upload' => 'Upload cover',
+                                                'url'    => 'Use image URL',
                                             ])
                                             ->live()
                                             ->default('upload')
@@ -126,10 +126,10 @@ class GameResource extends Resource
                                                     $set('cover_mode', 'upload');
                                                 }
                                             })
-                                            ->helperText('Envie um arquivo ou informe uma URL completa (ex.: https://imagensfivers.com/Games/Pragmatic/vs5joker.webp)'),
+                                            ->helperText('Upload a file or enter a full URL (e.g., https://imagensfivers.com/Games/Pragmatic/vs5joker.webp)'),
 
                                         Forms\Components\TextInput::make('cover_url')
-                                            ->label(__('URL da imagem'))
+                                            ->label(__('Image URL'))
                                             ->placeholder(__('https://exemplo.com/minha-capa.webp'))
                                             ->visible(fn (Get $get) => $get('cover_mode') === 'url')
                                             ->required(fn (Get $get) => $get('cover_mode') === 'url')
@@ -137,18 +137,18 @@ class GameResource extends Resource
                                             ->url()
                                             ->rule('active_url')
                                             ->columnSpanFull()
-                                            ->helperText('A imagem será carregada diretamente desta URL.'),
+                                            ->helperText('The image will be loaded directly from this URL.'),
 
                                         Forms\Components\FileUpload::make('cover')
-                                            ->label(__('Capa (upload)'))
-                                            ->placeholder(__('Carregue a capa do jogo'))
+                                            ->label(__('Cover (upload)'))
+                                            ->placeholder(__('Upload the game cover'))
                                             ->image()
                                             ->imageEditor()
                                             ->visible(fn (Get $get) => $get('cover_mode') === 'upload')
                                             ->required(fn (Get $get) => $get('cover_mode') === 'upload')
                                             // ->disk('public')
                                             ->columnSpanFull()
-                                            ->helperText('Tamanho recomendado: 322x322.'),
+                                            ->helperText('Recommended size: 322x322.'),
                                     ]),
                             ]),
                     ])->columns(1)
@@ -166,21 +166,21 @@ class GameResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\ImageColumn::make('cover')
-                    ->label(__('IMAGEM DO JOGO')),
+                    ->label(__('GAME IMAGE')),
 
                 Tables\Columns\TextColumn::make('provider.name')
-                    ->label(__('PROVEDOR DO JOGO'))
+                    ->label(__('GAME PROVIDER'))
                     ->numeric()
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('game_name')
-                    ->label(__('NOME DO JOGO'))
+                    ->label(__('GAME NAME'))
                     ->searchable(),
 
                 // 🔹 Mostrar categorias como tags (limite para não poluir)
                 Tables\Columns\TagsColumn::make('categories.name')
-                    ->label(__('CATEGORIAS'))
-                    ->limit(3),
+                    ->label(__('CATEGORIES'))
+                    ->limitList(3),
 
                 Tables\Columns\ToggleColumn::make('show_home')
                     ->afterStateUpdated(function ($record, $state) {
@@ -188,16 +188,16 @@ class GameResource extends Resource
                             $record->update(['status' => 1]);
                         }
                     })
-                    ->label(__('MOSTRAR NA HOME')),
+                    ->label(__('SHOW ON HOME')),
 
                 Tables\Columns\ToggleColumn::make('is_featured')
-                    ->label(__('DESTAQUE NA HOME')),
+                    ->label(__('FEATURED ON HOME')),
 
                 Tables\Columns\ToggleColumn::make('original')
-                    ->label(__('Game original')),
+                    ->label(__('Original Game')),
 
                 Tables\Columns\TextColumn::make('views')
-                    ->label(__('VEZES JOGADO'))
+                    ->label(__('TIMES PLAYED'))
                     ->icon('heroicon-o-eye')
                     ->numeric()
                     ->formatStateUsing(fn (Game $record): string => \Helper::formatNumber($record->views))
@@ -206,14 +206,14 @@ class GameResource extends Resource
             ->filters([
                 SelectFilter::make('Provedor')
                     ->relationship('provider', 'name')
-                    ->label(__('Provedor'))
-                    ->indicator('Provedor'),
+                    ->label(__('Provider'))
+                    ->indicator('Provider'),
 
                 // 🔹 Filtro por categoria
                 SelectFilter::make('Categoria')
                     ->relationship('categories', 'name')
-                    ->label(__('Categoria'))
-                    ->indicator('Categoria'),
+                    ->label(__('Category'))
+                    ->indicator('Category'),
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
@@ -223,25 +223,25 @@ class GameResource extends Resource
             ])
             ->bulkActions([
                 // ✅ NOVO: Definir categorias em massa
-                Tables\Actions\BulkAction::make('Definir Categorias')
+                Tables\Actions\BulkAction::make('Set Categories')
                     ->icon('heroicon-m-tag')
                     ->color('primary')
                     ->deselectRecordsAfterCompletion()
                     ->form([
                         Forms\Components\Select::make('categories')
-                            ->label(__('Categorias'))
+                            ->label(__('Categories'))
                             ->options(fn () => Category::query()->orderBy('name')->pluck('name', 'id'))
                             ->searchable()
                             ->preload()
                             ->multiple()
                             ->required()
-                            ->helperText('Selecione uma ou mais categorias para aplicar aos jogos selecionados.'),
+                            ->helperText('Select one or more categories to apply to the selected games.'),
 
                         Forms\Components\Radio::make('strategy')
-                            ->label(__('Como aplicar?'))
+                            ->label(__('How to apply?'))
                             ->options([
-                                'append'  => 'Adicionar às existentes',
-                                'replace' => 'Substituir existentes',
+                                'append'  => 'Add to existing',
+                                'replace' => 'Replace existing',
                             ])
                             ->default('append')
                             ->inline()
@@ -277,11 +277,11 @@ class GameResource extends Resource
                         }
                     })
                     ->requiresConfirmation()
-                    ->modalHeading(__('Aplicar categorias aos jogos selecionados'))
-                    ->modalSubmitActionLabel('Aplicar'),
+                    ->modalHeading(__('Apply categories to selected games'))
+                    ->modalSubmitActionLabel('Apply'),
 
                 // (Opcional) Limpar categorias
-                Tables\Actions\BulkAction::make('Limpar Categorias')
+                Tables\Actions\BulkAction::make('Clear Categories')
                     ->icon('heroicon-m-trash')
                     ->color('warning')
                     ->requiresConfirmation()
@@ -292,14 +292,14 @@ class GameResource extends Resource
                     })
                     ->deselectRecordsAfterCompletion(),
 
-                Tables\Actions\BulkAction::make('Ativar Jogos')
+                Tables\Actions\BulkAction::make('Activate Games')
                     ->icon('heroicon-m-check')
                     ->requiresConfirmation()
                     ->action(function ($records) {
                         return $records->each->update(['status' => 1]);
                     }),
 
-                Tables\Actions\BulkAction::make('Desativar Jogos')
+                Tables\Actions\BulkAction::make('Deactivate Games')
                     ->icon('heroicon-m-x-circle')
                     ->color('danger')
                     ->requiresConfirmation()

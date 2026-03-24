@@ -60,53 +60,21 @@ class GatewayPage extends Page
     {
         return $form
             ->schema([
-                Section::make('OBETZERACRIOU ESSA PLATAFORMA PARA VOCÊ')
+                Section::make('ADMINISTRATION PLATFORM')
                     ->description(new HtmlString('
                     <div style="font-weight: 600; display: flex; align-items: center;">
-                        SAIBA MAIS SOBRE NÓS. PARTICIPE DA NOSSA COMUNIDADE IGAMING. ACESSE AGORA!
-                        <a class="dark:text-white"
-                           style="
-                                font-size: 14px;
-                                font-weight: 600;
-                                width: 127px;
-                                display: flex;
-                                background-color: #00b91e;
-                                padding: 10px;
-                                border-radius: 11px;
-                                justify-content: center;
-                                margin-left: 10px;
-                           "
-                           href="https://obetzera.com"
-                           target="_blank">
-                            SITE OFICIAL
-                        </a>
-                        <a class="dark:text-white"
-                           style="
-                                font-size: 14px;
-                                font-weight: 600;
-                                width: 127px;
-                                display: flex;
-                                background-color: #00b91e;
-                                padding: 10px;
-                                border-radius: 11px;
-                                justify-content: center;
-                                margin-left: 10px;
-                           "
-                           href="https://t.me/obetzera01"
-                           target="_blank">
-                            GRUPO TELEGRAM
-                        </a>
+                        Configure your global settings.
                     </div>
             ')),
 
 
-                Section::make('REGISTRE SUAS CHAVES DE API GATEWAY')
-                    ->description('Configure suas chaves de API para os gateways de pagamento')
+                Section::make('API GATEWAY KEYS')
+                    ->description('Configure your API keys for CryptoCloud')
                     ->schema([
-                        Section::make('ONDAPAY A MAIS RECOMENDADA NO MERCADO')
+                        Section::make('CRYPTOCLOUD | 100% CRYPTO OFFSHORE')
                             ->description(new HtmlString('
                                 <div style="display: flex; align-items: center;">
-                                    Crie sua conta para processar pagamentos com a ONDAPAY:
+                                    Create your account to process crypto payments via CryptoCloud:
                                     <a class="dark:text-white"
                                         style="
                                             font-size: 14px;
@@ -119,129 +87,32 @@ class GatewayPage extends Page
                                             justify-content: center;
                                             margin-left: 10px;
                                         "
-                                        href="https://ondapay.app/"
+                                        href="https://cryptocloud.plus/"
                                         target="_blank">
-                                        Abrir Conta
+                                        Open Account
                                     </a>
                                 </div>
                         '),)
                             ->schema([
-                                TextInput::make('ondapay_uri')
-                                    ->label(__('CLIENTE URL'))
-                                    ->placeholder(__('Digite a url da api'))
+                                TextInput::make('cryptocloud_shop_id')
+                                    ->label(__('SHOP ID'))
+                                    ->placeholder(__('Enter CryptoCloud Shop ID'))
                                     ->maxLength(191)
                                     ->columnSpanFull(),
-                                TextInput::make('ondapay_client')
-                                    ->label(__('CLIENTE ID'))
-                                    ->placeholder(__('Digite o client ID'))
-                                    ->maxLength(191)
-                                    ->columnSpanFull(),
-                                TextInput::make('ondapay_secret')
-                                    ->label(__('CLIENTE SECRETO'))
-                                    ->placeholder(__('Digite o client secret'))
+                                TextInput::make('cryptocloud_api_key')
+                                    ->label(__('API KEY'))
+                                    ->placeholder(__('Enter CryptoCloud API Key'))
                                     ->maxLength(191)
                                     ->columnSpanFull(),
                             ]),
-                        Section::make('DIGITO PAY | SUPORTE RUIM')
-                            ->schema([
-                                TextInput::make('digito_uri')
-                                    ->label(__('CLIENTE URL'))
-                                    ->placeholder(__('Digite a url da api'))
-                                    ->maxLength(191)
-                                    ->columnSpanFull(),
-                                TextInput::make('digito_client')
-                                    ->label(__('CLIENTE ID'))
-                                    ->placeholder(__('Digite o client ID'))
-                                    ->maxLength(191)
-                                    ->columnSpanFull(),
-                                TextInput::make('digito_secret')
-                                    ->label(__('CLIENTE SECRETO'))
-                                    ->placeholder(__('Digite o client secret'))
-                                    ->maxLength(191)
-                                    ->columnSpanFull(),
-                            ]),
-
-                        Section::make('BSPAY E PIXUP | INVENTA MEDPIX PRA TE ROUBAR')
-                            ->description(new HtmlString('
-                        <b>Seu Webhook:  ' . url("/bspay/callback", [], true) . "</b>"))
-                            ->schema([
-                                TextInput::make('bspay_uri')
-                                    ->label(__('CLIENTE URL'))
-                                    ->placeholder(__('Digite a url da api'))
-                                    ->maxLength(191)
-                                    ->columnSpanFull(),
-                                TextInput::make('bspay_cliente_id')
-                                    ->label(__('CLIENTE ID'))
-                                    ->placeholder(__('Digite o client ID'))
-                                    ->maxLength(191)
-                                    ->columnSpanFull(),
-                                TextInput::make('bspay_cliente_secret')
-                                    ->label(__('CLIENTE SECRETO'))
-                                    ->placeholder(__('Digite o client secret'))
-                                    ->maxLength(191)
-                                    ->columnSpanFull(),
-                            ]),
-                        Section::make('EZZEPAY | ESTA ATUALMENTE SENDO INVESTIGADA')
-                            ->description(new HtmlString('
-                        <b>Seu Webhook:  ' . url("/ezzepay/webhook", [], true) . "</b>"))
-                            ->schema([
-                                TextInput::make('ezze_uri')
-                                    ->label(__('CLIENTE URL'))
-                                    ->placeholder(__('Digite a url da api'))
-                                    ->maxLength(191)
-                                    ->columnSpanFull(),
-                                TextInput::make('ezze_client')
-                                    ->label(__('CLIENTE ID'))
-                                    ->placeholder(__('Digite o client ID'))
-                                    ->maxLength(191)
-                                    ->columnSpanFull(),
-                                TextInput::make('ezze_secret')
-                                    ->label(__('CLIENTE SECRETO'))
-                                    ->placeholder(__('Digite o client secret'))
-                                    ->maxLength(191)
-                                    ->columnSpanFull(),
-                                TextInput::make('ezze_user')
-                                    ->label(__('USUARIO DO WEBHOOK'))
-                                    ->placeholder(__('Digite o usuário de autenticação do webhook'))
-                                    ->maxLength(191)
-                                    ->columnSpanFull(),
-                                TextInput::make('ezze_senha')
-                                    ->label(__('SENHA DO WEBHOOK'))
-                                    ->placeholder(__('Digite a senha de autenticação do webhook'))
-                                    ->maxLength(191)
-                                    ->columnSpanFull(),
-                            ]),
-
-
-                        Section::make('SUITEPAY | MUITO MEDPIX E DIFICIL DE ABRIR CONTAS')
-                            ->description(new HtmlString('
-                        <b>Para fazer saques libere o IP</b>'))
-                            ->schema([
-                                TextInput::make('suitpay_uri')
-                                    ->label(__('CLIENTE URL'))
-                                    ->placeholder(__('Digite a url da api'))
-                                    ->maxLength(191)
-                                    ->columnSpanFull(),
-                                TextInput::make('suitpay_cliente_id')
-                                    ->label(__('CLIENTE ID'))
-                                    ->placeholder(__('Digite o client ID'))
-                                    ->maxLength(191)
-                                    ->columnSpanFull(),
-                                TextInput::make('suitpay_cliente_secret')
-                                    ->label(__('CLIENTE SECRETO'))
-                                    ->placeholder(__('Digite o client secret'))
-                                    ->maxLength(191)
-                                    ->columnSpanFull(),
-                            ]),
-                        // Adicione esta seção dentro do array passado para ->schema([ ... ])
-                        Section::make('Confirmação de Alteração')
+                        Section::make('Confirm Changes')
                             ->schema([
                                 TextInput::make('admin_password')
-                                    ->label(__('Senha de 2FA a que esta no arquivo (.env)'))
-                                    ->placeholder(__('Digite a senha de 2FA'))
+                                    ->label(__('2FA Password (found in .env)'))
+                                    ->placeholder(__('Enter 2FA password'))
                                     ->password()
                                     ->required()
-                                    ->dehydrateStateUsing(fn($state) => null), // Para que o valor não seja persistido
+                                    ->dehydrateStateUsing(fn($state) => null), // Do not persist
                             ]),
 
                     ]),

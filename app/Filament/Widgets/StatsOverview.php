@@ -84,85 +84,85 @@ class StatsOverview extends BaseWidget
         $netVar = $var($netToday, $depYday - $wdYday);
 
         return [
-            Stat::make('Usuários', number_format($totalUsers))
-                ->description('Total cadastrados')
+            Stat::make('Users', number_format($totalUsers))
+                ->description('Total registered')
                 ->descriptionIcon('heroicon-o-user-group')
                 ->color('blue')
                 ->chart($this->normalizeSparkline($sparkDeposits))
                 ->chartColor('rgba(59, 130, 246, 0.5)'),
 
-            Stat::make('Depósitos (hoje)', \Helper::amountFormatDecimal($depToday))
-                ->description($this->trendText('vs ontem', $depVar))
+            Stat::make('Deposits (today)', \Helper::amountFormatDecimal($depToday))
+                ->description($this->trendText('vs yesterday', $depVar))
                 ->descriptionIcon('heroicon-o-currency-dollar')
                 ->color('success')
                 ->chart($sparkDeposits)
                 ->chartColor('rgba(16, 185, 129, 0.5)'),
 
-            Stat::make('Saques (hoje)', \Helper::amountFormatDecimal($wdToday))
-                ->description($this->trendText('vs ontem', $wdVar))
+            Stat::make('Withdrawals (today)', \Helper::amountFormatDecimal($wdToday))
+                ->description($this->trendText('vs yesterday', $wdVar))
                 ->descriptionIcon('heroicon-o-arrow-down-tray')
                 ->color('danger')
                 ->chart($sparkWithdraws)
                 ->chartColor('rgba(239, 68, 68, 0.5)'),
 
-            Stat::make('Fluxo líquido (hoje)', \Helper::amountFormatDecimal($netToday))
-                ->description($this->trendText('vs ontem', $netVar))
+            Stat::make('Net Flow (today)', \Helper::amountFormatDecimal($netToday))
+                ->description($this->trendText('vs yesterday', $netVar))
                 ->descriptionIcon('heroicon-o-arrows-right-left')
                 ->color($netToday >= 0 ? 'success' : 'danger')
                 ->chart($this->normalizeSparkline(array_map(fn($i) => $sparkDeposits[$i] - $sparkWithdraws[$i], array_keys($sparkDeposits))))
                 ->chartColor('rgba(99, 102, 241, 0.5)'), // indigo
 
-            Stat::make('Saldo players', \Helper::amountFormatDecimal($playersBalance))
-                ->description('Somatório de wallets')
+            Stat::make('Player Balance', \Helper::amountFormatDecimal($playersBalance))
+                ->description('Wallet summary')
                 ->descriptionIcon('heroicon-o-wallet')
                 ->color('purple')
                 ->chart([15, 30, 25, 40, 35, 50, 45])
                 ->chartColor('rgba(168, 85, 247, 0.5)'),
 
-            Stat::make('Afiliados (acumulado)', \Helper::amountFormatDecimal($affRewards))
-                ->description('Ganhos a pagar')
+            Stat::make('Affiliates (accumulated)', \Helper::amountFormatDecimal($affRewards))
+                ->description('Pending payouts')
                 ->descriptionIcon('heroicon-o-briefcase')
                 ->color('yellow')
                 ->chart([5, 15, 10, 20, 25, 30, 35])
                 ->chartColor('rgba(250, 204, 21, 0.5)'),
 
-            Stat::make('Conversão novos (hoje)', number_format($convToday, 2) . '%')
-                ->description("{$depUsersToday} depositantes / {$newUsersToday} novos")
+            Stat::make('New Conversions (today)', number_format($convToday, 2) . '%')
+                ->description("{$depUsersToday} depositors / {$newUsersToday} new")
                 ->descriptionIcon('heroicon-o-sparkles')
                 ->color('info')
                 ->chart([10, 20, 15, 30, 25, 35, 45])
                 ->chartColor('rgba(2, 132, 199, 0.5)'),
 
-            Stat::make('Ticket médio (hoje)', \Helper::amountFormatDecimal($arpuToday))
-                ->description('Média por depositante de hoje')
+            Stat::make('Average Ticket (today)', \Helper::amountFormatDecimal($arpuToday))
+                ->description('Average per depositor today')
                 ->descriptionIcon('heroicon-o-chart-bar')
                 ->color('gray')
                 ->chart([20, 30, 25, 35, 45, 50, 55])
                 ->chartColor('rgba(107, 114, 128, 0.5)'),
 
-            Stat::make('1 depósito', $dep1)
-                ->description('Distribuição usuários')
+            Stat::make('1 deposit', $dep1)
+                ->description('User distribution')
                 ->descriptionIcon('heroicon-o-user')
                 ->color('orange')
                 ->chart([10, 20, 15, 30, 25, 35, 45])
                 ->chartColor('rgba(249, 115, 22, 0.5)'),
 
-            Stat::make('2 depósitos', $dep2)
-                ->description('Distribuição usuários')
+            Stat::make('2 deposits', $dep2)
+                ->description('User distribution')
                 ->descriptionIcon('heroicon-o-user')
                 ->color('rose')
                 ->chart([20, 30, 25, 35, 45, 50, 55])
                 ->chartColor('rgba(244, 63, 94, 0.5)'),
 
-            Stat::make('3 depósitos', $dep3)
-                ->description('Distribuição usuários')
+            Stat::make('3 deposits', $dep3)
+                ->description('User distribution')
                 ->descriptionIcon('heroicon-o-user')
                 ->color('indigo')
                 ->chart([15, 25, 20, 30, 35, 40, 50])
                 ->chartColor('rgba(79, 70, 229, 0.5)'),
 
-            Stat::make('4+ depósitos', $dep4p)
-                ->description('Distribuição usuários')
+            Stat::make('4+ deposits', $dep4p)
+                ->description('User distribution')
                 ->descriptionIcon('heroicon-o-user')
                 ->color('teal')
                 ->chart([25, 35, 30, 40, 45, 55, 60])
@@ -172,7 +172,7 @@ class StatsOverview extends BaseWidget
 
     private function trendText(string $prefix, ?float $var): string
     {
-        if ($var === null) return "$prefix: n/d";
+        if ($var === null) return "$prefix: n/a";
         $arrow = $var >= 0 ? '↑' : '↓';
         return sprintf('%s: %s %s%%', $prefix, $arrow, number_format(abs($var), 2));
     }

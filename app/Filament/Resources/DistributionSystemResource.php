@@ -20,10 +20,10 @@ class DistributionSystemResource extends Resource
      * Customizações de exibição no menu do Filament
      */
     protected static ?string $navigationIcon = 'heroicon-o-ticket';
-    protected static ?string $label = 'Distribuição de Ganhos';
-    protected static ?string $pluralLabel = 'Sistema de Distribuição';
-    protected static ?string $navigationLabel = 'SISTEMA DE DISTRIBUIÇÃO';
-    protected static ?string $navigationGroup = 'Finanças';
+    protected static ?string $label = 'Earnings Distribution';
+    protected static ?string $pluralLabel = 'Distribution System';
+    protected static ?string $navigationLabel = 'DISTRIBUTION SYSTEM';
+    protected static ?string $navigationGroup = 'Finance';
 
     /**
      * Controla o acesso: somente Admin pode ver
@@ -41,46 +41,46 @@ class DistributionSystemResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Toggle::make('ativo')
-                    ->label(__('Sistema Ativado'))
+                    ->label(__('System Enabled'))
                     ->helperText('Ligue ou desligue o sistema de distribuição.')
                     ->live(),
 
                 Forms\Components\TextInput::make('meta_arrecadacao')
-                    ->label(__('Meta de Arrecadação'))
+                    ->label(__('Collection Goal'))
                     ->numeric()
                     ->step(1)
                     ->rules(['integer']),
 
                 Forms\Components\TextInput::make('percentual_distribuicao')
-                    ->label(__('% de Distribuição'))
+                    ->label(__('% Distribution'))
                     ->numeric()
                     ->step(1)
                     ->rules(['integer']),
 
 
                 Forms\Components\TextInput::make('rtp_arrecadacao')
-                    ->label(__('RTP de Arrecadação'))
+                    ->label(__('Collection RTP'))
                     ->numeric()
                     ->step(1)
                     ->rules(['integer']),
                 Forms\Components\TextInput::make('rtp_distribuicao')
-                    ->label(__('RTP de Distribuição'))
+                    ->label(__('Distribution RTP'))
                     ->numeric()
                     ->step(1)
                     ->rules(['integer']),
 
                 Forms\Components\TextInput::make('total_arrecadado')
-                    ->label(__('Total Arrecadado'))
+                    ->label(__('Total Collected'))
                     ->numeric()
                     ->disabled(),
 
                 Forms\Components\TextInput::make('total_distribuido')
-                    ->label(__('Total Distribuído'))
+                    ->label(__('Total Distributed'))
                     ->numeric()
                     ->disabled(),
 
                 Forms\Components\Select::make('modo')
-                    ->label(__('Modo Atual'))
+                    ->label(__('Current Mode'))
                     ->options([
                         'arrecadacao' => 'Arrecadação',
                         'distribuicao' => 'Distribuição',
@@ -103,25 +103,25 @@ class DistributionSystemResource extends Resource
                     ->color(fn ($state) => $state ? 'success' : 'danger'),
 
                 Tables\Columns\TextColumn::make('meta_arrecadacao')
-                    ->label(__('Meta de Arrecadação')),
+                    ->label(__('Collection Goal')),
 
                 Tables\Columns\TextColumn::make('percentual_distribuicao')
-                    ->label(__('% de Distribuição')),
+                    ->label(__('% Distribution')),
 
                 Tables\Columns\TextColumn::make('rtp_arrecadacao')
-                    ->label(__('RTP de Arrecadação')),
+                    ->label(__('Collection RTP')),
 
                 Tables\Columns\TextColumn::make('rtp_distribuicao')
-                    ->label(__('RTP de Distribuição')),
+                    ->label(__('Distribution RTP')),
 
                 Tables\Columns\TextColumn::make('total_arrecadado')
-                    ->label(__('Total Arrecadado')),
+                    ->label(__('Total Collected')),
 
                 Tables\Columns\TextColumn::make('total_distribuido')
-                    ->label(__('Total Distribuído')),
+                    ->label(__('Total Distributed')),
 
                 Tables\Columns\BadgeColumn::make('modo')
-                    ->label(__('Modo Atual'))
+                    ->label(__('Current Mode'))
                     ->formatStateUsing(fn ($state) => $state === 'arrecadacao' ? 'Arrecadação' : 'Distribuição')
                     ->color(fn ($state) => $state === 'arrecadacao' ? 'primary' : 'success'),
             ])

@@ -19,9 +19,9 @@ class ProviderResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationLabel = 'PROVEDORES DE JOGOS';
+    protected static ?string $navigationLabel = 'GAME PROVIDERS';
 
-    protected static ?string $modelLabel = 'Todos os Provedores';
+    protected static ?string $modelLabel = 'All Providers';
 
     /**
      * Garante que apenas usuários com o papel de admin possam acessar.
@@ -43,18 +43,18 @@ class ProviderResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('CRIE OU EDITE UM PROVEDOR')
+                Forms\Components\Section::make('CREATE OR EDIT A PROVIDER')
                     ->schema([
                         Forms\Components\TextInput::make('code')
-                            ->label(__('CODIGO DO PROVEDOR'))
-                            ->placeholder(__('Digite o Código'))
+                            ->label(__('PROVIDER CODE'))
+                            ->placeholder(__('Enter the Code'))
                             ->maxLength(50),
                         Forms\Components\TextInput::make('name')
-                            ->placeholder(__('Digite o Nome'))
-                            ->label(__('NOME DO PROVEDOR'))
+                            ->placeholder(__('Enter the Name'))
+                            ->label(__('PROVIDER NAME'))
                             ->maxLength(50),
                         Forms\Components\Toggle::make('status')
-                            ->label(__('STATUS DO PROVEDOR'))
+                            ->label(__('PROVIDER STATUS'))
                             ->inline(false)
                             ->required(),
                     ])
@@ -73,13 +73,13 @@ class ProviderResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('code')
-                    ->label(__('CÓDIGO DO PROVEDOR'))
+                    ->label(__('PROVIDER CODE'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('name')
-                    ->label(__('NOME DO PROVEDOR'))
+                    ->label(__('PROVIDER NAME'))
                     ->searchable(),
                 Tables\Columns\IconColumn::make('status')
-                    ->label(__('STATUS DO PROVEDOR'))
+                    ->label(__('PROVIDER STATUS'))
                     ->boolean(),
             ])
             ->actions([

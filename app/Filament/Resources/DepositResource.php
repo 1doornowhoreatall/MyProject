@@ -19,11 +19,11 @@ class DepositResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
 
-    protected static ?string $navigationLabel = 'GESTÃO DE DEPÓSITOS';
+    protected static ?string $navigationLabel = 'DEPOSIT MANAGEMENT';
+    
+    protected static ?string $modelLabel = 'DEPOSIT MANAGEMENT';
 
-    protected static ?string $modelLabel = 'GESTÃO DE DEPÓSITOS';
-
-    protected static ?string $navigationGroup = 'Administração';
+    protected static ?string $navigationGroup = 'Administration';
 
     protected static ?string $slug = 'todos-depositos';
 
@@ -48,11 +48,11 @@ class DepositResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('Cadastro de Depósito')
+                Forms\Components\Section::make('Deposit Registration')
                     ->schema([
                         Forms\Components\Select::make('user_id')
-                            ->label(__('Usuários'))
-                            ->placeholder(__('Selecione um usuário'))
+                            ->label('Users')
+                            ->placeholder('Select a user')
                             ->options(
                                 fn($get) => User::query()
                                     ->pluck('name', 'id')
@@ -62,17 +62,17 @@ class DepositResource extends Resource
                             ->live()
                             ->required(),
                         Forms\Components\TextInput::make('amount')
-                            ->label(__('Valor'))
+                            ->label('Amount')
                             ->required()
                             ->default(0.00),
                         Forms\Components\FileUpload::make('proof')
-                            ->label(__('Comprovante'))
-                            ->placeholder(__('Carregue a imagem do comprovante'))
+                            ->label('Proof')
+                            ->placeholder('Upload proof image')
                             ->image()
                             ->columnSpanFull()
                             ->required(),
                         Forms\Components\Toggle::make('status')
-                            ->label(__('Pago'))
+                            ->label('Paid')
                             ->required(),
                     ])
             ]);
@@ -84,26 +84,26 @@ class DepositResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label(__('USUÁRIO'))
+                    ->label('USER')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('payment_id')
-                    ->label(__('ID DO PAGAMENTO'))
+                    ->label('PAYMENT ID')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('amount')
-                    ->label(__('VALOR'))
-                    ->formatStateUsing(fn(Deposit $record): string => 'R$ ' . number_format($record->amount, 2, ',', '.'))
+                    ->label('AMOUNT')
+                    ->formatStateUsing(fn(Deposit $record): string => '€ ' . number_format($record->amount, 2, ',', '.'))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status')
-                    ->label(__('STATUS'))
-                    ->formatStateUsing(fn(Deposit $record): string => $record->status ? 'Pago' : 'Não Pago')
+                    ->label('STATUS')
+                    ->formatStateUsing(fn(Deposit $record): string => $record->status ? 'Paid' : 'Unpaid')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label(__('DATA DE CRIAÇÃO'))
+                    ->label('CREATION DATE')
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label(__('DATA DE ATUALIZAÇÃO'))
+                    ->label('UPDATE DATE')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -112,9 +112,9 @@ class DepositResource extends Resource
                 Filter::make('data')
                     ->form([
                         Forms\Components\DatePicker::make('created_from')
-                            ->label(__('De')),
+                            ->label('From'),
                         Forms\Components\DatePicker::make('created_until')
-                            ->label(__('Até')),
+                            ->label('Until'),
                     ])
                     ->query(function (Builder $query, array $data) {
                         return $query
@@ -122,17 +122,17 @@ class DepositResource extends Resource
                             ->when($data['created_until'], fn($query, $date) => $query->whereDate('created_at', '<=', $date));
                     }),
                 Filter::make('status')
-                    ->label(__('Status'))
+                    ->label('Status')
                     ->default(null) // Define "Todos" como padrão
                     ->form([
                         Forms\Components\Select::make('status')
-                            ->label(__('Status'))
+                            ->label('Status')
                             ->options([
-                                '' => 'Todos',
-                                '1' => 'Pago',
-                                '0' => 'Não Pago',
+                                '' => 'All',
+                                '1' => 'Paid',
+                                '0' => 'Unpaid',
                             ])
-                            ->default(''), // Define "Todos" como padrão
+                            ->default(''), // Define "All" como padrão
                     ])
                     ->query(function (Builder $query, array $data) {
                         if (isset($data['status']) && $data['status'] !== '') {
@@ -142,7 +142,7 @@ class DepositResource extends Resource
             ])
             ->actions([
                 Tables\Actions\Action::make('mudarParaPago')
-                    ->label(__('Mudar para Pago'))
+                    ->label('Mark as Paid')
                     ->action(function (Deposit $record) {
                         $record->update(['status' => 1]);
                     })

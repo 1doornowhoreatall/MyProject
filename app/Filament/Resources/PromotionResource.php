@@ -24,9 +24,9 @@ class PromotionResource extends Resource
     protected static ?string $model = Promocao::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $label = 'Promoção';
-    protected static ?string $pluralLabel = 'Promoções';
-    protected static ?string $navigationLabel = 'GERENCIAR PROMOÇÕES';
+    protected static ?string $label = 'Promotion';
+    protected static ?string $pluralLabel = 'Promotions';
+    protected static ?string $navigationLabel = 'MANAGE PROMOTIONS';
     protected static ?string $navigationGroup = 'Marketing';
 
     /**
@@ -45,23 +45,23 @@ class PromotionResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('titulo')
-                    ->label(__('Título'))
+                    ->label(__('Title'))
                     ->required()
                     ->maxLength(191),
                 Forms\Components\TextInput::make('link')
                     ->label(__('Link'))
-                    ->placeholder(__('Digite o link da promoção'))
+                    ->placeholder(__('Enter the promotion link'))
                     ->url()
                     ->required()
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('imagem')
-                    ->label(__('Imagem'))
+                    ->label(__('Image'))
                     ->image()
                     ->required()
                     ->directory('/uploads/promocoes') // Diretório onde as imagens serão salvas
-                    ->placeholder(__('Carregue uma imagem')),
+                    ->placeholder(__('Upload an image')),
                 Forms\Components\RichEditor::make('regras_html')
-                    ->label(__('Regras'))
+                    ->label(__('Rules'))
                     ->toolbarButtons([
                         'bold',
                         'italic',
@@ -82,10 +82,10 @@ class PromotionResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('imagem')
-                    ->label(__('Imagem'))
-                    ->rounded(),
+                    ->label(__('Image'))
+                    ->circular(),
                 TextColumn::make('titulo')
-                    ->label(__('Título'))
+                    ->label(__('Title'))
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('link')

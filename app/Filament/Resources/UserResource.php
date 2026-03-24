@@ -175,10 +175,11 @@ class UserResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('wallet.total_balance')
                     ->label(__('AVAILABLE BALANCE'))
-                    ->money('BRL'),
+                    ->formatStateUsing(fn ($state) => '€ ' . number_format($state, 2, ',', '.'))
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('wallet.refer_rewards')
                     ->label(__('AFFILIATE BALANCE'))
-                    ->money('BRL')
+                    ->formatStateUsing(fn ($state) => '€ ' . number_format($state, 2, ',', '.'))
                     ->sortable(),  // Torna a coluna de saldo ordenável
                 Tables\Columns\TextColumn::make('created_at')
                     ->label(__('REGISTERED AT'))
@@ -261,9 +262,9 @@ class UserResource extends Resource
                         ->action(function (User $user, array $data) {
                             if ($data['senha'] !== env('TOKEN_DE_2FA')) {
                                 Notification::make()
-                                    ->title(__('Senha incorreta'))
+                                    ->title(__('Incorrect password'))
                                     ->danger()
-                                    ->body('A senha informada está incorreta.')
+                                    ->body('The provided password is incorrect.')
                                     ->send();
                                 return;
                             }
@@ -287,9 +288,9 @@ class UserResource extends Resource
                         ->action(function (User $user, array $data) {
                             if ($data['senha'] !== env('TOKEN_DE_2FA')) {
                                 Notification::make()
-                                    ->title(__('Senha incorreta'))
+                                    ->title(__('Incorrect password'))
                                     ->danger()
-                                    ->body('A senha informada está incorreta.')
+                                    ->body('The provided password is incorrect.')
                                     ->send();
                                 return;
                             }

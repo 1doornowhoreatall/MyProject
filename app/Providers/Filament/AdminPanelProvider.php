@@ -189,9 +189,9 @@ class AdminPanelProvider extends PanelProvider
                         ->items([
                             NavigationItem::make('withdraw_affiliates')
                                 ->icon('heroicon-o-banknotes')
-                                ->label(fn (): string => 'SAQUES AFILIADOS')
+                                ->label(fn (): string => 'AFFILIATE WITHDRAWALS')
                                 ->url(fn (): string => AffiliateWithdrawResource::getUrl())
-                                ->isActiveWhen(fn () => request()->routeIs('filament.admin.resources.sub-affiliates.index')),
+                                ->isActiveWhen(fn () => request()->routeIs('filament.admin.resources.affiliate-withdraws.index')),
                             ...WithdrawalResource::getNavigationItems(),
                         ]),
 

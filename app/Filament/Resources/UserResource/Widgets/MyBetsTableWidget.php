@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class MyBetsTableWidget extends BaseWidget
 {
-    protected static ?string $heading = 'HISTÓRICO DE APOSTAS';
+    protected static ?string $heading = 'BET HISTORY';
     protected static ?int $navigationSort = -1;
     protected int | string | array $columnSpan = 'full';
     public User $record;
@@ -25,18 +25,18 @@ class MyBetsTableWidget extends BaseWidget
             ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('gameDetails.game_name')
-                    ->label(__('NOME DO JOGO'))
+                    ->label('GAME NAME')
                     ->color('info')
                     ->badge()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')
-                    ->label(__('RESULTADO'))
+                    ->label('RESULT')
                     ->badge()
                     ->formatStateUsing(function ($state) {
                         return match($state) {
-                            'Perda' => 'APOSTA PERDIDA',
-                            'Ganho' => 'APOSTA GANHA',
-                            default => 'DESCONHECIDO',
+                            'Perda' => 'LOST BET',
+                            'Ganho' => 'WON BET',
+                            default => 'UNKNOWN',
                         };
                     })
                     ->color(function ($state) {
@@ -48,54 +48,54 @@ class MyBetsTableWidget extends BaseWidget
                     })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type_money')
-                    ->label(__('CARTEIRA USADA'))
+                    ->label('WALLET USED')
                     ->badge()
                     ->color('info')
                     ->formatStateUsing(function ($state) {
                         return match($state) {
-                            'balance' => 'CARTEIRA DEPÓSITO',
-                            'balance_bonus' => 'CARTEIRA BÔNUS',
-                            'balance_withdrawal' => 'CARTEIRA SAQUE',
-                            default => 'CARTEIRA DESCONHECIDA',
+                            'balance' => 'DEPOSIT WALLET',
+                            'balance_bonus' => 'BONUS WALLET',
+                            'balance_withdrawal' => 'WITHDRAWAL WALLET',
+                            default => 'UNKNOWN WALLET',
                         };
                     })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('amount')
-                    ->label(__('VALOR DA APOSTA'))
-                    ->money('BRL')
+                    ->label('BET AMOUNT')
+                    ->money('EUR')
                     ->badge()
                     ->color('success')
                     ->sortable()  // Torna a coluna ordenável
                     ->searchable(),
                 Tables\Columns\TextColumn::make('providers')
-                    ->label(__('STATUS'))
+                    ->label('STATUS')
                     ->badge()
                     ->color('success')
                     ->formatStateUsing(function ($state) {
                         return match($state) {
-                            'Play Fiver' => 'VALIDADO',
+                            'Play Fiver' => 'VALIDATED',
                             default => '',
                         };
                     })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label(__('APOSTADO EM'))
+                    ->label('BET AT')
                     ->dateTime()
                     ->sortable(),
             ])
             ->filters([
                 Filter::make('type_ganho')
-                    ->label(__('APOSTAS GANHAS'))
+                    ->label('WON BETS')
                     ->query(fn (Builder $query): Builder => $query->where('type', '=', 'win')),
 
                 Filter::make('type_perda')
-                    ->label(__('APOSTAS PERDIDAS'))
+                    ->label('LOST BETS')
                     ->query(fn (Builder $query): Builder => $query->where('type', '=', 'bet')),
 
                 Filter::make('created_at')
                     ->form([
-                        DatePicker::make('created_from')->label(__('Data Inicial')),
-                        DatePicker::make('created_until')->label(__('Data Final')),
+                        DatePicker::make('created_from')->label('Start Date'),
+                        DatePicker::make('created_until')->label('End Date'),
                     ])
                     ->query(function (Builder $query, array $data): Builder {
                         return $query
@@ -112,11 +112,11 @@ class MyBetsTableWidget extends BaseWidget
                         $indicators = [];
 
                         if ($data['created_from'] ?? null) {
-                            $indicators['created_from'] = 'Criação Inicial ' . Carbon::parse($data['created_from'])->toFormattedDateString();
+                            $indicators['created_from'] = 'Start Creation ' . Carbon::parse($data['created_from'])->toFormattedDateString();
                         }
 
                         if ($data['created_until'] ?? null) {
-                            $indicators['created_until'] = 'Criação Final ' . Carbon::parse($data['created_until'])->toFormattedDateString();
+                            $indicators['created_until'] = 'End Creation ' . Carbon::parse($data['created_until'])->toFormattedDateString();
                         }
 
                         return $indicators;

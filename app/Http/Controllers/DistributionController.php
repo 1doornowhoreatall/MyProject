@@ -18,20 +18,20 @@ class DistributionController extends Controller
         // Verifica senha (caso use rota pública)
         if ($request->input('key') !== $this->secretKey) {
             return response()->json([
-                'error' => 'Acesso negado. Senha incorreta ou não informada.'
+                'error' => 'Access denied. Incorrect or missing password.'
             ], 403);
         }
 
         // 1. Carrega o registro do sistema
         $distribution = DistributionSystem::first();
         if (!$distribution) {
-            return response()->json(['error' => 'Nenhum registro de distribuição encontrado.'], 404);
+            return response()->json(['error' => 'No distribution record found.'], 404);
         }
 
         // 2. Se estiver desativado, não faz nada
         if (!$distribution->ativo) {
             return response()->json([
-                'message' => 'Nenhuma ação executada.'
+                'message' => 'No action performed.'
             ], 200);
         }
 
@@ -95,7 +95,7 @@ class DistributionController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Sistema de distribuição atualizado com sucesso!',
+            'message' => 'Distribution system updated successfully!',
         ]);
     }
 

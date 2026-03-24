@@ -22,11 +22,11 @@ class WithdrawalResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
-    protected static ?string $navigationLabel = 'SAQUES DE USUÁRIOS';
+    protected static ?string $navigationLabel = 'USER WITHDRAWALS';
 
-    protected static ?string $modelLabel = 'SAQUE';
+    protected static ?string $modelLabel = 'WITHDRAWAL';
 
-    protected static ?string $navigationGroup = 'GESTÃO E FINANÇAS';
+    protected static ?string $navigationGroup = 'MANAGEMENT & FINANCE';
 
     protected static ?string $slug = 'todos-saques';
 
@@ -39,7 +39,7 @@ class WithdrawalResource extends Resource
 
     public static function getGloballySearchableAttributes(): array
     {
-        return ['type', 'bank_info', 'user.name', 'user.last_name', 'user.cpf', 'user.phone',  'user.email'];
+        return ['type', 'bank_info', 'user.name', 'user.last_name', 'user.phone',  'user.email'];
     }
 
     public static function getNavigationBadge(): ?string
@@ -59,46 +59,46 @@ class WithdrawalResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label(__('USUÁRIO'))
+                    ->label('USER')
                     ->searchable(['users.name', 'users.last_name'])
                     ->sortable(),
                 Tables\Columns\TextColumn::make('amount')
-                    ->label(__('VALOR'))
-                    ->formatStateUsing(fn(Withdrawal $record): string => 'R$ ' . number_format($record->amount, 2, ',', '.'))
+                    ->label('AMOUNT')
+                    ->formatStateUsing(fn(Withdrawal $record): string => '€ ' . number_format($record->amount, 2, ',', '.'))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('pix_type')
-                    ->label(__('TIPO DE CHAVE'))
+                    ->label('CRYPTO TYPE')
                     ->formatStateUsing(fn(string $state): string => \Helper::formatPixType($state))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('pix_key')
-                    ->label(__('CHAVE PIX')),
+                    ->label('WALLET ADDRESS'),
                 Tables\Columns\TextColumn::make('status')
-                    ->label(__('STATUS'))
+                    ->label('STATUS')
                     ->formatStateUsing(fn(Withdrawal $record): string => match ($record->status) {
-                        0 => 'Pendente',
-                        1 => 'Aprovado',
-                        2 => 'Cancelado',
-                        default => 'Desconhecido'
+                        0 => 'Pending',
+                        1 => 'Approved',
+                        2 => 'Canceled',
+                        default => 'Unknown'
                     })
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label(__('CRIADO EM'))
+                    ->label('CREATED AT')
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label(__('ATUALIZADO EM'))
+                    ->label('UPDATED AT')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 Filter::make('created_at')
-                    ->label(__('Data de Criação'))
+                    ->label('Creation Date')
                     ->form([
                         Forms\Components\DatePicker::make('created_from')
-                            ->label(__('De')),
+                            ->label('From'),
                         Forms\Components\DatePicker::make('created_until')
-                            ->label(__('Até')),
+                            ->label('Until'),
                     ])
                     ->query(function ($query, array $data) {
                         return $query
@@ -106,61 +106,36 @@ class WithdrawalResource extends Resource
                             ->when($data['created_until'], fn($query) => $query->whereDate('created_at', '<=', $data['created_until']));
                     }),
                 Filter::make('status')
-                    ->label(__('Status'))
+                    ->label('Status')
                     ->form([
                         Forms\Components\Select::make('status')
                             ->options([
-                                0 => 'Pendente',
-                                1 => 'Aprovado',
-                                2 => 'Cancelado',
+                                0 => 'Pending',
+                                1 => 'Approved',
+                                2 => 'Canceled',
                             ])
-                            ->placeholder(__('Selecione um status')),
+                            ->placeholder('Select a status'),
                     ])
                     ->query(fn($query, $data) => isset($data['status']) ? $query->where('status', $data['status']) : $query),
             ])
             ->actions([
                 Action::make('refund_payment')
-                    ->label(__('Reembolsar'))
+                    ->label('Refund')
                     ->icon('heroicon-o-x-circle')
                     ->color('danger')
                     ->visible(fn(Withdrawal $withdrawal): bool => !$withdrawal->status)
                     ->action(function (Withdrawal $withdrawal) {
-                        $route = route('suitpay.cancelwithdrawal', ['id' => $withdrawal->id]);
-                        \Filament\Notifications\Notification::make()
-                            ->title(__('Reembolsar Saque'))
+                        $withdrawal->update(['status' => 2]); // Mark as Canceled/Refunded
+                        Notification::make()
+                            ->title('Withdrawal Refunded')
                             ->success()
-                            ->persistent()
-                            ->body('Você está reembolsando o saque de ' . \Helper::amountFormatDecimal($withdrawal->amount))
-                            ->actions([
-                                \Filament\Notifications\Actions\Action::make('view')
-                                    ->label(__('Confirmar'))
-                                    ->button()
-                                     ->extraAttributes([
-                                        'onclick' => <<<JS
-                                            var apertou = false;
-                                            this.disabled = true;
-                                            if (!apertou) {
-                                                apertou = true;
-                                                var url = `$route`;
-                                                window.location.href = url;
-                                            }
-                                        JS,
-                                    ])     
-                                    ->close(),
-                                \Filament\Notifications\Actions\Action::make('undo')
-                                    ->color('gray')
-                                    ->label(__('Cancelar'))
-                                    ->action(function (Withdrawal $withdrawal) {
-                                        // Ação de cancelamento se necessário
-                                    })
-                                    ->close(),
-                            ])
+                            ->body('The withdrawal was refunded successfully.')
                             ->send();
                     }),
 
                     
                     Action::make('approve_payment')
-                        ->label(__('Fazer pagamento'))
+                        ->label('Make payment')
                         ->icon('heroicon-o-check-circle')
                         ->color('success')
                         ->visible(fn (Withdrawal $record): bool => !$record->status)
@@ -168,7 +143,7 @@ class WithdrawalResource extends Resource
                         // 1) Cria um form para pedir a senha no modal
                         ->form([
                             Forms\Components\TextInput::make('senha')
-                                ->label(__('Digite a senha de 2fa para concluir o saque'))
+                                ->label('Enter 2fa password to complete withdrawal')
                                 ->password() // campo tipo password
                                 ->required(),
                         ])
@@ -177,17 +152,17 @@ class WithdrawalResource extends Resource
                         ->requiresConfirmation()
                     
                         // 3) Personaliza título do modal e texto do botão
-                        ->modalHeading(__('Confirmação de saque'))
-                        ->modalButton(__('Solicitar Saque'))
+                        ->modalHeading('Withdrawal confirmation')
+                        ->modalButton('Request Withdrawal')
                     
                         // 4) Callback que roda ao submeter o form do modal
                         ->action(function (Withdrawal $record, array $data) {
                             // Se quiser checar se digitou algo (opcional, pois '->required()' já força no Filament)
                             if (! $data['senha']) {
                                 Notification::make()
-                                    ->title(__('Informe a senha'))
+                                    ->title('Provide password')
                                     ->danger()
-                                    ->body('Você não digitou a senha.')
+                                    ->body('You did not enter the password.')
                                     ->send();
                     
                                 return;
@@ -208,17 +183,17 @@ class WithdrawalResource extends Resource
                     
                 
                 Action::make('delete')
-                    ->label(__('Excluir'))
+                    ->label('Delete')
                     ->icon('heroicon-o-trash')
                     ->color('danger')
                     ->visible(fn(Withdrawal $withdrawal): bool => in_array($withdrawal->status, [0, 1, 2]))
                     ->action(function (Withdrawal $withdrawal) {
                         $withdrawal->delete();
                         \Filament\Notifications\Notification::make()
-                            ->title(__('Saque Excluído'))
+                            ->title('Withdrawal Deleted')
                             ->success()
                             ->persistent()
-                            ->body('O saque foi excluído com sucesso.')
+                            ->body('Withdrawal deleted successfully.')
                             ->send();
                     }),
             ])

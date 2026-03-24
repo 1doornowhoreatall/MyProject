@@ -48,7 +48,7 @@ class DefaultSetting extends Page implements HasForms
      */
     public function getTitle(): string | Htmlable
     {
-        return __('AJUSTE OS DADOS DA PLATAFORMA'); 
+        return __('ADJUST PLATFORM DATA'); 
     }
 
     public Setting $record;
@@ -75,8 +75,8 @@ class DefaultSetting extends Page implements HasForms
         try {
             if(env('APP_DEMO')) {
                 Notification::make()
-                    ->title(__('Atenção'))
-                    ->body('Você não pode realizar está alteração na versão demo')
+                    ->title(__('Attention'))
+                    ->body('You cannot make this change in the demo version')
                     ->danger()
                     ->send();
                 return;
@@ -134,8 +134,8 @@ class DefaultSetting extends Page implements HasForms
                 Cache::put('setting', $setting);
 
                 Notification::make()
-                    ->title(__('Dados alterados'))
-                    ->body('Dados alterados com sucesso!')
+                    ->title(__('Data updated'))
+                    ->body('Data updated successfully!')
                     ->success()
                     ->send();
 
@@ -194,31 +194,31 @@ class DefaultSetting extends Page implements HasForms
                         </a>
                     </div>
                 ')),
-            Section::make('ALTERE LOGOTIPO E DADOS')
-                ->description('Altere o logotipo e os dados da plataforma')
+            Section::make('UPDATE LOGO AND DATA')
+                ->description('Update the platform logo and data')
                 ->schema([
                     Group::make()
                         ->columns(2)
                         ->schema([
                             TextInput::make('software_name')
-                                ->label(__('NOME DA PLATAFORMA'))
+                                ->label(__('PLATFORM NAME'))
                                 ->required()
                                 ->maxLength(191),
-                    ]),
+                        ]),
                     Group::make()
                         ->columns(2)
                         ->schema([
                             FileUpload::make('software_favicon')
-                                ->label(__('FAVICON (até 1024×1024)'))
+                                ->label(__('FAVICON (up to 1024×1024)'))
                                 ->image(),
                             Group::make()
                                 ->columnSpan('full')
                                 ->schema([
                                     FileUpload::make('software_logo_white')
-                                        ->label(__('LOGOTIPO DE CANTO BRANCO (1228×274)'))
+                                        ->label(__('WHITE SIDE LOGO (1228×274)'))
                                         ->image(),
                                     FileUpload::make('software_logo_black')
-                                        ->label(__('LOGO DE CARREGAMENTO USE GIF ANIMADO (1228×274)'))
+                                        ->label(__('LOADING LOGO - USE ANIMATED GIF (1228×274)'))
                                         ->image(),
                                 ]),
                         ]),

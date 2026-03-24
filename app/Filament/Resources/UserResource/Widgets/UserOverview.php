@@ -18,9 +18,9 @@ class UserOverview extends BaseWidget
         $totalWeekUsers = User::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
 
         return [
-            Stat::make('TOTAL DE CADASTRO', User::query()->count()), 
-            Stat::make('CADASTROS DA SEMANA', $totalWeekUsers), 
-            Stat::make('CADASTROS DO MÊS', $totalMonthUsers), 
+            Stat::make('TOTAL REGISTRATIONS', User::query()->count()), 
+            Stat::make('REGISTRATIONS THIS WEEK', $totalWeekUsers), 
+            Stat::make('REGISTRATIONS THIS MONTH', $totalMonthUsers), 
         ];
     }
 }

@@ -44,7 +44,7 @@ class RolloverSetting extends Page implements HasForms
      */
     public function getTitle(): string | Htmlable
     {
-        return __('SISTEMA DE ROLL-OVER');
+        return __('ROLL-OVER SYSTEM');
     }
 
     public Setting $record;
@@ -140,37 +140,37 @@ class RolloverSetting extends Page implements HasForms
                         </a>
                     </div>
                 ')),
-                Section::make('SISTEMA DE PROTEÇÃO DE BÔNUS E DEPÓSITO')
-                    ->description('Proteção para evitar saques sem apostas e lavagem de dinheiro.')
+                Section::make('BONUS AND DEPOSIT PROTECTION SYSTEM')
+                    ->description('Protection to prevent withdrawals without betting and money laundering.')
                     ->schema([
                         TextInput::make('rollover_deposit')
-                            ->label(__('ROLL-OVER DEPÓSITO'))
+                            ->label(__('DEPOSIT ROLL-OVER'))
                             ->numeric()
                             ->default(1)
                             ->suffix('x')
-                            ->helperText('A quantidade de multiplicação do depósito --> recomendado = 2')
+                            ->helperText('The amount of deposit multiplication --> recommended = 2')
                             ->maxLength(191),
                         
                         Group::make()->schema([ // Adiciona o group para rollover e rollover_protection
                             TextInput::make('rollover')
-                                ->label(__('ROLL-OVER BÔNUS'))
+                                ->label(__('BONUS ROLL-OVER'))
                                 ->numeric()
                                 ->default(1)
                                 ->suffix('x')
-                                ->helperText('a quantidade de multiplicação do Bônus --> recomendado = 5')
+                                ->helperText('The amount of Bonus multiplication --> recommended = 5')
                                 ->maxLength(191),
                             TextInput::make('rollover_protection')
-                                ->label(__('Proteção de Rollover para Bônus'))
+                                ->label(__('Bonus Rollover Protection'))
                                 ->numeric()
                                 ->default(1)
                                 ->suffix('x')
-                                ->helperText('Defina a quantidade de transações mínimas para zerar o Rollover')
+                                ->helperText('Define the minimum amount of transactions to clear the Rollover')
                                 ->maxLength(191),
                         ])->columns(2),
-    
+     
                         Toggle::make('disable_rollover')
-                            ->label(__('Desativar Rollover'))
-                            ->helperText('Se tiver desmarcado é porque está ativo o Rollover de Bônus e Depósito')
+                            ->label(__('Disable Rollover'))
+                            ->helperText('If unchecked, the Bonus and Deposit Rollover is active')
                     ])->columns(2),
             ])
             ->statePath('data');

@@ -15,9 +15,9 @@ class MissionResource extends Resource
 {
     protected static ?string $model = Mission::class;
     protected static ?string $navigationIcon = 'heroicon-o-flag';
-    protected static ?string $label = 'Missão';
-    protected static ?string $navigationLabel = 'GERENCIAR MISSÃO';
-    protected static ?string $pluralLabel = 'Missões';
+    protected static ?string $label = 'Mission';
+    protected static ?string $navigationLabel = 'MANAGE MISSION';
+    protected static ?string $pluralLabel = 'Missions';
     protected static ?string $navigationGroup = 'Marketing';
 
     public static function canAccess(): bool
@@ -29,24 +29,24 @@ class MissionResource extends Resource
     {
         return $form->schema([
             TextInput::make('title')
-                ->label(__('Título'))
+                ->label('Title')
                 ->required()
                 ->maxLength(255),
 
             Textarea::make('description')
-                ->label(__('Descrição'))
+                ->label('Description')
                 ->rows(5)
                 ->nullable(),
 
             Select::make('type')
-                ->label(__('Tipo de Missão'))
+                ->label('Mission Type')
                 ->options([
-                    'deposit' => 'Missão de Depósito',
-                    'game_bet' => 'Missão de Aposta por Jogo',
-                    'total_bet' => 'Missão de Aposta Total',
-                    'rounds_played' => 'Missão de Rodadas Jogadas',
-                    'win_amount' => 'Missão de Ganho por Jogo',
-                    'loss_amount' => 'Missão de Perda por Jogo',
+                    'deposit' => 'Deposit Mission',
+                    'game_bet' => 'Game Bet Mission',
+                    'total_bet' => 'Total Bet Mission',
+                    'rounds_played' => 'Rounds Played Mission',
+                    'win_amount' => 'Win Amount Mission',
+                    'loss_amount' => 'Loss Amount Mission',
                 ])
                 ->required()
                 ->reactive() // Atualiza dinamicamente ao selecionar
@@ -58,7 +58,7 @@ class MissionResource extends Resource
                 }),
 
             Select::make('game_id')
-                ->label(__('Selecione o Jogo'))
+                ->label('Select Game')
                 ->options(
                     \DB::table('games')->pluck('game_name', 'game_id')->toArray() // Pluck com game_id como chave e game_name como valor
                 )
@@ -67,33 +67,33 @@ class MissionResource extends Resource
                 ->visible(fn ($get) => in_array($get('type'), ['game_bet', 'rounds_played', 'win_amount', 'loss_amount'])), // Mostra para tipos que envolvem jogos
 
             TextInput::make('target_amount')
-                ->label(__('Valor-Alvo (R$ ou Rodadas)'))
+                ->label('Target Value (€ or Rounds)')
                 ->numeric()
                 ->helperText(fn ($get) => match ($get('type')) {
-                    'rounds_played' => 'Número de rodadas que o usuário precisa jogar.',
-                    'win_amount' => 'Valor de ganho que o usuário precisa atingir.',
-                    'loss_amount' => 'Valor de perda que o usuário precisa atingir.',
-                    default => 'Valor que o usuário precisa alcançar para concluir a missão.',
+                    'rounds_played' => 'Number of rounds the user needs to play.',
+                    'win_amount' => 'Win amount the user needs to achieve.',
+                    'loss_amount' => 'Loss amount the user needs to achieve.',
+                    default => 'Amount the user needs to achieve to complete the mission.',
                 })
                 ->required(),
 
             TextInput::make('reward')
-                ->label(__('Recompensa (R$)'))
+                ->label('Reward (€)')
                 ->numeric()
-                ->helperText('Valor que o usuário receberá ao concluir a missão.')
+                ->helperText('Amount the user will receive upon completing the mission.')
                 ->required(),
 
             FileUpload::make('image')
-                ->label(__('Imagem da Missão'))
+                ->label('Mission Image')
                 ->image()
                 ->directory('/uploads/missoes') // Diretório onde as imagens serão salvas
-                ->placeholder(__('Carregue uma imagem')),
+                ->placeholder('Upload an image'),
 
             Select::make('status')
-                ->label(__('Status'))
+                ->label('Status')
                 ->options([
-                    'active' => 'Ativa',
-                    'inactive' => 'Inativa',
+                    'active' => 'Active',
+                    'inactive' => 'Inactive',
                 ])
                 ->default('active')
                 ->required(),
@@ -104,36 +104,36 @@ class MissionResource extends Resource
     {
         return $table->columns([
             ImageColumn::make('image')
-                ->label(__('Imagem'))
-                ->rounded(),
+                ->label('Image')
+                ->circular(),
             TextColumn::make('title')
-                ->label(__('Título'))
+                ->label('Title')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('type')
-                ->label(__('Tipo de Missão'))
+                ->label('Mission Type')
                 ->formatStateUsing(fn ($state) => [
-                    'deposit' => 'Missão de Depósito',
-                    'game_bet' => 'Missão de Aposta por Jogo',
-                    'total_bet' => 'Missão de Aposta Total',
-                    'rounds_played' => 'Missão de Rodadas Jogadas',
-                    'win_amount' => 'Missão de Ganho por Jogo',
-                    'loss_amount' => 'Missão de Perda por Jogo',
+                    'deposit' => 'Deposit Mission',
+                    'game_bet' => 'Game Bet Mission',
+                    'total_bet' => 'Total Bet Mission',
+                    'rounds_played' => 'Rounds Played Mission',
+                    'win_amount' => 'Win Amount Mission',
+                    'loss_amount' => 'Loss Amount Mission',
                 ][$state] ?? $state),
             TextColumn::make('target_amount')
-                ->label(__('Valor-Alvo'))
+                ->label('Target Value')
                 ->formatStateUsing(fn ($state, $record) => match ($record->type) {
-                    'rounds_played' => "{$state} Rodadas",
-                    default => "R$ {$state}",
+                    'rounds_played' => "{$state} Rounds",
+                    default => "€ {$state}",
                 }),
             TextColumn::make('reward')
-                ->label(__('Recompensa'))
-                ->money('BRL'),
+                ->label('Reward')
+                ->money('EUR'),
             TextColumn::make('status')
-                ->label(__('Status'))
+                ->label('Status')
                 ->formatStateUsing(fn ($state) => [
-                    'active' => 'Ativa',
-                    'inactive' => 'Inativa',
+                    'active' => 'Active',
+                    'inactive' => 'Inactive',
                 ][$state] ?? $state),
         ])->filters([])
           ->actions([

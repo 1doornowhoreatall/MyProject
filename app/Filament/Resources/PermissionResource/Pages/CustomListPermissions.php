@@ -11,6 +11,6 @@ class CustomListPermissions extends ListRecords
 
     protected function getHeaderActions(): array
     {
-        // Suas ações de cabeçalho personalizadas
+        return [];
     }
 }

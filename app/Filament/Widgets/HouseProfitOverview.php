@@ -41,21 +41,21 @@ class HouseProfitOverview extends BaseWidget
         [, $betsSeries, $winsSeries, $profitSeries] = $this->seriesByDay($from, $to);
 
         return [
-            Stat::make('Total de Perdas (apostas)', \Helper::amountFormatDecimal($totalBets))
+            Stat::make('Total Losses (bets)', \Helper::amountFormatDecimal($totalBets))
                 ->description($this->periodLabel($from, $to))
                 ->descriptionIcon('heroicon-o-fire')
                 ->color('orange')
                 ->chart($betsSeries)
                 ->chartColor('rgba(249, 115, 22, 0.5)'),
 
-            Stat::make('Total de Ganhos (pagos)', \Helper::amountFormatDecimal($totalWins))
+            Stat::make('Total Wins (paid)', \Helper::amountFormatDecimal($totalWins))
                 ->description($this->periodLabel($from, $to))
                 ->descriptionIcon('heroicon-o-gift')
                 ->color('info')
                 ->chart($winsSeries)
                 ->chartColor('rgba(2, 132, 199, 0.5)'),
 
-            Stat::make('Lucro da Casa', \Helper::amountFormatDecimal($profit))
+            Stat::make('House Profit', \Helper::amountFormatDecimal($profit))
                 ->description($this->periodLabel($from, $to))
                 ->descriptionIcon('heroicon-o-banknotes')
                 ->color($profit >= 0 ? 'success' : 'danger')
@@ -118,8 +118,8 @@ class HouseProfitOverview extends BaseWidget
     private function periodLabel(Carbon $from, Carbon $to): string
     {
         return $from->isSameDay($to)
-            ? 'Hoje'
-            : 'Período: ' . $from->format('d/m') . ' - ' . $to->format('d/m');
+            ? 'Today'
+            : 'Period: ' . $from->format('d/m') . ' - ' . $to->format('d/m');
     }
 
     private function normalizeSparkline(array $series): array

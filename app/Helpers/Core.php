@@ -203,10 +203,10 @@ class Core
     public static function getTypeOrder($order)
     {
         if ($order == 'win') {
-            return 'Ganho';
+            return 'Win';
         }
 
-        return 'Perda';
+        return 'Loss';
     }
 
     /*** Get Ative Wallet
@@ -352,13 +352,15 @@ class Core
     {
         switch ($key) {
             case 'document':
-                return 'Documento';
+                return 'Document';
             case 'phoneNumber':
-                return 'Telefone';
+                return 'Phone Number';
             case 'email':
                 return 'E-mail';
             case 'randomKey':
-                return 'Chave Aleatória';
+                return 'Random Key';
+            case 'crypto':
+                return 'Crypto Wallet';
             default:
                 return $key;
         }
@@ -783,7 +785,7 @@ class Core
     }
 
     /**
-     * @return float
+     * @return string
      */
     public static function getBalance()
     {
@@ -1212,24 +1214,20 @@ class Core
             case 'jpg':
             case 'svg':
                 return 'image';
-                break;
 
             case 'doc':
             case 'pdf':
             case 'docx':
             case 'txt':
                 return 'document';
-                break;
 
             case 'mp3':
             case 'wav':
                 return 'audio';
-                break;
 
             case 'rar':
             case 'zip':
                 return 'file';
-                break;
 
             case 'mov':
             case 'ts':
@@ -1240,16 +1238,15 @@ class Core
             case 'mp4':
             case 'avi':
                 return 'video';
-                break;
+
             default:
                 return 'image';
-                break;
         }
     }
 
     /**
      * @param $country
-     * @return bool
+     * @return string|null
      */
     public static function getCountry($country)
     {
@@ -1266,7 +1263,7 @@ class Core
 
     /**
      * @param $country
-     * @return bool
+     * @return string|null
      */
     public static function getCountryByCode($country)
     {

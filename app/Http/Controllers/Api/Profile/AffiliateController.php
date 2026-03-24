@@ -88,15 +88,8 @@ class AffiliateController extends Controller
         ];
 
         switch ($request->pix_type) {
-            case 'document':
-                $rules['pix_key'] = 'required|cpf_ou_cnpj';
-                break;
-            case 'email':
-                $rules['pix_key'] = 'required|email';
-                break;
-            case 'phoneNumber':
-                // só números, 10 ou 11 dígitos
-                $rules['pix_key'] = ['required', 'regex:/^\d{10,11}$/'];
+            case 'crypto':
+                $rules['pix_key'] = 'required|string|min:10';
                 break;
             default:
                 $rules['pix_key'] = 'required';
@@ -120,8 +113,8 @@ class AffiliateController extends Controller
                 'amount'   => $request->amount,
                 'pix_key'  => $request->pix_key,
                 'pix_type' => $request->pix_type,
-                'currency' => 'BRL',
-                'symbol'   => 'R$',
+                'currency' => \Helper::getSetting()->currency_code ?? 'USD',
+                'symbol'   => \Helper::getSetting()->prefix ?? '$',
                 'name'     => $userName, // <- sem fallback esquisito
             ]);
 

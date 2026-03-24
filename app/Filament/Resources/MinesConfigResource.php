@@ -16,10 +16,10 @@ class MinesConfigResource extends Resource
     protected static ?string $model = GameConfig::class;
 
     protected static ?string $navigationIcon   = 'heroicon-o-ticket';
-    protected static ?string $label            = 'Config. Mines';
-    protected static ?string $pluralLabel      = 'Config. Mines';
-    protected static ?string $navigationLabel  = 'CONFIGURAÇÃO MINES';
-    protected static ?string $navigationGroup  = 'Finanças';
+    protected static ?string $label            = 'Mines Config';
+    protected static ?string $pluralLabel      = 'Mines Config';
+    protected static ?string $navigationLabel  = 'MINES CONFIGURATION';
+    protected static ?string $navigationGroup  = 'Finance';
 
     public static function canAccess(): bool
     {
@@ -32,70 +32,70 @@ class MinesConfigResource extends Resource
             ->schema([
                 // Campos editáveis
                 Forms\Components\TextInput::make('meta_arrecadacao')
-                    ->label(__('Meta de Arrecadação'))
+                    ->label(__('Collection Goal'))
                     ->numeric()
                     ->required(),
 
                 Forms\Components\TextInput::make('percentual_distribuicao')
-                    ->label(__('% de Distribuição'))
+                    ->label(__('% Distribution'))
                     ->numeric()
                     ->required(),
 
                 Forms\Components\TextInput::make('minas_distribuicao')
-                    ->label(__('Minas (Distribuição)'))
+                    ->label(__('Mines (Distribution)'))
                     ->numeric()
                     ->required(),
 
                 Forms\Components\TextInput::make('minas_arrecadacao')
-                    ->label(__('Minas (Arrecadação)'))
+                    ->label(__('Mines (Collection)'))
                     ->numeric()
                     ->required(),
 
                 Forms\Components\TextInput::make('x_por_mina')
-                    ->label(__('Multiplicador por Mina'))
+                    ->label(__('Multiplier per Mine'))
                     ->numeric()
                     ->step(0.01)
                     ->required(),
 
                 Forms\Components\TextInput::make('x_a_cada_5')
-                    ->label(__('Acrescimo a cada 5'))
+                    ->label(__('Increment every 5'))
                     ->numeric()
                     ->step(0.01)
                     ->required(),
 
                 Forms\Components\TextInput::make('bet_loss')
-                    ->label(__('% de Bet Loss'))
+                    ->label(__('% Bet Loss'))
                     ->numeric()
                     ->step(0.01)
                     ->required(),
 
                 Forms\Components\Toggle::make('modo_influenciador')
-                    ->label(__('Modo Influenciador'))
+                    ->label(__('Influencer Mode'))
                     ->helperText('Se ativo, o usuário só ganha.')
                     ->default(false),
 
                 Forms\Components\Toggle::make('modo_perdedor')
-                    ->label(__('Modo Perdedor'))
+                    ->label(__('Loser Mode'))
                     ->helperText('Se ativo, o usuário só perde.')
                     ->default(false),
 
                 // Campos apenas informativos (disabled)
                 Forms\Components\TextInput::make('modo_atual')
-                    ->label(__('Modo Atual'))
+                    ->label(__('Current Mode'))
                     ->disabled(),
 
                 Forms\Components\TextInput::make('total_arrecadado')
-                    ->label(__('Total Arrecadado'))
+                    ->label(__('Total Collected'))
                     ->numeric()
                     ->disabled(),
 
                 Forms\Components\TextInput::make('total_distribuido')
-                    ->label(__('Total Distribuído'))
+                    ->label(__('Total Distributed'))
                     ->numeric()
                     ->disabled(),
 
                 Forms\Components\DateTimePicker::make('start_cycle_at')
-                    ->label(__('Início do Ciclo'))
+                    ->label(__('Cycle Start'))
                     ->disabled(),
             ]);
     }
@@ -105,7 +105,7 @@ class MinesConfigResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\BadgeColumn::make('modo_atual')
-                    ->label(__('Modo Atual'))
+                    ->label(__('Current Mode'))
                     ->formatStateUsing(function ($state) {
                         return match ($state) {
                             'arrecadacao'  => 'Arrecadação',
@@ -123,21 +123,21 @@ class MinesConfigResource extends Resource
                     ]),
 
                 Tables\Columns\TextColumn::make('meta_arrecadacao')
-                    ->label(__('Meta de Arrecadação')),
+                    ->label(__('Collection Goal')),
                 Tables\Columns\TextColumn::make('percentual_distribuicao')
-                    ->label(__('% de Distribuição')),
+                    ->label(__('% Distribution')),
                 Tables\Columns\TextColumn::make('minas_distribuicao')
-                    ->label(__('Minas (Distribuição)')),
+                    ->label(__('Mines (Distribution)')),
                 Tables\Columns\TextColumn::make('minas_arrecadacao')
-                    ->label(__('Minas (Arrecadação)')),
+                    ->label(__('Mines (Collection)')),
                 Tables\Columns\TextColumn::make('x_por_mina')
-                    ->label(__('X por Mina')),
+                    ->label(__('X per Mine')),
                 Tables\Columns\TextColumn::make('x_a_cada_5')
-                    ->label(__('X a cada 5')),
+                    ->label(__('X every 5')),
                 Tables\Columns\TextColumn::make('bet_loss')
                     ->label(__('% Bet Loss')),
                 Tables\Columns\TextColumn::make('start_cycle_at')
-                    ->label(__('Ciclo Iniciado')),
+                    ->label(__('Cycle Started')),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

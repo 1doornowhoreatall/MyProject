@@ -5,53 +5,33 @@ namespace App\Http\Controllers\Api\Wallet;
 use App\Http\Controllers\Controller;
 use App\Models\Deposit;
 use App\Models\Transaction;
-use App\Traits\Gateways\DigitoPayTrait;
-use App\Traits\Gateways\EzzepayTrait;
-use App\Traits\Gateways\BsPayTrait;
-use App\Traits\Gateways\OndaPayTrait;
-use App\Traits\Gateways\SuitpayTrait;
+use App\Traits\Gateways\CryptoCloudTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class DepositController extends Controller
 {
-    use SuitpayTrait, DigitoPayTrait, EzzepayTrait, BsPayTrait, OndaPayTrait;
+    use CryptoCloudTrait;
 
     /**
      * @param Request $request
-     * @return array|false[]
+     * @return \Illuminate\Http\JsonResponse|array
      */
     public function submitPayment(Request $request)
     {
         switch ($request->gateway) {
-            case 'suitpay':
-                return self::requestQrcode($request);
-            case 'ezzepay':
-                return self::requestQrcodeEzze($request);
-            case 'digitopay':
-                return self::requestQrcodeDigito($request);
-            case 'ondapay':
-                return self::requestQrCodeOnda($request);
-            case 'bspay':
-                return self::requestQrcodeBsPay($request);
+            case 'cryptocloud':
+                return self::requestCryptoCloudDeposit($request);
+            default:
+                return response()->json(['error' => 'Gateway not supported'], 400);
         }
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function consultStatusTransactionPix(Request $request)
+    public function consultStatusTransaction(Request $request)
     {
-        return self::consultStatusTransaction($request);
-    }
-    /**
-     * @param $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public static function consultStatusTransaction($request)
-    {
-        self::generateCredentials();
-
         $transaction = Transaction::where('payment_id', $request->input("idTransaction"))->first();
 
         if ($transaction != null && $transaction->status) {

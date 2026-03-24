@@ -18,10 +18,10 @@ class CupomResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-ticket';  // Ícone de navegação apropriado para cupons
 
-    protected static ?string $label = 'Cupom';
-    protected static ?string $pluralLabel = 'Cupons de Bônus';  
+    protected static ?string $label = 'Coupon';
+    protected static ?string $pluralLabel = 'Bonus Coupons';  
 
-    protected static ?string $navigationLabel = 'DEFINIÇÕES DE CUPONS';  
+    protected static ?string $navigationLabel = 'COUPON SETTINGS';  
 
     protected static ?string $navigationGroup = 'Promoções';  // Agrupado na seção de Promoções
 
@@ -42,7 +42,7 @@ class CupomResource extends Resource
     {
         return $form
             ->schema([
-                Section::make('INFORMAÇÕES DO CUPOM')
+                Section::make('COUPON INFORMATION')
                 ->description(new HtmlString('
                     <div style="font-weight: 600;">
                         Crie e gerencie os cupons de bônus disponíveis para os usuários.
@@ -52,25 +52,25 @@ class CupomResource extends Resource
                     ->schema([
 
                         Forms\Components\TextInput::make('codigo')
-                            ->label(__('Código do Cupom'))
-                            ->placeholder(__('Digite o código do cupom'))
+                            ->label(__('Coupon Code'))
+                            ->placeholder(__('Enter the coupon code'))
                             ->required()
                             ->maxLength(191),
 
                         Forms\Components\TextInput::make('valor_bonus')
-                            ->label(__('Valor do Bônus'))
-                            ->placeholder(__('Digite o valor do bônus'))
+                            ->label(__('Bonus Amount'))
+                            ->placeholder(__('Enter the bonus amount'))
                             ->numeric()
                             ->required(),
 
                         Forms\Components\DatePicker::make('validade')
-                            ->label(__('Validade'))
-                            ->placeholder(__('Escolha a data de validade do cupom'))
+                            ->label(__('Expiration'))
+                            ->placeholder(__('Choose the coupon expiration date'))
                             ->required(),
 
                         Forms\Components\TextInput::make('quantidade_uso')
-                            ->label(__('Quantidade de Usos'))
-                            ->placeholder(__('Digite a quantidade máxima de usos'))
+                            ->label(__('Use Quantity'))
+                            ->placeholder(__('Enter the maximum number of uses'))
                             ->numeric()
                             ->required(),
 
@@ -87,10 +87,10 @@ class CupomResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('codigo')
-                    ->label(__('Código')),
+                    ->label(__('Code')),
 
                 Tables\Columns\TextColumn::make('valor_bonus')
-                    ->label(__('Valor Bônus')),
+                    ->label(__('Bonus Amount')),
 
                 Tables\Columns\TextColumn::make('validade')
                     ->label(__('Validade'))
@@ -100,7 +100,7 @@ class CupomResource extends Resource
                     ->label(__('Quantidade de Usos')),
 
                 Tables\Columns\TextColumn::make('usos')
-                    ->label(__('Usos'))
+                    ->label(__('Uses'))
             ])
             ->filters([/* Adicionar filtros se necessário */])
             ->actions([

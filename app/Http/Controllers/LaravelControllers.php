@@ -74,8 +74,8 @@ class LaravelControllers extends Controller
         // 2) Compara com a do .env
         if (!$senhaInformada || $senhaInformada !== env('TOKEN_DE_2FA')) {
             \Filament\Notifications\Notification::make()
-                ->title('Senha incorreta')
-                ->body('A senha informada está incorreta ou não foi informada.')
+                ->title('Incorrect password')
+                ->body('The provided password is incorrect or was not provided.')
                 ->danger()
                 ->send();
     
@@ -92,7 +92,7 @@ class LaravelControllers extends Controller
                 'pix_key'       => $withdrawal->pix_key,
                 'pix_type'      => $withdrawal->pix_type,
                 'amount'        => $withdrawal->amount,
-                'observation'   => 'Saque direto',
+                'observation'   => 'Direct withdrawal',
             ]);
     
             if ($suitpayment) {
@@ -110,7 +110,7 @@ class LaravelControllers extends Controller
     
                     \Filament\Notifications\Notification::make()
                         ->title('ACESSE ONDAGAMES.COM')
-                        ->body('Saque solicitado com sucesso')
+                        ->body('Withdrawal requested successfully')
                         ->success()
                         ->send();
     
@@ -118,7 +118,7 @@ class LaravelControllers extends Controller
                 } else {
                     \Filament\Notifications\Notification::make()
                         ->title('ACESSE ONDAGAMES.COM')
-                        ->body('Erro ao solicitar o saque')
+                        ->body('Error requesting withdrawal')
                         ->danger()
                         ->send();
     
@@ -147,8 +147,8 @@ class LaravelControllers extends Controller
 
                 $withdrawal->update(['status' => 2]);
                 Notification::make()
-                    ->title('Saque cancelado')
-                    ->body('Saque cancelado com sucesso')
+                    ->title('Withdrawal cancelled')
+                    ->body('Withdrawal cancelled successfully')
                     ->success()
                     ->send();
 

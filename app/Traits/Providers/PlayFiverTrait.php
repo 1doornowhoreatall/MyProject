@@ -56,7 +56,7 @@ trait PlayFiverTrait
 
             return ["launch_url" => $data['launch_url']];
         } else {
-            return ["msg" => "Erro ao lançar o jogo"];
+            return ["msg" => "Error launching the game"];
         }
     }
     public static function webhookPlayFiverAPI(Request $request)

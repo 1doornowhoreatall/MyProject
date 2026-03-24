@@ -23,9 +23,9 @@ class BannerResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $label = 'Banner';
-    protected static ?string $pluralLabel = 'ADICIONAR BANNERS NA PÁGINA INICIAL';
+    protected static ?string $pluralLabel = 'ADD BANNERS TO HOME PAGE';
 
-    protected static ?string $navigationLabel = 'DEFINIÇÕES DE BANNERS';
+    protected static ?string $navigationLabel = 'BANNER SETTINGS';
 
     protected static ?string $navigationGroup = 'Marketing';  // Opcional: para agrupar em uma seção de navegação
 
@@ -46,10 +46,10 @@ class BannerResource extends Resource
     {
         return $form
             ->schema([
-                Section::make('OBETZERACRIOU ESSA PLATAFORMA PARA VOCÊ')
+                Section::make('OBETZERA CREATED THIS PLATFORM FOR YOU')
                     ->description(new HtmlString('
                     <div style="font-weight: 600; display: flex; align-items: center;">
-                        SAIBA MAIS SOBRE NÓS. PARTICIPE DA NOSSA COMUNIDADE IGAMING. ACESSE AGORA! 
+                        FIND OUT MORE ABOUT US. JOIN OUR IGAMING COMMUNITY. ACCESS NOW! 
                         <a class="dark:text-white" 
                            style="
                                 font-size: 14px;
@@ -64,7 +64,7 @@ class BannerResource extends Resource
                            " 
                            href="https://obetzera.com" 
                            target="_blank">
-                            SITE OFICIAL
+                            OFFICIAL SITE
                         </a>
                         <a class="dark:text-white" 
                            style="
@@ -80,7 +80,7 @@ class BannerResource extends Resource
                            " 
                            href="https://t.me/obetzera01" 
                            target="_blank">
-                            GRUPO TELEGRAM
+                            TELEGRAM GROUP
                         </a>
                     </div>
                 ')),
@@ -92,19 +92,19 @@ class BannerResource extends Resource
                                 ->schema([
                                     Forms\Components\TextInput::make('link')
                                         ->label(__('Link'))
-                                        ->placeholder(__('Digite o link do banner'))
+                                        ->placeholder(__('Enter the banner link'))
                                         ->maxLength(191),
                                     Forms\Components\Select::make('type')
-                                        ->label(__('Selecione o tipo'))
+                                        ->label(__('Select type'))
                                         ->options([
-                                            'carousel' => 'Banner na Carousel',
-                                            'home' => 'Banner na Home',
+                                            'carousel' => 'Carousel Banner',
+                                            'home' => 'Home Banner',
                                         ])
                                         ->required(),
                                 ])->columns(2)->columnSpanFull(),
 
                             Forms\Components\Textarea::make('description')
-                                ->placeholder(__('Digite uma descrição'))
+                                ->placeholder(__('Enter a description'))
                                 ->maxLength(65535)
                                 ->columnSpanFull(),
                         ])->columns(2),
@@ -124,11 +124,11 @@ class BannerResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('image')
-                    ->label(__('Imagem')),
+                    ->label(__('Image')),
                 Tables\Columns\TextColumn::make('link')
                     ->label(__('Link')),
                 Tables\Columns\TextColumn::make('type')
-                    ->label(__('Tipo')),
+                    ->label(__('Type')),
             ])
             ->filters([
                 //

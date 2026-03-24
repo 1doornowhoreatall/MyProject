@@ -160,14 +160,14 @@ class AuthController extends Controller
             if (! empty($request->cupom)) {
                 $cupom = \App\Models\Cupom::where('codigo', $request->cupom)->first();
                 if (! $cupom) {
-                    return response()->json(['error' => 'Esse cupom não existe'], 400);
+                    return response()->json(['error' => 'This coupon does not exist'], 400);
                 }
                 if ($cupom->validade < now()) {
-                    return response()->json(['error' => 'Esse cupom já está expirado'], 400);
+                    return response()->json(['error' => 'This coupon has expired'], 400);
                 }
                 if ($cupom->usos >= $cupom->quantidade_uso) {
                     return response()->json([
-                        'error' => 'Vários usuários resgataram esse cupom hoje, tente novamente amanhã ou outro cupom'
+                        'error' => 'Many users have redeemed this coupon today, please try again tomorrow or use another coupon'
                     ], 400);
                 }
             }
@@ -207,7 +207,7 @@ class AuthController extends Controller
             // Autentica e gera JWT
             $token = auth('api')->attempt($request->only('email','password'));
             if (! $token) {
-                return response()->json(['error' => 'Faça login ou cadastre-se para continuar'], 401);
+                return response()->json(['error' => 'Please log in or sign up to continue'], 401);
             }
 
             // Cria sessão customizada (50 minutos)
@@ -240,8 +240,6 @@ class AuthController extends Controller
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
-
-        return response()->json(['error' => 'User registration failed'], 400);
     }
 
     /**
@@ -347,7 +345,7 @@ class AuthController extends Controller
         auth('api')->logout();
 
         return response()->json([
-            'message' => 'Você está conectado em outro dispositivo'
+            'message' => 'You are connected on another device'
         ], 200);
     }
 
@@ -356,9 +354,10 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function refresh()
+    public function refresh(Request $request)
     {
-        return $this->respondWithToken(auth('api')->refresh());
+        $sessionToken = $request->header('X-Session-Token') ?? $request->input('session_token') ?? '';
+        return $this->respondWithToken(auth('api')->refresh(), (string)$sessionToken);
     }
 
     private function generateAffiliateCode()

@@ -16,9 +16,9 @@ class CategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationLabel = 'CATEGORIAS DE JOGOS';
+    protected static ?string $navigationLabel = 'GAME CATEGORIES';
 
-    protected static ?string $modelLabel = 'Todas as Categorias';
+    protected static ?string $modelLabel = 'All Categories';
 
     /**
      * @dev  
@@ -42,22 +42,22 @@ class CategoryResource extends Resource
                 Forms\Components\Section::make()
                     ->schema([
                         Forms\Components\TextInput::make('name')
-                            ->label(__('NOME DA CATEGORIA'))
+                            ->label(__('CATEGORY NAME'))
                             ->required()
                             ->unique(ignorable: fn ($record) => $record)
                             ->maxLength(191),
                         Forms\Components\TextInput::make('description')
-                            ->label(__('DESCRIÇÃO DA CATEGORIA'))
+                            ->label(__('CATEGORY DESCRIPTION'))
                             ->required()
                             ->maxLength(191),
                         Forms\Components\FileUpload::make('image')
-                            ->label(__('IMAGEM DA CATEGORIA'))
+                            ->label(__('CATEGORY IMAGE'))
                             ->image(),
                         Forms\Components\TextInput::make('slug')
-                            ->label(__('NOME EXIBIDO NA HOME'))
+                            ->label(__('NAME DISPLAYED ON HOME'))
                             ->maxLength(191),
                         Forms\Components\TextInput::make('url')
-                            ->label(__('LINK OPCIONAL'))
+                            ->label(__('OPTIONAL LINK'))
                             ->placeholder(__('https://exemplo.com'))
                             ->url()
                             ->maxLength(191),

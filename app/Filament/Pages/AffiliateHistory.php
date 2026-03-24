@@ -26,7 +26,7 @@ class AffiliateHistory extends Page implements HasTable
 
     protected static string $view = 'filament.pages.affiliate';
 
-    protected static ?string $title = 'Afiliados';
+    protected static ?string $title = 'Affiliates';
     protected static ?string $model = User::class;
 
     protected static ?string $slug = 'afiliado';
@@ -57,11 +57,11 @@ class AffiliateHistory extends Page implements HasTable
         ->defaultSort('created_at', 'desc')
 
         ->columns([
-            TextColumn::make("id")->label(__("ID")),
-            TextColumn::make("name")->label(__("Nome"))->searchable(),
-            TextColumn::make("email")->label(__("Email"))->searchable(),
-            TextColumn::make("wallet.refer_rewards")->label(__("Saldo"))->money("BRL")->sortable(),
-            TextColumn::make("affiliateHistory.logs")->label(__("RevShare"))->formatStateUsing(function($record) {
+            TextColumn::make("id")->label('ID'),
+            TextColumn::make("name")->label('Name')->searchable(),
+            TextColumn::make("email")->label('Email')->searchable(),
+            TextColumn::make("wallet.refer_rewards")->label('Balance')->money("EUR")->sortable(),
+            TextColumn::make("affiliateHistory.logs")->label('RevShare')->formatStateUsing(function($record) {
                 $count = 0;
                 $affiliates = ModelsAffiliateHistory::where("inviter", $record->id)->where("status", 1)->get();
                 foreach($affiliates as $item){
@@ -70,14 +70,14 @@ class AffiliateHistory extends Page implements HasTable
                     }
                 }
                 
-                return "R$". number_format($count, 2, ".", ",");
+                return "€ ". number_format($count, 2, ".", ",");
 
             })->default(0)->sortable(query: function (Builder $query, string $direction): Builder {
                 return $query->leftJoin('affiliate_histories', 'affiliate_histories.user_id', '=', 'users.id')
                 ->orderByRaw("FIELD(affiliate_histories.commission_type, 'revshare') " . $direction)
                 ->select('affiliate_histories.commission_type', 'affiliate_histories.commission', 'users.*');
             }),
-            TextColumn::make("affiliateHistory.commission")->label(__("CPA"))->formatStateUsing(function($record) {
+            TextColumn::make("affiliateHistory.commission")->label('CPA')->formatStateUsing(function($record) {
                 $count = 0;
                 $affiliates = ModelsAffiliateHistory::where("inviter", $record->id)->where("status", 1)->get();
                 foreach($affiliates as $item){
@@ -86,16 +86,16 @@ class AffiliateHistory extends Page implements HasTable
                     }
                 }
                 
-                return "R$". number_format($count, 2, ".", ",");
+                return "€ ". number_format($count, 2, ".", ",");
             })->default(0)->sortable(query: function (Builder $query, string $direction): Builder {
                 return $query->leftJoin('affiliate_histories', 'affiliate_histories.user_id', '=', 'users.id')
                 ->orderByRaw("FIELD(affiliate_histories.commission_type, 'cpa') " . $direction)
                 ->select('affiliate_histories.commission_type', 'affiliate_histories.commission', 'users.*');
             }),
-            TextColumn::make("inviter")->label(__("Afiliados"))->formatStateUsing(function ($record) {
+            TextColumn::make("inviter")->label('Affiliates')->formatStateUsing(function ($record) {
                 return User::where("inviter", $record->id)->count();
             })->default(0),
-            TextColumn::make("created_at")->label(__("Criado em"))->dateTime()->sortable()
+            TextColumn::make("created_at")->label('Created at')->dateTime()->sortable()
 
         ])->actions([
            DetailsActin::make(),

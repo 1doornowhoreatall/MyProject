@@ -42,46 +42,46 @@ class StatsUserDetailOverview extends BaseWidget
             ->count();
 
         return [
-            Stat::make('TOTAL DE GANHO', Helper::amountFormatDecimal(Helper::formatNumber($totalGanhos))) 
-                ->description('Total de ganhos das apostas')
+            Stat::make('TOTAL WINS', Helper::amountFormatDecimal(Helper::formatNumber($totalGanhos))) 
+                ->description('Total winnings from bets')
                 ->descriptionIcon('heroicon-m-arrow-trending-up')
                 ->color('success')
                 ->chart([10, 20, 15, 30, 25, 40, 35])
                 ->chartColor('rgba(59, 130, 246, 0.5)'),
 
-            Stat::make('TOTAL DE PERCAS', Helper::amountFormatDecimal(Helper::formatNumber($totalPerdas)))
-                ->description('Total de perdas das apostas')
+            Stat::make('TOTAL LOSSES', Helper::amountFormatDecimal(Helper::formatNumber($totalPerdas)))
+                ->description('Total losses from bets')
                 ->descriptionIcon('heroicon-m-arrow-trending-down')
                 ->color('danger')
                 ->chart([10, 20, 15, 30, 25, 40, 35])
                 ->chartColor('rgba(59, 130, 246, 0.5)'),
-
-            Stat::make('GANHO COMO AFILIADO', Helper::amountFormatDecimal(Helper::formatNumber($totalAfiliados)))
-                ->description('Total de ganhos como afiliado') 
+ 
+            Stat::make('AFFILIATE EARNINGS', Helper::amountFormatDecimal(Helper::formatNumber($totalAfiliados)))
+                ->description('Total earnings as an affiliate') 
                 ->descriptionIcon('heroicon-m-arrow-trending-up')
                 ->color('success')
                 ->chart([10, 20, 15, 30, 25, 40, 35])
                 ->chartColor('rgba(59, 130, 246, 0.5)'),
 
             // Novo widget: Trouxe de Depositantes
-            Stat::make('TROUXE DE DEPOSITANTES', $trouxeDeDepositantes)
-                ->description('Quantidade de depositantes trazidos')
+            Stat::make('DEPOSITORS REFERRED', $trouxeDeDepositantes)
+                ->description('Number of depositors referred')
                 ->descriptionIcon('heroicon-m-arrow-trending-up')
                 ->color('success')
                 ->chart([10, 20, 15, 30, 25, 40, 35])
                 ->chartColor('rgba(59, 130, 246, 0.5)'),
-
+ 
             // Novo widget: Trouxe de Lucro
-            Stat::make('TROUXE DE LUCRO', Helper::amountFormatDecimal(Helper::formatNumber($trouxeDeLucro)))
-                ->description('Quantidade de lucro trazido')
+            Stat::make('PROFIT REFERRED', Helper::amountFormatDecimal(Helper::formatNumber($trouxeDeLucro)))
+                ->description('Amount of profit referred')
                 ->descriptionIcon('heroicon-m-arrow-trending-down')
                 ->color('success')
                 ->chart([10, 20, 15, 30, 25, 40, 35])
                 ->chartColor('rgba(59, 130, 246, 0.5)'),
-
+ 
             // Novo widget: Trouxe de Clientes
-            Stat::make('TROUXE DE CLIENTES', $trouxeDeClientes)
-                ->description('Total de clientes trazidos')
+            Stat::make('CLIENTS REFERRED', $trouxeDeClientes)
+                ->description('Total clients referred')
                 ->descriptionIcon('heroicon-m-arrow-trending-up')
                 ->color('success')
                 ->chart([10, 20, 15, 30, 25, 40, 35])

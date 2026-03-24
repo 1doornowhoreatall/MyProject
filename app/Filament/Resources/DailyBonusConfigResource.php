@@ -16,10 +16,10 @@ class DailyBonusConfigResource extends Resource
     protected static ?string $model = DailyBonusConfig::class;
 
     protected static ?string $navigationIcon   = 'heroicon-o-ticket';
-    protected static ?string $label            = 'Bônus Diário';
-    protected static ?string $pluralLabel      = 'Bônus Diário'; // ou "Bônus Diários"
-    protected static ?string $navigationLabel  = 'BÔNUS DIÁRIO';
-    protected static ?string $navigationGroup  = 'Finanças';
+    protected static ?string $label            = 'Daily Bonus';
+    protected static ?string $pluralLabel      = 'Daily Bonuses'; // ou "Bônus Diários"
+    protected static ?string $navigationLabel  = 'DAILY BONUS';
+    protected static ?string $navigationGroup  = 'Finance';
 
     /**
      * Restringe acesso a admins, por exemplo.
@@ -36,19 +36,19 @@ class DailyBonusConfigResource extends Resource
     {
         return $form->schema([
             Forms\Components\TextInput::make('bonus_value')
-                ->label(__('Valor do Bônus'))
+                ->label('Bonus Value')
                 ->numeric()
                 ->step(0.01)
                 ->default(0)
                 ->required(),
 
             Forms\Components\TextInput::make('cycle_hours')
-                ->label(__('Intervalo (Horas)'))
+                ->label('Interval (Hours)')
                 ->numeric()
                 ->default(24)
                 ->minValue(1)
                 ->required()
-                ->helperText('Ex: 12 ou 24 horas.'),
+                ->helperText('Ex: 12 or 24 hours.'),
         ]);
     }
 
@@ -62,9 +62,9 @@ class DailyBonusConfigResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('bonus_value')
-                    ->label(__('Bônus (R$)')),
+                    ->label('Bonus (€)'),
                 Tables\Columns\TextColumn::make('cycle_hours')
-                    ->label(__('Intervalo (h)')),
+                    ->label('Interval (h)'),
             ])
             ->filters([])
             ->actions([

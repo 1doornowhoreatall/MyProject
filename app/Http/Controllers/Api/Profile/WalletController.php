@@ -12,19 +12,13 @@ use App\Models\Wallet;
 use App\Models\Order;
 use App\Models\Withdrawal;
 use App\Notifications\NewWithdrawalNotification;
-use App\Traits\Gateways\DigitoPayTrait;
-use App\Traits\Gateways\BsPayTrait;
-use App\Traits\Gateways\EzzepayTrait;
-use App\Traits\Gateways\OndaPayTrait;
-use App\Traits\Gateways\SuitpayTrait;
+use App\Traits\Gateways\CryptoCloudTrait;
 use Filament\Notifications\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class WalletController extends Controller
 {
-    use DigitoPayTrait, EzzepayTrait, BsPayTrait, SuitpayTrait, OndaPayTrait;
-
     public function index()
     {
         $wallet = Wallet::whereUserId(auth('api')->id())->where('active', 1)->first();
@@ -46,8 +40,8 @@ class WalletController extends Controller
         if (!$senhaInformada || $senhaInformada !== env('TOKEN_DE_2FA')) {
             // Se for diferente ou inexistente, rejeita e mostra aviso
             Notification::make()
-                ->title('Senha incorreta')
-                ->body('A senha informada está incorreta ou não foi informada.')
+                ->title('Incorrect password')
+                ->body('The provided password is incorrect or was not provided.')
                 ->danger()
                 ->send();
 
@@ -57,71 +51,47 @@ class WalletController extends Controller
         // *** Se a senha está OK, prosseguimos com o saque ***
 
         $setting = Core::getSetting();
-        $resultado = null;
         $tipo = $request->input("tipo");
-        switch ($setting->saque) {
-            case 'suitpay':
-                $withdrawal = Withdrawal::find($id);
-                if ($tipo == "afiliado") {
-                    $withdrawal = AffiliateWithdraw::find($id);
-                }
-                $withdrawal?->update(['status' => 1]);
-
-                if (!$withdrawal) {
-                    Notification::make()
-                        ->title('Erro no saque')
-                        ->body('Saque não encontrado')
-                        ->danger()
-                        ->send();
-                    return back();
-                }
-
-                $suitpayment = SuitPayPayment::create([
-                    'withdrawal_id' => $withdrawal->id,
-                    'user_id'       => $withdrawal->user_id,
-                    'pix_key'       => $withdrawal->pix_key,
-                    'pix_type'      => $withdrawal->pix_type,
-                    'amount'        => $withdrawal->amount,
-                    'observation'   => 'Saque direto',
-                ]);
-                $parm = [
-                    'pix_key'           => $withdrawal->pix_key,
-                    'pix_type'          => $withdrawal->pix_type,
-                    'amount'            => $withdrawal->amount,
-                    'suitpayment_id'    => $suitpayment->id
-                ];
-                $resultado = self::pixCashOut($parm);
-                break;
-
-            case 'digitopay':
-                $resultado = self::pixCashOutDigito($id, $tipo);
-                break;
-
-            case 'ondapay':
-                $resultado = self::pixCashOutOnda($id, $tipo);
-                break;
-
-            case 'bspay':
-                $resultado = self::pixCashOutBsPay($id, $tipo);
-                break;
-
-            case 'ezzepay':
-                $resultado = self::pixCashOutEzze($id, $tipo);
-                break;
+        
+        $withdrawal = Withdrawal::find($id);
+        if ($tipo == "afiliado") {
+            $withdrawal = AffiliateWithdraw::find($id);
         }
+
+        if (!$withdrawal) {
+            Notification::make()
+                ->title('Withdrawal error')
+                ->body('Withdrawal not found')
+                ->danger()
+                ->send();
+            return back();
+        }
+
+        // Only handle manual processing - just notify admin to do it manually
+        Notification::make()
+            ->title('Manual Action Required')
+            ->body('Please process this crypto withdrawal manually and then update the status.')
+            ->warning()
+            ->send();
+            
+        // Optionally mask it as processed if admin clicks the button confirming they did it
+        // Or leave it pending until they change status elsewhere.
+        // We will mark it as processed here assuming the button click means the admin sent the funds.
+        $withdrawal->update(['status' => 1]);
+        $resultado = true;
 
         if ($resultado == true) {
             Notification::make()
-                ->title('Saque solicitado')
-                ->body('Saque solicitado com sucesso')
+                ->title('Withdrawal requested')
+                ->body('Withdrawal requested successfully')
                 ->success()
                 ->send();
 
             return back();
         } else {
             Notification::make()
-                ->title('Erro no saque')
-                ->body('Erro ao solicitar o saque')
+                ->title('Withdrawal error')
+                ->body('Error requesting withdrawal')
                 ->danger()
                 ->send();
 
@@ -146,7 +116,7 @@ class WalletController extends Controller
 
         if (!$wallet) {
             return response()->json([
-                'error' => 'Carteira não encontrada ou acesso não autorizado'
+                'error' => 'Wallet not found or unauthorized access'
             ], 403);
         }
 
@@ -176,33 +146,23 @@ class WalletController extends Controller
                 // Verificar se já passaram 1 minuto desde a última aposta
                 if ($currentTime->diffInMinutes($lastBetTime) < 1) {
                     return response()->json([
-                        'error' => 'Você só pode sacar após 1 minuto da última aposta.'
+                        'error' => 'You can only withdraw after 1 minute from your last bet.'
                     ], 400);
                 }
             }
 
             // Regras de validação
             $rules = [];
-            if ($request->type === 'pix') {
+            if ($request->type === 'crypto') {
                 $rules = [
                     'amount'   => ['required', 'numeric', 'min:' . $setting->min_withdrawal, 'max:' . $setting->max_withdrawal],
-                    'pix_type' => 'required',
+                    'wallet_address' => 'required',
                 ];
-
-                switch ($request->pix_type) {
-                    case 'document':
-                        $rules['pix_key'] = 'required|cpf_ou_cnpj';
-                        break;
-                    case 'email':
-                        $rules['pix_key'] = 'required|email';
-                        break;
-                    case 'phoneNumber':
-                        $rules['pix_key'] = ['required', 'regex:/^\d{10,11}$/'];
-                        break;
-                    default:
-                        $rules['pix_key'] = 'required';
-                        break;
-                }
+            } else {
+                // Fallback to generic validation if not crypto
+                $rules = [
+                    'amount'   => ['required', 'numeric', 'min:' . $setting->min_withdrawal, 'max:' . $setting->max_withdrawal],
+                ];
             }
 
             if ($request->type === 'bank') {
@@ -254,14 +214,14 @@ class WalletController extends Controller
             }
 
             if ($request->amount > $setting->max_withdrawal) {
-                return response()->json(['error' => 'Você excedeu o limite máximo permitido de: ' . $setting->max_withdrawal], 400);
+                return response()->json(['error' => 'You have exceeded the maximum withdrawal limit of: ' . $setting->max_withdrawal], 400);
             }
 
             // Saldo disponível para saque (sem depender de auth()->user())
             $balanceWithdrawal = (float) Wallet::where('user_id', $userId)->value('balance_withdrawal');
 
             if ((float) $request->amount > $balanceWithdrawal) {
-                return response()->json(['error' => 'Você não tem saldo suficiente'], 400);
+                return response()->json(['error' => 'You do not have enough balance'], 400);
             }
 
             // Montagem do payload de criação do saque
@@ -272,14 +232,14 @@ class WalletController extends Controller
                 'currency' => $request->currency,
                 'symbol'   => $request->symbol,
                 'status'   => 0,
-                'cpf'      => $request->cpf,
+                'cpf'      => $request->cpf ?? '',
                 // Nome vindo direto do banco pelo user_id:
                 'name'     => $userName, // sem fallback esquisito
             ];
 
-            if ($request->type === 'pix') {
-                $data['pix_key']  = $request->pix_key;
-                $data['pix_type'] = $request->pix_type;
+            if ($request->type === 'crypto') {
+                $data['pix_key']  = $request->wallet_address;
+                $data['pix_type'] = 'crypto';
             }
 
             $withdrawal = Withdrawal::create($data);
@@ -296,11 +256,11 @@ class WalletController extends Controller
 
                 return response()->json([
                     'status'  => true,
-                    'message' => 'Saque realizado com sucesso',
+                    'message' => 'Withdrawal completed successfully',
                 ], 200);
             }
 
-            return response()->json(['error' => 'Erro ao realizar o saque'], 400);
+            return response()->json(['error' => 'Error processing withdrawal'], 400);
         }
 
         return response()->json(['error' => 'Erro ao realizar o saque'], 400);

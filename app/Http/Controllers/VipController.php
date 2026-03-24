@@ -17,7 +17,7 @@ class VipController extends Controller
         $user = auth('api')->user();
     
         if (!$user) {
-            return response()->json(['message' => 'Usuário não autenticado.'], 401);
+            return response()->json(['message' => 'User not authenticated.'], 401);
         }
     
         // Obter os níveis VIP ordenados por missões necessárias
@@ -82,7 +82,7 @@ class VipController extends Controller
         $vip = Vip::find($vipId);
     
         if (!$vip) {
-            return response()->json(['message' => 'Nível VIP não encontrado.'], 404);
+            return response()->json(['message' => 'VIP level not found.'], 404);
         }
     
         // Obter ou criar o registro do usuário para o VIP
@@ -93,7 +93,7 @@ class VipController extends Controller
     
         // Verificar se o VIP foi resgatado na semana passada
         if ($userVip->last_reward_claimed_at && now()->diffInDays($userVip->last_reward_claimed_at) < 7) {
-            return response()->json(['message' => 'Você já resgatou a recompensa semanal deste nível VIP.'], 400);
+            return response()->json(['message' => 'You have already claimed the weekly reward for this VIP level.'], 400);
         }
     
         // Verificar se o usuário alcançou este VIP
@@ -102,14 +102,14 @@ class VipController extends Controller
             ->count();
     
         if ($completedMissions < $vip->required_missions) {
-            return response()->json(['message' => 'Você ainda não alcançou este nível VIP.'], 403);
+            return response()->json(['message' => 'You have not yet reached this VIP level.'], 403);
         }
     
         // Atualizar saldos na carteira
         $wallet = Wallet::where('user_id', $user->id)->where('active', 1)->first();
     
         if (!$wallet) {
-            return response()->json(['message' => 'Carteira não encontrada.'], 404);
+            return response()->json(['message' => 'Wallet not found.'], 404);
         }
     
         $wallet->increment('balance_bonus', $vip->weekly_reward);
@@ -119,7 +119,7 @@ class VipController extends Controller
         $userVip->update(['last_reward_claimed_at' => now()]);
     
         return response()->json([
-            'message' => 'Recompensa semanal resgatada com sucesso!',
+            'message' => 'Weekly reward claimed successfully!',
             'reward' => $vip->weekly_reward,
             'wallet' => [
                 'balance_bonus' => $wallet->balance_bonus,

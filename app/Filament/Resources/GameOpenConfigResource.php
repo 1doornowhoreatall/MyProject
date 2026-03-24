@@ -16,10 +16,10 @@ class GameOpenConfigResource extends Resource
     protected static ?string $model = GameOpenConfig::class;
 
     protected static ?string $navigationIcon   = 'heroicon-o-lock-closed';
-    protected static ?string $label            = 'Abertura de Jogos';
-    protected static ?string $pluralLabel      = 'Abertura de Jogos';
-    protected static ?string $navigationLabel  = 'ABERTURA DE JOGOS';
-    protected static ?string $navigationGroup  = 'Finanças';
+    protected static ?string $label            = 'Game Opening';
+    protected static ?string $pluralLabel      = 'Game Openings';
+    protected static ?string $navigationLabel  = 'GAME OPENINGS';
+    protected static ?string $navigationGroup  = 'Finance';
 
     // Só admin acessa
     public static function canAccess(): bool
@@ -32,7 +32,7 @@ class GameOpenConfigResource extends Resource
     {
         return $form->schema([
             Forms\Components\Toggle::make('requires_deposit_today')
-                ->label(__('Exigir Depósito Diário?'))
+                ->label(__('Require Daily Deposit?'))
                 ->helperText('Se ativo, o usuário só poderá abrir jogos se tiver depositado hoje.')
                 ->default(false),
         ]);
@@ -44,7 +44,7 @@ class GameOpenConfigResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\BadgeColumn::make('requires_deposit_today')
-                    ->label(__('Exigir Depósito Diário'))
+                    ->label(__('Require Daily Deposit'))
                     ->boolean(),
             ])
             ->actions([

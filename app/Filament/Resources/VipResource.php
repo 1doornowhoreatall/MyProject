@@ -21,32 +21,32 @@ class VipResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-star';
 
-    protected static ?string $navigationLabel = 'NÍVEIS VIP';
+    protected static ?string $navigationLabel = 'VIP LEVELS';
 
     protected static ?string $pluralLabel = 'VIPs';
 
-    protected static ?string $navigationGroup = 'Promoções'; // Agrupado na seção de Promoções
+    protected static ?string $navigationGroup = 'Promotions';
 
     public static function form(Forms\Form $form): Forms\Form
     {
         return $form
             ->schema([
                 TextInput::make('title')
-                    ->label(__('Título do VIP'))
+                    ->label(__('VIP Title'))
                     ->required(),
                 Textarea::make('description')
-                    ->label(__('Descrição'))
+                    ->label(__('Description'))
                     ->rows(3),
                 TextInput::make('required_missions')
-                    ->label(__('Missões Necessárias'))
+                    ->label(__('Required Missions'))
                     ->numeric()
                     ->required(),
                 TextInput::make('weekly_reward')
-                    ->label(__('Recompensa Semanal'))
+                    ->label(__('Weekly Reward'))
                     ->numeric()
                     ->required(),
                 FileUpload::make('image')
-                    ->label(__('Imagem do VIP'))
+                    ->label(__('VIP Image'))
                     ->directory('uploads/vips')
                     ->image()
                     ->imagePreviewHeight('100')
@@ -59,19 +59,19 @@ class VipResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('title')
-                    ->label(__('Título'))
+                    ->label(__('Title'))
                     ->searchable(),
                 TextColumn::make('description')
-                    ->label(__('Descrição'))
+                    ->label(__('Description'))
                     ->limit(50),
                 TextColumn::make('required_missions')
-                    ->label(__('Missões Necessárias'))
+                    ->label(__('Required Missions'))
                     ->sortable(),
                 TextColumn::make('weekly_reward')
-                    ->label(__('Recompensa Semanal'))
+                    ->label(__('Weekly Reward'))
                     ->sortable(),
                 ImageColumn::make('image')
-                    ->label(__('Imagem'))
+                    ->label(__('Image'))
                     ->size(50),
             ])
             ->filters([])

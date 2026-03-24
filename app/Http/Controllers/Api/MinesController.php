@@ -19,7 +19,7 @@ class MinesController extends Controller
     {
         $user = auth('api')->user();
         if (!$user) {
-            return response()->json(['message' => 'Usuário não autenticado.'], 401);
+            return response()->json(['message' => 'User not authenticated.'], 401);
         }
 
         $betAmount = floatval($request->input('bet_amount'));
@@ -27,28 +27,28 @@ class MinesController extends Controller
         // Carrega config
         $config = GameConfig::first();
         if (!$config) {
-            return response()->json(['error' => 'Configuração do jogo não encontrada.'], 500);
+            return response()->json(['error' => 'Game configuration not found.'], 500);
         }
 
         // Valida a aposta
         if ($betAmount < 0.50 || $betAmount > 100) {
-            return response()->json(['error' => 'Valor de aposta inválido.'], 422);
+            return response()->json(['error' => 'Invalid bet amount.'], 422);
         }
 
         // Carteira
         $wallet = Wallet::where('user_id', $user->id)->where('active', 1)->first();
         if (!$wallet) {
-            return response()->json(['error' => 'Carteira não encontrada.'], 404);
+            return response()->json(['error' => 'Wallet not found.'], 404);
         }
         $totalAvailable = ($wallet->balance ?? 0) + ($wallet->balance_bonus ?? 0) + ($wallet->balance_withdrawal ?? 0);
         if ($totalAvailable < $betAmount) {
-            return response()->json(['error' => 'Saldo insuficiente.'], 422);
+            return response()->json(['error' => 'Insufficient balance.'], 422);
         }
 
         // Deduz a aposta
         $bet = $this->deductBetFromWallet($user, $betAmount);
         if ($bet == null) {
-            return response()->json(['error' => 'Erro ao debitar a aposta.'], 500);
+            return response()->json(['error' => 'Error debiting the bet.'], 500);
         }
 
         // Define bombsCount de acordo com modo_atual
@@ -175,24 +175,24 @@ class MinesController extends Controller
     {
         $user = auth('api')->user();
         if (!$user) {
-            return response()->json(['error' => 'Usuário não autenticado.'], 401);
+            return response()->json(['error' => 'User not authenticated.'], 401);
         }
     
         $gameId    = $request->input('game_id');
         $cellIndex = intval($request->input('cell_index'));
     
         if ($cellIndex < 0 || $cellIndex > 24) {
-            return response()->json(['error' => 'Índice de célula inválido.'], 422);
+            return response()->json(['error' => 'Invalid cell index.'], 422);
         }
     
         $betHistory = BetHistory::find($gameId);
         if (!$betHistory) {
-            return response()->json(['error' => 'Jogo não encontrado.'], 404);
+            return response()->json(['error' => 'Game not found.'], 404);
         }
     
         $config = GameConfig::first();
         if (!$config) {
-            return response()->json(['error' => 'Config não encontrada.'], 500);
+            return response()->json(['error' => 'Config not found.'], 500);
         }
     
         // Carrega e inicializa o game_data
@@ -204,7 +204,7 @@ class MinesController extends Controller
     
         // Proteção: se a célula já foi revelada, rejeita a requisição
         if (in_array($cellIndex, $revealedPositions)) {
-            return response()->json(['error' => 'Célula já revelada.'], 422);
+            return response()->json(['error' => 'Cell already revealed.'], 422);
         }
         // Adiciona a célula à lista de reveladas
         $revealedPositions[] = $cellIndex;
@@ -224,7 +224,7 @@ class MinesController extends Controller
             ]);
             return response()->json([
                 'success'     => false,
-                'message'     => 'BOMBA revelada! Você perdeu (modo perdedor).',
+                'message'     => 'BOMB revealed! You lost (loser mode).',
                 'cell_status' => 'bomb',
             ]);
         }
@@ -263,7 +263,7 @@ class MinesController extends Controller
             ]);
             return response()->json([
                 'success'     => false,
-                'message'     => 'BOMBA revelada! Você perdeu.',
+                'message'     => 'BOMB revealed! You lost.',
                 'cell_status' => 'bomb',
             ]);
         } else {
@@ -298,7 +298,7 @@ class MinesController extends Controller
     {
         $user = auth('api')->user();
         if (!$user) {
-            return response()->json(['error' => 'Usuário não autenticado.'], 401);
+            return response()->json(['error' => 'User not authenticated.'], 401);
         }
 
         $gameId = $request->input('game_id');
@@ -308,7 +308,7 @@ class MinesController extends Controller
         }
 
         if ($betHistory->payout <= 0) {
-            return response()->json(['error' => 'Jogo já finalizado ou perdido.'], 422);
+            return response()->json(['error' => 'Game already finished or lost.'], 422);
         }
 
         $wallet = Wallet::where('user_id', $user->id)->where('active', 1)->first();

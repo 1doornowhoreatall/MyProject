@@ -44,7 +44,7 @@ class LimitSetting extends Page implements HasForms
      */
     public function getTitle(): string | Htmlable
     {
-        return __('LIMITE DE SAQUE POR PERÍODO');
+        return __('WITHDRAWAL LIMIT PER PERIOD');
     }
 
     public Setting $record;
@@ -142,19 +142,19 @@ class LimitSetting extends Page implements HasForms
                         </a>
                     </div>
                 ')),
-                Section::make('AJUSTE O LIMITE POR PERÍODO')
-                    ->description('Voce pode definir quanto um usuário pode sacar por período.')
+                Section::make('ADJUST LIMIT BY PERIOD')
+                    ->description('You can define how much a user can withdraw per period.')
                     ->schema([
                         TextInput::make('withdrawal_limit')
-                            ->label(__('QUANTO USUÁRIO PODE SACAR?'))
+                            ->label(__('HOW MUCH CAN THE USER WITHDRAW?'))
                             ->numeric(),
                         Select::make('withdrawal_period')
-                            ->label(__('QUAL O PERIODO DE SAQUE?'))
+                            ->label(__('WHAT IS THE WITHDRAWAL PERIOD?'))
                             ->options([
-                                'daily' => 'DIA',
-                                'weekly' => 'SEMANA',
-                                'monthly' => 'MÊS',
-                                'yearly' => 'ANO',
+                                'daily' => 'DAY',
+                                'weekly' => 'WEEK',
+                                'monthly' => 'MONTH',
+                                'yearly' => 'YEAR',
                             ]),
                     ])->columns(2)
             ])

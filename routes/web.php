@@ -84,14 +84,9 @@ Route::get('api/distribution/manual-update', [DistributionController::class, 'ch
 // GAMES PROVIDER
 
 include_once(__DIR__ . '/groups/provider/playFiver.php');
-include_once(__DIR__ . '/groups/ControlPainel/calbackmetod.php');
-
 // GATEWAYS
-include_once(__DIR__ . '/groups/gateways/bspay.php');
 include_once(__DIR__ . '/groups/gateways/stripe.php');
-include_once(__DIR__ . '/groups/gateways/ezzepay.php');
-include_once(__DIR__ . '/groups/gateways/digitopay.php');
-include_once(__DIR__ . '/groups/gateways/ondapay.php');
+include_once(__DIR__ . '/groups/gateways/cryptocloud.php'); // Ensure this is here if not already
 
 /// SOCIAL
 /// include_once(__DIR__ . '/groups/auth/social.php');

@@ -28,7 +28,7 @@ class DetailsAffiliate extends Page implements HasTable
 
     protected static string $view = 'filament.pages.affiliateDetails';
 
-    protected static ?string $title = 'Histórico do afiliado';
+    protected static ?string $title = 'Affiliate History';
     protected static ?string $model = AffiliateLogs::class;
 
     protected static ?string $slug = 'afiliado/details/{provider}';
@@ -67,26 +67,26 @@ class DetailsAffiliate extends Page implements HasTable
        
         ->columns([
 
-            TextColumn::make("commission_type")->label(__("Tipo de Comissão"))->formatStateUsing(function($record) {
+            TextColumn::make("commission_type")->label('Commission Type')->formatStateUsing(function($record) {
                 if ($record->commission_type == "revshare") {
                     return "RevShare";
                 } else {
                     return "CPA";
                 }  
-            })->default("Indefinido"),
-            TextColumn::make("commission")->label(__("Valor da comissão"))->formatStateUsing(function($record) {
+            })->default("Undefined"),
+            TextColumn::make("commission")->label('Commission amount')->formatStateUsing(function($record) {
                 $count = number_format($record->commission, 2, ",", ",");
                 
-                return "R$". $count;
+                return "€ ". $count;
             })->default(0),
-            TextColumn::make("type")->label(__("Tipo"))->formatStateUsing(function($record){
+            TextColumn::make("type")->label('Type')->formatStateUsing(function($record){
                 if($record->type == "decrement"){
-                    return "Ganho";
+                    return "Win";
                 }else{
-                    return "Perca";
+                    return "Loss";
                 }
             }),
-            TextColumn::make("created_at")->label(__("Data"))->dateTime()
+            TextColumn::make("created_at")->label('Date')->dateTime()
            
 
         ])->actions([
@@ -96,8 +96,8 @@ class DetailsAffiliate extends Page implements HasTable
             Filter::make('created_at')
             
             ->form([
-                DatePicker::make('created_from')->label(__("Criado a partir de")),
-                DatePicker::make('created_until')->label(__("Criado até")),
+                DatePicker::make('created_from')->label('Created from'),
+                DatePicker::make('created_until')->label('Created until'),
             ])
             ->query(function (Builder $query, array $data): Builder {
                 return $query
@@ -118,11 +118,11 @@ class DetailsAffiliate extends Page implements HasTable
                 $indicators = [];
 
                 if ($data['created_from'] ?? null) {
-                    $indicators['created_from'] = 'Criado a partir de ' . Carbon::parse($data['created_from'])->toFormattedDateString();
+                    $indicators['created_from'] = 'Created from ' . Carbon::parse($data['created_from'])->toFormattedDateString();
                 }
 
                 if ($data['created_until'] ?? null) {
-                    $indicators['created_until'] = 'Criado até ' . Carbon::parse($data['created_until'])->toFormattedDateString();
+                    $indicators['created_until'] = 'Created until ' . Carbon::parse($data['created_until'])->toFormattedDateString();
                 }
 
                 return $indicators;

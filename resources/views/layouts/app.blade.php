@@ -1441,7 +1441,7 @@
             {{-- Pergunta + botões --}}
             <div style="padding:1.5rem; color:{{$custom['maior_de_18_texto_color']}};">
                 <div style="font-size:1.5rem; margin-bottom:1rem;">
-                    Você tem mais de 18 anos?
+                    Are you over 18?
                 </div>
                 <div style="display:flex; gap:1rem; justify-content:center;">
                     <button id="btn-no" style="
@@ -1461,7 +1461,7 @@
                                              12.5 45.3 0s12.5-32.8 0-45.3L205.3
                                              256 310.6 150.6z" fill="currentColor"/>
                         </svg>
-                        Não
+                        No
                     </button>
                     <button id="btn-yes" style="
                             flex:1; padding:.75rem;
@@ -1480,7 +1480,7 @@
                                              0L192 338.7 425.4 105.4c12.5-12.5
                                              32.8-12.5 45.3 0z" fill="currentColor"/>
                         </svg>
-                        Sim
+                        Yes
                     </button>
                 </div>
             </div>
