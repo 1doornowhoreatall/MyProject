@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AffiliateWithdraw;
 use App\Models\User;
 use App\Models\Wallet;
+use App\Helpers\Core as Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 

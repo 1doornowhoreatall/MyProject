@@ -26,12 +26,12 @@ class AffiliateWithdrawResource extends Resource
     
     public static function getNavigationLabel(): string
     {
-        return 'AFFILIATE WITHDRAWALS';
+        return __('AFFILIATE WITHDRAWALS');
     }
     
     public static function getModelLabel(): string
     {
-        return 'AFFILIATE WITHDRAWALS';
+        return __('AFFILIATE WITHDRAWALS');
     }
     
 
@@ -129,7 +129,7 @@ class AffiliateWithdrawResource extends Resource
                             ->title(__('Withdrawal Deleted'))
                             ->success()
                             ->persistent()
-                            ->body('The withdrawal was deleted successfully.')
+                            ->body(__('The withdrawal was deleted successfully.'))
                             ->send();
                     }),
                     Action::make('approve_payment')
@@ -159,7 +159,7 @@ class AffiliateWithdrawResource extends Resource
                             \Filament\Notifications\Notification::make()
                                 ->title(__('Enter the password'))
                                 ->danger()
-                                ->body('You did not enter the password.')
+                                ->body(__('You did not enter the password.'))
                                 ->send();
                 
                             return;

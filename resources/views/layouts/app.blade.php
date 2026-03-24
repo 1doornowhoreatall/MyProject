@@ -14,7 +14,7 @@
                 : url()->current();
     @endphp
 
-    <!-- Meta Tags Básicas -->
+    <!-- Basic Meta Tags -->
     <link rel="shortcut icon" href="{{ $favicon }}" type="image/x-icon">
     <link rel="apple-touch-icon" href="{{ $favicon }}" type="image/x-icon">
 
@@ -23,7 +23,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 
-    <!-- Meta Tags Essenciais -->
+    <!-- Essential Meta Tags -->
     <title>{{$setting->software_name}}</title>
     <meta name="description" content="{{ $setting->meta_description }}">
 
@@ -46,7 +46,7 @@
     <meta name="twitter:description" content="{{ $setting->twitter_description }}">
     <meta name="twitter:image"       content="{{ asset('storage/' . ltrim($setting->software_favicon, '/')) }}">
 
-    <!-- Robots (Indexação) -->
+    <!-- Robots (Indexing) -->
     <meta name="robots" content="{{ $setting->allow_indexing ? 'index,follow' : 'noindex,nofollow' }}">
     <meta name="googlebot" content="{{ $setting->allow_indexing ? 'index,follow' : 'noindex,nofollow' }}">
 
@@ -107,11 +107,11 @@
         :root {
 
             /*/////////////////////////////////////////////////////////////////
-            ///////////////////////// CENTRAL DE DISIGN /////////////////////////
+            ///////////////////////// DESIGN CENTER /////////////////////////
             /////////////////////////////////////////////////////////////////////
 
             //////////////////////////////////////////////////////////////// 
-            ///////////// PAGINA FOOTER   | FICA EM BAIXO DO SITE ///// */
+            ///////////// FOOTER PAGE   | AT THE BOTTOM OF THE SITE ///// */
 
 
             --footer-background:
@@ -155,7 +155,7 @@
             ;
 
             /* //////////////////////////////////////////////////////////////// */
-            /* /////////// PAGINA SIDEBAR   | FICA NA LATERAL DO SITE////////// */
+            /* /////////// SIDEBAR PAGE   | ON THE SIDE OF THE SITE////////// */
             /* //////////////////////////////////////////////////////////////// */
 
             --sidebar-background:
@@ -210,7 +210,7 @@
 
 
             /* //////////////////////////////////////////////////////////////// */
-            /* /////////// PAGINA NAVHAR   | FICA EM CIMA DO SITE////////// */
+            /* /////////// NAVBAR PAGE   | AT THE TOP OF THE SITE////////// */
             /* //////////////////////////////////////////////////////////////// */
 
 
@@ -323,7 +323,7 @@
 
 
             /* //////////////////////////////////////////////////////////////// */
-            /* /////////// PAGINA HOME   | PAGINA PRINCIPAL DO SITE////////// */
+            /* /////////// HOME PAGE   | MAIN PAGE OF THE SITE////////// */
             /* //////////////////////////////////////////////////////////////// */
 
 
@@ -413,7 +413,7 @@
 
 
             /* //////////////////////////////////////////////////////////////// */
-            /* /////////// PAGINA LISTGAME   | PAGINA DE LISTAGEM DE JOGOS////////// */
+            /* /////////// LISTGAME PAGE   | GAME LIST PAGE////////// */
             /* //////////////////////////////////////////////////////////////// */
 
             --gamelist_background:
@@ -443,7 +443,7 @@
 
 
             /* //////////////////////////////////////////////////////////////// */
-            /* /////////// PAGINA LOGIN - RESGISTRO E ESQUECI A SENHA   /////// */
+            /* /////////// LOGIN PAGE - REGISTER AND FORGOT PASSWORD   /////// */
             /* //////////////////////////////////////////////////////////////// */
             --register_background:
                 {{ $custom['register_background'] }}
@@ -541,7 +541,7 @@
 
 
             /* //////////////////////////////////////////////////////////////// */
-            /* /////////// PAGINA AFFILIATE   | PAGINA DE AFILIADOS////////// */
+            /* /////////// AFFILIATE PAGE   | AFFILIATE PAGE////////// */
             /* //////////////////////////////////////////////////////////////// */
 
 
@@ -575,7 +575,7 @@
 
 
             /* //////////////////////////////////////////////////////////////// */
-            /* /////////// PAGINA CART   | PAGINA DE  DE COMPRAS     ////////// */
+            /* /////////// CART PAGE   | SHOPPING PAGE     ////////// */
             /* //////////////////////////////////////////////////////////////// */
 
             --carteira_button_background:
@@ -772,7 +772,7 @@
 
 
             /* //////////////////////////////////////////////////////////////// */
-            /* /////////// PAGINA VIP   | PAGINA DE VIP     ////////// */
+            /* /////////// VIP PAGE   | VIP PAGE     ////////// */
             /* //////////////////////////////////////////////////////////////// */
 
             --vips_background:
@@ -833,7 +833,7 @@
 
 
             /* //////////////////////////////////////////////////////////////// */
-            /* /////////// PAGINA PROMOCOES   | PAGINA DE PROMOCOES     ////////// */
+            /* /////////// PROMOTIONS PAGE   | PROMOTIONS PAGE     ////////// */
             /* //////////////////////////////////////////////////////////////// */
 
             --promocoes_background:
@@ -867,7 +867,7 @@
 
 
             /* //////////////////////////////////////////////////////////////// */
-            /* /////////// PAGINA MISSOES   | PAGINA DE MISSOES     ////////// */
+            /* /////////// MISSIONS PAGE   | MISSIONS PAGE     ////////// */
             /* //////////////////////////////////////////////////////////////// */
 
 
@@ -923,7 +923,7 @@
 
 
             /* //////////////////////////////////////////////////////////////// */
-            /* /////////// PAGINA COOKIES   | PAGINA DE COOKIES     ////////// */
+            /* /////////// COOKIES PAGE   | COOKIES PAGE     ////////// */
             /* //////////////////////////////////////////////////////////////// */
 
             --popup_cookies_background:
@@ -944,7 +944,7 @@
 
 
             /* //////////////////////////////////////////////////////////////// */
-            /* /////////// PAGINA MENU CELULAR   | MENU CELULAR     ////////// */
+            /* /////////// MOBILE MENU PAGE   | MOBILE MENU     ////////// */
             /* //////////////////////////////////////////////////////////////// */
 
             --menu_cell_background:
@@ -955,7 +955,7 @@
             ;
 
             /* //////////////////////////////////////////////////////////////// */
-            /* /////////// PAGINA SPORTE E TERMOS | TERMOS E SPORT  ////////// */
+            /* /////////// SPORTS AND TERMS PAGE | TERMS AND SPORTS  ////////// */
             /* //////////////////////////////////////////////////////////////// */
 
             --aviso_sport_background:
@@ -979,7 +979,7 @@
 
 
             /* //////////////////////////////////////////////////////////////// */
-            /* /////////// Modal  MY ACCOUNT | MINHA CONTA  ////////// */
+            /* /////////// Modal  MY ACCOUNT | MY ACCOUNT  ////////// */
             /* //////////////////////////////////////////////////////////////// */
 
             --myconta_background:
@@ -1101,7 +1101,7 @@
 
             /*///////////////////////////////////////////////////////////////// */
 
-            /*/// MAIORES GANHOS*/
+            /*/// HIGHEST WINNINGS*/
 
             --maiores-ganhos-background:
                 {{ $custom['maiores_ganhos_backgroud'] }}
@@ -1117,7 +1117,7 @@
             ;
 
             /*///////////////////////////////////////////////////////////////// */
-            /*/// Lives GANHOS*/
+            /*/// LIVE WINNINGS*/
             --live-ganhos-background:
                 {{ $custom['live_ganhos_backgroud'] }}
             ;
@@ -1140,7 +1140,7 @@
                 {{ $custom['live_ganhos_box_shadow_color'] }}
             ;
             /*///////////////////////////////////////////////////////////////// */
-            /*/// Promoçao oferta GANHOS*/
+            /*/// Promotion offer WINNINGS*/
             --rodadas-gratis-background:
                 {{ $custom['rodadas_gratis_background'] }}
             ;
@@ -1438,7 +1438,7 @@
                 background: url('{{ asset('storage/' . $setting->software_logo_white) }}') center/contain no-repeat;
         "></div>
             </div>
-            {{-- Pergunta + botões --}}
+            {{-- Question + buttons --}}
             <div style="padding:1.5rem; color:{{$custom['maior_de_18_texto_color']}};">
                 <div style="font-size:1.5rem; margin-bottom:1rem;">
                     Are you over 18?
@@ -1490,19 +1490,19 @@
     @yield('content')
 
     <script>
-        // só roda client-side
+        // only runs client-side
         window.addEventListener('load', () => {
-            // se já tiver clicado em "Sim", não mostra nada
+            // if already clicked "Yes", show nothing
             if (localStorage.getItem('maior18') === '1') return;
 
-            // espera 2s para garantir que o CSS external seja aplicado
+            // wait 2s to ensure external CSS is applied
             setTimeout(() => {
                 document.getElementById('age-popup').style.display = 'flex';
-            }, 4000); // agora é 2 segundos em vez de 5
+            }, 4000); // now it is 2 seconds instead of 5
         });
 
         document.getElementById('btn-yes').addEventListener('click', () => {
-            // marca pra nunca mais exibir
+            // mark to never show again
             localStorage.setItem('maior18', '1');
             document.getElementById('age-popup').remove();
         });

@@ -91,8 +91,8 @@ class SettingSpin extends Page
         try {
             if(env('APP_DEMO')) {
                 Notification::make()
-                    ->title(__('Atenção'))
-                    ->body('Você não pode realizar está alteração na versão demo')
+                    ->title(__('Attention'))
+                    ->body(__('You cannot perform this change in the demo version'))
                     ->danger()
                     ->send();
                 return;
@@ -109,8 +109,8 @@ class SettingSpin extends Page
 
                 if($setting->update(['prizes' => $updatedData])) {
                     Notification::make()
-                        ->title(__('ACESSE ONDAGAMES.COM'))
-                        ->body('Dados alterados com sucesso!')
+                        ->title(__('ACCESS FITOREBET.COM'))
+                        ->body(__('Data changed successfully!'))
                         ->success()
                         ->send();
 
@@ -119,8 +119,8 @@ class SettingSpin extends Page
             }
         } catch (Halt $exception) {
             Notification::make()
-                ->title(__('Erro ao alterar dados!'))
-                ->body('Erro ao alterar dados!')
+                ->title(__('Error changing data!'))
+                ->body(__('Error changing data!'))
                 ->danger()
                 ->send();
         }
@@ -139,10 +139,10 @@ class SettingSpin extends Page
                         Repeater::make('prizesArray')
                             ->schema([
                                 TextInput::make('currency')
-                                    ->label(__('Moeda'))
+                                    ->label(__('Currency'))
                                     ->required(),
                                 TextInput::make('value')
-                                    ->label(__('Valor'))
+                                    ->label(__('Value'))
                                     ->numeric()
                                     ->required(),
                             ])

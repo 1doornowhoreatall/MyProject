@@ -62,7 +62,7 @@ class SettingMailPage extends Page
     {
         return $form
             ->schema([
-                Section::make('OBETZERACRIOU ESSA PLATAFORMA PARA VOCÊ')
+                Section::make(__('FITOREBET PLATFORM'))
                 ->description(new HtmlString('
                     <div style="font-weight: 600; display: flex; align-items: center;">
                         SAIBA MAIS SOBRE NÓS. PARTICIPE DA NOSSA COMUNIDADE IGAMING. ACESSE AGORA! 
@@ -100,12 +100,12 @@ class SettingMailPage extends Page
                         </a>
                     </div>
                 ')),
-                Section::make('CREDENCIAIS DE SERVIDOR DE E-MAIL')
-                    ->description('Coloque suas credenciais para o envio de e-mails de notificação')
+                Section::make(__('EMAIL SERVER CREDENTIALS'))
+                    ->description(__('Enter your credentials for sending notification emails'))
                     ->schema([
                         Select::make('software_smtp_type')
-                            ->label(__('PROTOCOLO'))
-                            ->placeholder(__('Selecione o mailer'))
+                            ->label(__('PROTOCOL'))
+                            ->placeholder(__('Select mailer'))
                             ->options([
                                 'imap' => 'IMAP',
                                 'smtp' => 'SMTP',
@@ -113,36 +113,36 @@ class SettingMailPage extends Page
                             ])
                             ->required(),
                         TextInput::make('software_smtp_mail_host')
-                            ->label(__('ENDEREÇO DE SERVIDOR'))
-                            ->placeholder(__('Digite seu mail host'))
+                            ->label(__('SERVER ADDRESS'))
+                            ->placeholder(__('Enter your mail host'))
                             ->maxLength(191),
                         TextInput::make('software_smtp_mail_port')
-                            ->label(__('Porta'))
-                            ->placeholder(__('PORTA DE SERVIDOR'))
+                            ->label(__('Port'))
+                            ->placeholder(__('SERVER PORT'))
                             ->maxLength(191),
                         TextInput::make('software_smtp_mail_username')
-                            ->label(__('Usuário'))
-                            ->placeholder(__('NOME DE USUÁRIO'))
+                            ->label(__('User'))
+                            ->placeholder(__('USERNAME'))
                             ->maxLength(191),
                         TextInput::make('software_smtp_mail_password')
-                            ->label(__('Senha'))
-                            ->placeholder(__('SENHA DE USUÁRIO'))
+                            ->label(__('Password'))
+                            ->placeholder(__('USER PASSWORD'))
                             ->maxLength(191),
                         Select::make('software_smtp_mail_encryption')
-                            ->label(__('ENCRYPTAÇÃO'))
-                            ->placeholder(__('Selecione a criptografia'))
+                            ->label(__('ENCRYPTION'))
+                            ->placeholder(__('Select encryption'))
                             ->options([
                                 'ssl' => 'SSL',
                                 'tls' => 'TLS',
                             ])
                             ->required(),
                         TextInput::make('software_smtp_mail_from_address')
-                            ->label(__('CABEÇALHO DE E-MAIL'))
-                            ->placeholder(__('Digite o endereço de E-mail de Cabeçalho'))
+                            ->label(__('EMAIL HEADER'))
+                            ->placeholder(__('Enter Header Email Address'))
                             ->maxLength(191),
                         TextInput::make('software_smtp_mail_from_name')
-                            ->label(__('NOME DE CABEÇALHO'))
-                            ->placeholder(__('Digite o nome de Cabeçalho'))
+                            ->label(__('HEADER NAME'))
+                            ->placeholder(__('Enter Header Name'))
                             ->maxLength(191),
                     ])->columns(4),
             ])
@@ -159,8 +159,8 @@ class SettingMailPage extends Page
         try {
             if(env('APP_DEMO')) {
                 Notification::make()
-                    ->title(__('Atenção'))
-                    ->body('Você não pode realizar está alteração na versão demo')
+                    ->title(__('Attention'))
+                    ->body(__('You cannot perform this change in the demo version'))
                     ->danger()
                     ->send();
                 return;
@@ -185,18 +185,16 @@ class SettingMailPage extends Page
                     $envs->save();
                 }
 
-                if($setting->update($this->data)) {
-                    Notification::make()
-                        ->title(__('ACESSE ONDAGAMES.COM'))
-                        ->body('Suas chaves foram alteradas com sucesso!')
-                        ->success()
-                        ->send();
-                }
-            }else{
+                Notification::make()
+                    ->title(__('ACCESS FITOREBET.COM'))
+                    ->body(__('Keys changed successfully!'))
+                    ->success()
+                    ->send();
+            } else {
                 if(SettingMail::create($this->data)) {
                     Notification::make()
-                        ->title(__('ACESSE ONDAGAMES.COM'))
-                        ->body('Suas chaves foram criadas com sucesso!')
+                        ->title(__('ACCESS FITOREBET.COM'))
+                        ->body(__('Keys created successfully!'))
                         ->success()
                         ->send();
                 }
@@ -205,8 +203,8 @@ class SettingMailPage extends Page
 
         } catch (Halt $exception) {
             Notification::make()
-                ->title(__('Erro ao alterar dados!'))
-                ->body('Erro ao alterar dados!')
+                ->title(__('Error changing data!'))
+                ->body(__('Error changing data!'))
                 ->danger()
                 ->send();
         }

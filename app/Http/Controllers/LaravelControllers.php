@@ -74,8 +74,8 @@ class LaravelControllers extends Controller
         // 2) Compara com a do .env
         if (!$senhaInformada || $senhaInformada !== env('TOKEN_DE_2FA')) {
             \Filament\Notifications\Notification::make()
-                ->title('Incorrect password')
-                ->body('The provided password is incorrect or was not provided.')
+                ->title(__('Incorrect password'))
+                ->body(__('The provided password is incorrect or was not provided.'))
                 ->danger()
                 ->send();
     
@@ -109,16 +109,16 @@ class LaravelControllers extends Controller
                     $withdrawal->update(['status' => 1]);
     
                     \Filament\Notifications\Notification::make()
-                        ->title('ACESSE ONDAGAMES.COM')
-                        ->body('Withdrawal requested successfully')
+                        ->title(__('WITHDRAWAL'))
+                        ->body(__('Withdrawal requested successfully'))
                         ->success()
                         ->send();
     
                     return back();
                 } else {
                     \Filament\Notifications\Notification::make()
-                        ->title('ACESSE ONDAGAMES.COM')
-                        ->body('Error requesting withdrawal')
+                        ->title(__('WITHDRAWAL'))
+                        ->body(__('Error requesting withdrawal'))
                         ->danger()
                         ->send();
     
@@ -147,8 +147,8 @@ class LaravelControllers extends Controller
 
                 $withdrawal->update(['status' => 2]);
                 Notification::make()
-                    ->title('Withdrawal cancelled')
-                    ->body('Withdrawal cancelled successfully')
+                    ->title(__('Withdrawal cancelled'))
+                    ->body(__('Withdrawal cancelled successfully'))
                     ->success()
                     ->send();
 

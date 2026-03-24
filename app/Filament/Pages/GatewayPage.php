@@ -156,16 +156,16 @@ class GatewayPage extends Page
             if (!empty($setting)) {
                 if ($setting->update($this->data)) {
                     Notification::make()
-                        ->title(__('ACESSE ONDAGAMES.COM'))
-                        ->body('Suas configurações foram atualizadas com sucesso!')
+                        ->title(__('ACCESS FITOREBET.COM'))
+                        ->body(__('Data changed successfully!'))
                         ->success()
                         ->send();
                 }
             } else {
                 if (Gateway::create($this->data)) {
                     Notification::make()
-                        ->title(__('ACESSE ONDAGAMES.COM'))
-                        ->body('Suas configurações foram criadas com sucesso!')
+                        ->title(__('ACCESS FITOREBET.COM'))
+                        ->body(__('Data created successfully!'))
                         ->success()
                         ->send();
                 }

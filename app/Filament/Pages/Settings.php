@@ -46,12 +46,12 @@ class Settings extends Page implements HasForms
      */
     public static function canAccess(): bool
     {
-        return auth()->user()->hasRole('admin'); // Controla o acesso total à página
+        return auth()->user()->hasRole('admin'); // Controls full access to the page
     }
     
     public static function canView(): bool
     {
-        return auth()->user()->hasRole('admin'); // Controla a visualização de elementos específicos
+        return auth()->user()->hasRole('admin'); // Controls the viewing of specific elements
     }
 
     public ?array $data = [];

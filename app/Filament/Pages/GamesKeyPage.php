@@ -315,16 +315,16 @@ public function saveInfo() {
             if (!empty($setting)) {
                 if ($setting->update($this->data)) {
                     Notification::make()
-                        ->title(__('ACESSE ONDAGAMES.COM'))
-                        ->body('Suas chaves foram alteradas com sucesso!')
+                        ->title(__('ACCESS FITOREBET.COM'))
+                        ->body(__('Keys changed successfully!'))
                         ->success()
                         ->send();
                 }
             } else {
                 if (GamesKey::create($this->data)) {
                     Notification::make()
-                        ->title(__('ACESSE ONDAGAMES.COM'))
-                        ->body('Suas chaves foram criadas com sucesso!')
+                        ->title(__('ACCESS FITOREBET.COM'))
+                        ->body(__('Keys created successfully!'))
                         ->success()
                         ->send();
                 }

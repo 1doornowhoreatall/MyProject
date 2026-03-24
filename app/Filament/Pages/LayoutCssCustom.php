@@ -32,9 +32,9 @@ class LayoutCssCustom extends Page implements HasForms
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
     protected static string $view = 'filament.pages.layout-css-custom';
-    protected static ?string $navigationLabel = 'Customização Layout';
-    protected static ?string $modelLabel = 'Customização Layout';
-    protected static ?string $title = 'Customização Layout';
+    protected static ?string $navigationLabel = 'Layout Customization';
+    protected static ?string $modelLabel = 'Layout Customization';
+    protected static ?string $title = 'Layout Customization';
     protected static ?string $slug = 'custom-layout';
 
     public ?array $data = [];
@@ -83,7 +83,7 @@ class LayoutCssCustom extends Page implements HasForms
 
                 $this->css_do_BetHistory(),
                 $this->css_do_WalletWithdrawal(),
-                $this->css_do_PixWallet(),
+                $this->css_do_CryptoWallet(),
                 $this->css_do_WalletDeposit(),
                 $this->css_do_WalletBalance(),
                 $this->css_do_WalletDashboard(),
@@ -117,8 +117,8 @@ class LayoutCssCustom extends Page implements HasForms
     
     protected function getSecTokenJivochat(): Section
     {
-        return Section::make('TOKEN JIVOCHAT')
-            ->label(__('Altere o token do Jivochat'))
+        return Section::make(__('JIVOCHAT TOKEN'))
+            ->label(__('Change Jivochat token'))
             ->schema([
                 \Filament\Forms\Components\Placeholder::make('limpar_cache')
                     ->label('')
@@ -138,32 +138,32 @@ class LayoutCssCustom extends Page implements HasForms
                                     margin-left: 10px;
                                " 
                              );">
-                                SITE DO CHAT
+                                CHAT WEBSITE
                             </a>
                 
                     
                         </div>'
                     )),
                 TextInput::make("token_jivochat")
-                    ->label(__("Token do Jivochat Ex: //code.jivosite.com/widget/lmxxxxxxxx"))
-                    ->placeholder(__("Insira o token do Jivochat aqui Ex: //code.jivosite.com/widget/lmxxxxxxxx")),
+                    ->label(__('Jivochat Token Ex: //code.jivosite.com/widget/lmxxxxxxxx'))
+                    ->placeholder(__('Enter Jivochat token here Ex: //code.jivosite.com/widget/lmxxxxxxxx')),
             ])->columns(1);
     }
     
 
     protected function css_do_baixar_app(): Section
     {
-        return Section::make("Página Baixar App")
-            ->description('Você pode alterar as cores e imagem da seção Baixar App')
-            ->label(__('Baixar App'))
+        return Section::make(__('Download App Page'))
+            ->description(__('You can change the colors and image of the Download App section'))
+            ->label(__('Download App'))
             ->schema([
-                ColorPicker::make('baixar_app_background')->label(__('Cor de fundo'))->required(),
-                ColorPicker::make('baixar_app_sub_background')->label(__('Cor de fundo secundária'))->required(),
-                FileUpload::make('baixar_app_imagem')->label(__('Imagem do App'))->image()->placeholder(__('Carregue uma imagem')),
-                ColorPicker::make('baixar_app_texto_color')->label(__('Cor do texto'))->required(),
-                ColorPicker::make('baixar_app_explicacao_background')->label(__('Cor de fundo da explicação'))->required(),
-                ColorPicker::make('baixar_app_botao_background')->label(__('Cor de fundo do botão'))->required(),
-                ColorPicker::make('baixar_app_botao_texto_color')->label(__('Cor do texto do botão'))->required(),
+                ColorPicker::make('baixar_app_background')->label(__('Background color'))->required(),
+                ColorPicker::make('baixar_app_sub_background')->label(__('Secondary background color'))->required(),
+                FileUpload::make('baixar_app_imagem')->label(__('App Image'))->image()->placeholder(__('Upload an image')),
+                ColorPicker::make('baixar_app_texto_color')->label(__('Text color'))->required(),
+                ColorPicker::make('baixar_app_explicacao_background')->label(__('Explanation background color'))->required(),
+                ColorPicker::make('baixar_app_botao_background')->label(__('Button background color'))->required(),
+                ColorPicker::make('baixar_app_botao_texto_color')->label(__('Button text color'))->required(),
             ])->columns(3);
     }
 
@@ -171,59 +171,59 @@ class LayoutCssCustom extends Page implements HasForms
 
     protected function css_do_pesquisar_homepage(): Section
     {
-        return Section::make("Pesquisar Homepage")
-            ->description('Você pode alterar as cores da barra de pesquisa da Homepage')
-            ->label(__('Pesquisar Homepage'))
+        return Section::make(__('Search Homepage'))
+            ->description(__('You can change the colors of the Homepage search bar'))
+            ->label(__('Search Homepage'))
             ->schema([
-                ColorPicker::make('pesquisar_homepage_background')->label(__('Cor de fundo da pesquisa'))->required(),
-                ColorPicker::make('pesquisar_homepage_texto_color')->label(__('Cor do texto da pesquisa'))->required(),
-                ColorPicker::make('pesquisar_homepage_icon_color')->label(__('Cor do ícone da pesquisa'))->required(),
-                ColorPicker::make('pesquisar_homepage_button_background')->label(__('Cor de fundo do botão de pesquisa'))->required(),
-                ColorPicker::make('pesquisar_homepage_button_text_color')->label(__('Cor do texto do botão de pesquisa'))->required(),
+                ColorPicker::make('pesquisar_homepage_background')->label(__('Search background color'))->required(),
+                ColorPicker::make('pesquisar_homepage_texto_color')->label(__('Search text color'))->required(),
+                ColorPicker::make('pesquisar_homepage_icon_color')->label(__('Search icon color'))->required(),
+                ColorPicker::make('pesquisar_homepage_button_background')->label(__('Search button background color'))->required(),
+                ColorPicker::make('pesquisar_homepage_button_text_color')->label(__('Search button text color'))->required(),
             ])->columns(2);
     }
 
 
     protected function getSectilinkmagem(): Section
     {
-        return Section::make('LINKS COMPLEMENTARES')
-            ->label(__('Altere os links complementares'))
+        return Section::make(__('COMPLEMENTARY LINKS'))
+            ->label(__('Change complementary links'))
             ->schema([
-                TextInput::make("link_suporte")->label(__("Link do suporte")),
-                TextInput::make("link_lincenca")->label(__("Link da Licença")),
-                TextInput::make("link_app")->label(__("Link do App")),
-                TextInput::make("link_telegram")->label(__("Link do Telegram")),
-                TextInput::make("link_facebook")->label(__("Link do Facebook")),
-                TextInput::make("link_whatsapp")->label(__("Link do WhatsApp")),
-                TextInput::make("link_instagram")->label(__("Link do Instagram")),
+                TextInput::make("link_suporte")->label(__("Support Link")),
+                TextInput::make("link_lincenca")->label(__("License Link")),
+                TextInput::make("link_app")->label(__("App Link")),
+                TextInput::make("link_telegram")->label(__("Telegram Link")),
+                TextInput::make("link_facebook")->label(__("Facebook Link")),
+                TextInput::make("link_whatsapp")->label(__("WhatsApp Link")),
+                TextInput::make("link_instagram")->label(__("Instagram Link")),
             ])->columns(3);
     }
 
     protected function getSectiimagensmanegem(): Section
     {
-        return Section::make('banner e imagens')
-            ->label(__('Imagens e Banners'))
+        return Section::make(__('banners and images'))
+            ->label(__('Images and Banners'))
             ->schema([
-                FileUpload::make('image_hot4')->label(__("Imagem do banner licença"))->placeholder(__('Carregue uma imagem'))->image(),
-                FileUpload::make('banner_deposito1')->label(__("Banner do depósito"))->placeholder(__('Carregue uma imagem'))->image(),
-                FileUpload::make('banner_deposito2')->label(__("Banner do QR Code"))->placeholder(__('Carregue uma imagem'))->image(),
-                FileUpload::make('banner_registro')->label(__("Banner do Registrar"))->placeholder(__('Carregue uma imagem'))->image(),
-                FileUpload::make('banner_login')->label(__("Banner do Login"))->placeholder(__('Carregue uma imagem'))->image(),
-                FileUpload::make('menucell_inicio')->label(__("Imagem cell do Menu Início"))->placeholder(__('Carregue uma imagem'))->image(),                
-                FileUpload::make('menucell_suporte')->label(__("Imagem cell do Menu Suporte"))->placeholder(__('Carregue uma imagem'))->image(),
-                FileUpload::make('menucell_carteira')->label(__("Imagem cell do Menu Carteira"))->placeholder(__('Carregue uma imagem'))->image(),
-                FileUpload::make('menucell_afiliado')->label(__("Imagem cell do Menu Afiliado"))->placeholder(__('Carregue uma imagem'))->image(),
-                FileUpload::make('menucell_saque')->label(__("Imagem cell do Menu Saque"))->placeholder(__('Carregue uma imagem'))->image(),
-                FileUpload::make('menucell_sair')->label(__("Imagem  cell do Menu Sair"))->placeholder(__('Carregue uma imagem'))->image(),
-                FileUpload::make('menucell_img_esportes')->label(__("Imagem  cell esportes"))->placeholder(__('Carregue uma imagem'))->image(),
-                FileUpload::make('footer_imagen1')->label(__("Imagem do Footer 1"))->placeholder(__('Carregue uma imagem'))->image(),
-                FileUpload::make('footer_imagen2')->label(__("Imagem do Footer 2"))->placeholder(__('Carregue uma imagem'))->image(),
-                FileUpload::make('footer_imagen3')->label(__("Imagem do Footer 3"))->placeholder(__('Carregue uma imagem'))->image(),
-                FileUpload::make('footer_telegram')->label(__("Imagem do Footer Telegram"))->placeholder(__('Carregue uma imagem'))->image(),
-                FileUpload::make('footer_facebook')->label(__("Imagem do Footer Facebook"))->placeholder(__('Carregue uma imagem'))->image(),
-                FileUpload::make('footer_whatsapp')->label(__("Imagem do Footer WhatsApp"))->placeholder(__('Carregue uma imagem'))->image(),
-                FileUpload::make('footer_instagram')->label(__("Imagem do Footer Instagram"))->placeholder(__('Carregue uma imagem'))->image(),
-                FileUpload::make('footer_mais18')->label(__("Imagem do Footer +18"))->placeholder(__('Carregue uma imagem'))->image(),
+                FileUpload::make('image_hot4')->label(__("License banner image"))->placeholder(__('Upload an image'))->image(),
+                FileUpload::make('banner_deposito1')->label(__("Deposit banner"))->placeholder(__('Upload an image'))->image(),
+                FileUpload::make('banner_deposito2')->label(__("QR Code banner"))->placeholder(__('Upload an image'))->image(),
+                FileUpload::make('banner_registro')->label(__("Register banner"))->placeholder(__('Upload an image'))->image(),
+                FileUpload::make('banner_login')->label(__("Login banner"))->placeholder(__('Upload an image'))->image(),
+                FileUpload::make('menucell_inicio')->label(__("Menu Start cell image"))->placeholder(__('Upload an image'))->image(),                
+                FileUpload::make('menucell_suporte')->label(__("Menu Support cell image"))->placeholder(__('Upload an image'))->image(),
+                FileUpload::make('menucell_carteira')->label(__("Menu Wallet cell image"))->placeholder(__('Upload an image'))->image(),
+                FileUpload::make('menucell_afiliado')->label(__("Menu Affiliate cell image"))->placeholder(__('Upload an image'))->image(),
+                FileUpload::make('menucell_saque')->label(__("Menu Withdrawal cell image"))->placeholder(__('Upload an image'))->image(),
+                FileUpload::make('menucell_sair')->label(__("Menu Exit cell image"))->placeholder(__('Upload an image'))->image(),
+                FileUpload::make('menucell_img_esportes')->label(__("Sports cell image"))->placeholder(__('Upload an image'))->image(),
+                FileUpload::make('footer_imagen1')->label(__("Footer Image 1"))->placeholder(__('Upload an image'))->image(),
+                FileUpload::make('footer_imagen2')->label(__("Footer Image 2"))->placeholder(__('Upload an image'))->image(),
+                FileUpload::make('footer_imagen3')->label(__("Footer Image 3"))->placeholder(__('Upload an image'))->image(),
+                FileUpload::make('footer_telegram')->label(__("Footer Telegram Image"))->placeholder(__('Upload an image'))->image(),
+                FileUpload::make('footer_facebook')->label(__("Footer Facebook Image"))->placeholder(__('Upload an image'))->image(),
+                FileUpload::make('footer_whatsapp')->label(__("Footer WhatsApp Image"))->placeholder(__('Upload an image'))->image(),
+                FileUpload::make('footer_instagram')->label(__("Footer Instagram Image"))->placeholder(__('Upload an image'))->image(),
+                FileUpload::make('footer_mais18')->label(__("Footer +18 Image"))->placeholder(__('Upload an image'))->image(),
             ])->columns(4);
     }
 
@@ -275,42 +275,42 @@ class LayoutCssCustom extends Page implements HasForms
     // PAGINA NAVBAR   | FICA EM CIMA DO SITE
     protected function css_do_navbar(): Section
     {
-        return Section::make("Página de Navbar")
-            ->description('Você pode alterar as cores do Navbar')
+        return Section::make(__('Navbar Page'))
+            ->description(__('You can change the colors of the Navbar'))
             ->label(__('Navbar'))
             ->schema([
-                ColorPicker::make('navbar_background')->label(__('Cor de fundo do Navbar'))->required(),
-                ColorPicker::make('navbar_text')->label(__('Cor do texto do Navbar'))->required(),
-                ColorPicker::make('navbar_icon_menu')->label(__('Cor do ícone do Menu'))->required(),
-                ColorPicker::make('navbar_icon_promocoes')->label(__('Cor do ícone de Promoções'))->required(),
-                ColorPicker::make('navbar_icon_promocoes_segunda_cor')->label(__('Segunda cor do ícone de Promoções'))->required(),
-                ColorPicker::make('navbar_icon_casino')->label(__('Cor do ícone do Casino'))->required(),
-                ColorPicker::make('navbar_icon_sport')->label(__('Cor do ícone de Esportes'))->required(),
-                ColorPicker::make('navbar_button_text_login')->label(__('Cor do texto do botão de Login'))->required(),
-                ColorPicker::make('navbar_button_text_registro')->label(__('Cor do texto do botão de Registro'))->required(),
-                ColorPicker::make('navbar_button_background_login')->label(__('Cor de fundo do botão de Login'))->required(),
-                ColorPicker::make('navbar_button_background_registro')->label(__('Cor de fundo do botão de Registro'))->required(),
-                ColorPicker::make('navbar_button_border_color')->label(__('Cor da borda do botão'))->required(),
-                ColorPicker::make('navbar_button_text_superior')->label(__('Cor do texto do botão superior'))->required(),
-                ColorPicker::make('navbar_button_background_superior')->label(__('Cor de fundo do botão superior'))->required(),
-                ColorPicker::make('navbar_text_superior')->label(__('Cor do texto superior'))->required(),
-                ColorPicker::make('navbar_button_deposito_background')->label(__('Cor de fundo do botão de Depósito'))->required(),
-                ColorPicker::make('navbar_button_deposito_text_color')->label(__('Cor do texto do botão de Depósito'))->required(),
-                ColorPicker::make('navbar_button_deposito_border_color')->label(__('Cor da borda do botão de Depósito'))->required(),
-                ColorPicker::make('navbar_button_deposito_píx_color_text')->label(__('Cor do texto do botão de Depósito PIX'))->required(),
-                ColorPicker::make('navbar_button_deposito_píx_background')->label(__('Cor de fundo do botão de Depósito PIX'))->required(),
-                ColorPicker::make('navbar_button_deposito_píx_icon')->label(__('Cor do ícone do botão de Depósito PIX'))->required(),
-                ColorPicker::make('navbar_button_carteira_background')->label(__('Cor de fundo do botão Carteira'))->required(),
-                ColorPicker::make('navbar_button_carteira_text_color')->label(__('Cor do texto do botão Carteira'))->required(),
-                ColorPicker::make('navbar_button_carteira_border_color')->label(__('Cor da borda do botão Carteira'))->required(),
-                ColorPicker::make('navbar_perfil_text_color')->label(__('Cor do texto do Perfil'))->required(),
-                ColorPicker::make('navbar_perfil_background')->label(__('Cor de fundo do Perfil'))->required(),
-                ColorPicker::make('navbar_perfil_icon_color')->label(__('Cor do ícone do Perfil'))->required(),
-                ColorPicker::make('navbar_perfil_icon_color_border')->label(__('Cor da borda do ícone do Perfil'))->required(),
-                ColorPicker::make('navbar_perfil_modal_icon_color')->label(__('Cor do ícone do Modal do Perfil'))->required(),
-                ColorPicker::make('navbar_perfil_modal_text_modal')->label(__('Cor do texto do Modal do Perfil'))->required(),
-                ColorPicker::make('navbar_perfil_modal_background_modal')->label(__('Cor de fundo do Modal do Perfil'))->required(),
-                ColorPicker::make('navbar_perfil_modal_hover_modal')->label(__('Cor do hover do Modal do Perfil'))->required(),
+                ColorPicker::make('navbar_background')->label(__('Navbar background color'))->required(),
+                ColorPicker::make('navbar_text')->label(__('Navbar text color'))->required(),
+                ColorPicker::make('navbar_icon_menu')->label(__('Menu icon color'))->required(),
+                ColorPicker::make('navbar_icon_promocoes')->label(__('Promotions icon color'))->required(),
+                ColorPicker::make('navbar_icon_promocoes_segunda_cor')->label(__('Promotions icon secondary color'))->required(),
+                ColorPicker::make('navbar_icon_casino')->label(__('Casino icon color'))->required(),
+                ColorPicker::make('navbar_icon_sport')->label(__('Sports icon color'))->required(),
+                ColorPicker::make('navbar_button_text_login')->label(__('Login button text color'))->required(),
+                ColorPicker::make('navbar_button_text_registro')->label(__('Registration button text color'))->required(),
+                ColorPicker::make('navbar_button_background_login')->label(__('Login button background color'))->required(),
+                ColorPicker::make('navbar_button_background_registro')->label(__('Registration button background color'))->required(),
+                ColorPicker::make('navbar_button_border_color')->label(__('Button border color'))->required(),
+                ColorPicker::make('navbar_button_text_superior')->label(__('Superior button text color'))->required(),
+                ColorPicker::make('navbar_button_background_superior')->label(__('Superior button background color'))->required(),
+                ColorPicker::make('navbar_text_superior')->label(__('Superior text color'))->required(),
+                ColorPicker::make('navbar_button_deposito_background')->label(__('Deposit button background color'))->required(),
+                ColorPicker::make('navbar_button_deposito_text_color')->label(__('Deposit button text color'))->required(),
+                ColorPicker::make('navbar_button_deposito_border_color')->label(__('Deposit button border color'))->required(),
+                ColorPicker::make('navbar_button_deposito_píx_color_text')->label(__('Deposit button PIX text color'))->required(),
+                ColorPicker::make('navbar_button_deposito_píx_background')->label(__('Deposit button PIX background color'))->required(),
+                ColorPicker::make('navbar_button_deposito_píx_icon')->label(__('Deposit button PIX icon color'))->required(),
+                ColorPicker::make('navbar_button_carteira_background')->label(__('Wallet button background color'))->required(),
+                ColorPicker::make('navbar_button_carteira_text_color')->label(__('Wallet button text color'))->required(),
+                ColorPicker::make('navbar_button_carteira_border_color')->label(__('Wallet button border color'))->required(),
+                ColorPicker::make('navbar_perfil_text_color')->label(__('Profile text color'))->required(),
+                ColorPicker::make('navbar_perfil_background')->label(__('Profile background color'))->required(),
+                ColorPicker::make('navbar_perfil_icon_color')->label(__('Profile icon color'))->required(),
+                ColorPicker::make('navbar_perfil_icon_color_border')->label(__('Profile icon border color'))->required(),
+                ColorPicker::make('navbar_perfil_modal_icon_color')->label(__('Profile modal icon color'))->required(),
+                ColorPicker::make('navbar_perfil_modal_text_modal')->label(__('Profile modal text color'))->required(),
+                ColorPicker::make('navbar_perfil_modal_background_modal')->label(__('Profile modal background color'))->required(),
+                ColorPicker::make('navbar_perfil_modal_hover_modal')->label(__('Profile modal hover color'))->required(),
 
 
             ])->columns(4);
@@ -321,149 +321,149 @@ class LayoutCssCustom extends Page implements HasForms
     protected function css_do_sidebar(): Section
     {
 
-        return Section::make("Página de Sidebar")
-            ->description('Você pode alterar as cores do Sidebar')
+        return Section::make(__('Sidebar Page'))
+            ->description(__('You can change the colors of the Sidebar'))
             ->label(__('Sidebar'))
             ->schema([
-            ColorPicker::make('sidebar_background')->label(__('Cor de fundo do Sidebar'))->required(),
-            ColorPicker::make('sidebar_button_missoes_background')->label(__('Cor de fundo do botão Missões'))->required(),
-            ColorPicker::make('sidebar_button_vip_background')->label(__('Cor de fundo do botão VIP'))->required(),
-            ColorPicker::make('sidebar_button_ganhe_background')->label(__('Cor de fundo do botão Promoçoes'))->required(),
-            ColorPicker::make('sidebar_button_bonus_background')->label(__('Cor de fundo do botão bonus'))->required(),
-            ColorPicker::make('sidebar_button_missoes_text')->label(__('Cor do texto do botão Missões'))->required(),
-            ColorPicker::make('sidebar_button_ganhe_text')->label(__('Cor do texto do botão Ganhe'))->required(),
-            ColorPicker::make('sidebar_button_vip_text')->label(__('Cor do texto do botão VIP'))->required(),
-            ColorPicker::make('sidebar_button_hover')->label(__('Cor do hover do botão'))->required(),
-            ColorPicker::make('sidebar_text_hover')->label(__('Cor do hover do texto'))->required(),
-            ColorPicker::make('sidebar_text_color')->label(__('Cor do texto'))->required(),
-            ColorPicker::make('sidebar_border')->label(__('Cor da borda'))->required(),
-            ColorPicker::make('sidebar_icons')->label(__('Cor dos ícones'))->required(),
-            ColorPicker::make('sidebar_icons_background')->label(__('Cor de fundo dos ícones'))->required(),
+            ColorPicker::make('sidebar_background')->label(__('Sidebar background color'))->required(),
+            ColorPicker::make('sidebar_button_missoes_background')->label(__('Missions button background color'))->required(),
+            ColorPicker::make('sidebar_button_vip_background')->label(__('VIP button background color'))->required(),
+            ColorPicker::make('sidebar_button_ganhe_background')->label(__('Promotions button background color'))->required(),
+            ColorPicker::make('sidebar_button_bonus_background')->label(__('Bonus button background color'))->required(),
+            ColorPicker::make('sidebar_button_missoes_text')->label(__('Missions button text color'))->required(),
+            ColorPicker::make('sidebar_button_ganhe_text')->label(__('Earn button text color'))->required(),
+            ColorPicker::make('sidebar_button_vip_text')->label(__('VIP button text color'))->required(),
+            ColorPicker::make('sidebar_button_hover')->label(__('Button hover color'))->required(),
+            ColorPicker::make('sidebar_text_hover')->label(__('Text hover color'))->required(),
+            ColorPicker::make('sidebar_text_color')->label(__('Text color'))->required(),
+            ColorPicker::make('sidebar_border')->label(__('Border color'))->required(),
+            ColorPicker::make('sidebar_icons')->label(__('Icons color'))->required(),
+            ColorPicker::make('sidebar_icons_background')->label(__('Icons background color'))->required(),
             ])->columns(4);
     }
     // PAGINA HOMEPAGE | FICA NA PAGINA INICIAL DO SITE
 
     protected function css_do_homepage(): Section
     {
-        return Section::make("Pagina de Início")
-            ->description('Você pode alterar as cores do HomePage')
+        return Section::make(__('Start Page'))
+            ->description(__('You can change the colors of the HomePage'))
             ->label(__('HomePage'))
             ->schema([
-                ColorPicker::make('home_text_color')->label(__('Cor do texto da Home'))->required(),
-                ColorPicker::make('home_background')->label(__('Cor de fundo da Home'))->required(),
-                ColorPicker::make('home_background_button_banner')->label(__('Cor de fundo do botão Banner'))->required(),
-                ColorPicker::make('home_icon_color_button_banner')->label(__('Cor do ícone do botão Banner'))->required(),
+                ColorPicker::make('home_text_color')->label(__('Home text color'))->required(),
+                ColorPicker::make('home_background')->label(__('Home background color'))->required(),
+                ColorPicker::make('home_background_button_banner')->label(__('Banner button background color'))->required(),
+                ColorPicker::make('home_icon_color_button_banner')->label(__('Banner button icon color'))->required(),
                 
-                ColorPicker::make('home_background_input_pesquisa')->label(__('Cor de fundo do Input de Pesquisa'))->required(),
-                ColorPicker::make('home_icon_color_input_pesquisa')->label(__('Cor do ícone do Input de Pesquisa'))->required(),
-                ColorPicker::make('home_border_color_input_pesquisa')->label(__('Cor da borda do Input de Pesquisa'))->required(),
+                ColorPicker::make('home_background_input_pesquisa')->label(__('Search input background color'))->required(),
+                ColorPicker::make('home_icon_color_input_pesquisa')->label(__('Search input icon color'))->required(),
+                ColorPicker::make('home_border_color_input_pesquisa')->label(__('Search input border color'))->required(),
 
-                ColorPicker::make('topo_icon_color')->label(__('Cor do ícone do botão De volta ao topo'))->required(),
-                ColorPicker::make('topo_button_text_color')->label(__('Cor do texto do botão De volta ao topo'))->required(),
-                ColorPicker::make('topo_button_background')->label(__('Cor de fundo do botão De volta ao topo'))->required(),
-                ColorPicker::make('topo_button_border_color')->label(__('Cor da borda do botão De volta ao topo"'))->required(),
+                ColorPicker::make('topo_icon_color')->label(__('Back to top button icon color'))->required(),
+                ColorPicker::make('topo_button_text_color')->label(__('Back to top button text color'))->required(),
+                ColorPicker::make('topo_button_background')->label(__('Back to top button background color'))->required(),
+                ColorPicker::make('topo_button_border_color')->label(__('Back to top button border color'))->required(),
 
 
-                ColorPicker::make('home_background_categorias')->label(__('Cor de fundo das Categorias'))->required(),
-                ColorPicker::make('home_text_color_categorias')->label(__('Cor do texto das Categorias'))->required(),
-                ColorPicker::make('home_background_pesquisa')->label(__('Cor de fundo da Pesquisa'))->required(),
-                ColorPicker::make('home_text_color_pesquisa')->label(__('Cor do texto da Pesquisa'))->required(),
-                ColorPicker::make('home_background_pesquisa_aviso')->label(__('Cor de fundo do Aviso de Pesquisa'))->required(),
-                ColorPicker::make('home_text_color_pesquisa_aviso')->label(__('Cor do texto do Aviso de Pesquisa'))->required(),
-                ColorPicker::make('home_background_button_pesquisa')->label(__('Cor de fundo do botão X de Pesquisa'))->required(),
-                ColorPicker::make('home_icon_color_button_pesquisa')->label(__('Cor do ícone do botão X de Pesquisa'))->required(),
-                ColorPicker::make('home_background_button_vertodos')->label(__('Cor de fundo do botão Ver Todos'))->required(),
-                ColorPicker::make('home_text_color_button_vertodos')->label(__('Cor do texto do botão Ver Todos'))->required(),
-                ColorPicker::make('home_background_button_jogar')->label(__('Cor de fundo do botão Jogar'))->required(),
-                ColorPicker::make('home_text_color_button_jogar')->label(__('Cor do texto do botão Jogar'))->required(),
-                ColorPicker::make('home_icon_color_button_jogar')->label(__('Cor do ícone do botão Jogar'))->required(),
-                ColorPicker::make('home_hover_jogar')->label(__('Cor do hover do botão Jogar'))->required(),
+                ColorPicker::make('home_background_categorias')->label(__('Categories background color'))->required(),
+                ColorPicker::make('home_text_color_categorias')->label(__('Categories text color'))->required(),
+                ColorPicker::make('home_background_pesquisa')->label(__('Search background color'))->required(),
+                ColorPicker::make('home_text_color_pesquisa')->label(__('Search text color'))->required(),
+                ColorPicker::make('home_background_pesquisa_aviso')->label(__('Search notification background color'))->required(),
+                ColorPicker::make('home_text_color_pesquisa_aviso')->label(__('Search notification text color'))->required(),
+                ColorPicker::make('home_background_button_pesquisa')->label(__('Search close button background color'))->required(),
+                ColorPicker::make('home_icon_color_button_pesquisa')->label(__('Search close button icon color'))->required(),
+                ColorPicker::make('home_background_button_vertodos')->label(__('View All button background color'))->required(),
+                ColorPicker::make('home_text_color_button_vertodos')->label(__('View All button text color'))->required(),
+                ColorPicker::make('home_background_button_jogar')->label(__('Play button background color'))->required(),
+                ColorPicker::make('home_text_color_button_jogar')->label(__('Play button text color'))->required(),
+                ColorPicker::make('home_icon_color_button_jogar')->label(__('Play button icon color'))->required(),
+                ColorPicker::make('home_hover_jogar')->label(__('Play button hover color'))->required(),
             ])->columns(4);
     }
 
     // PAGINA Maiores Ganhos
     protected function css_dos_maiores_ganhos(): Section
     {
-        return Section::make("Maiores Ganhos")
-            ->description('Você pode alterar as cores e imagem dos Maiores Ganhos')
-            ->label(__('Maiores Ganhos'))
+        return Section::make(__('Biggest Wins'))
+            ->description(__('You can change the colors and image of the Biggest Wins section'))
+            ->label(__('Biggest Wins'))
             ->schema([
         Toggle::make('maiores_ganhos_status')
-            ->label(__('Ativar Maiores Ganhos'))
+            ->label(__('Enable Biggest Wins'))
             ->onColor('success')
             ->offColor('danger')
             ->inline(false)
             ->default(false)
             ->reactive(),
-                ColorPicker::make('maiores_ganhos_backgroud')->label(__('Cor de Fundo'))->required(),
-                ColorPicker::make('maiores_ganhos_sub_ackgroud')->label(__('Cor de Fundo Secundária'))->required(),
-                ColorPicker::make('maiores_ganhos_texto_color')->label(__('Cor do Texto'))->required(),
-                ColorPicker::make('maiores_ganhos_valor_color')->label(__('Cor do Valor'))->required(),
-                FileUpload::make('maiores_ganhos_img_icon')->label(__('Ícone dos Maiores Ganhos'))->image()->placeholder(__('Carregue uma imagem')),
+                ColorPicker::make('maiores_ganhos_backgroud')->label(__('Background Color'))->required(),
+                ColorPicker::make('maiores_ganhos_sub_ackgroud')->label(__('Secondary Background Color'))->required(),
+                ColorPicker::make('maiores_ganhos_texto_color')->label(__('Text Color'))->required(),
+                ColorPicker::make('maiores_ganhos_valor_color')->label(__('Value Color'))->required(),
+                FileUpload::make('maiores_ganhos_img_icon')->label(__('Biggest Wins Icon'))->image()->placeholder(__('Upload an image')),
             ])->columns(3);
     }
 
     // PAGINA Lives Ganhos  
     protected function css_dos_lives_ganhos(): Section
     {
-        return Section::make("Lives Ganhos")
-            ->description('Você pode alterar as cores dos Lives Ganhos')
-            ->label(__('Lives Ganhos'))
+        return Section::make(__('Live Wins'))
+            ->description(__('You can change the colors of the Live Wins section'))
+            ->label(__('Live Wins'))
             ->schema([
                 Toggle::make('live_ganhos_status')
-                    ->label(__('Ativar Lives Ganhos'))
+                    ->label(__('Enable Live Wins'))
                     ->onColor(color: 'success')
                     ->offColor('danger')
                     ->inline(false)
                     ->default(false)
                     ->reactive(),
-                ColorPicker::make('live_ganhos_backgroud')->label(__('Cor de Fundo'))->required(),
-                ColorPicker::make('live_ganhos_sub_backgroud')->label(__('Cor de Fundo Secundária'))->required(),
-                ColorPicker::make('live_ganhos_texto_color')->label(__('Cor do Texto'))->required(),
-                ColorPicker::make('live_ganhos_apostas_color')->label(__('Cor das Apostas'))->required(),
-                ColorPicker::make('live_ganhos_ganhos_color')->label(__('Cor dos Ganhos'))->required(),
-                ColorPicker::make('live_ganhos_border_color')->label(__('Cor da Borda'))->required(),
-                ColorPicker::make('live_ganhos_box_shadow_color')->label(__('Cor da Sombra'))->required(),
+                ColorPicker::make('live_ganhos_backgroud')->label(__('Background Color'))->required(),
+                ColorPicker::make('live_ganhos_sub_backgroud')->label(__('Secondary Background Color'))->required(),
+                ColorPicker::make('live_ganhos_texto_color')->label(__('Text Color'))->required(),
+                ColorPicker::make('live_ganhos_apostas_color')->label(__('Bets Color'))->required(),
+                ColorPicker::make('live_ganhos_ganhos_color')->label(__('Wins Color'))->required(),
+                ColorPicker::make('live_ganhos_border_color')->label(__('Border Color'))->required(),
+                ColorPicker::make('live_ganhos_box_shadow_color')->label(__('Shadow Color'))->required(),
             ])->columns(3);
     }
 
     // POP-UP de Rodadas Grátis
     protected function css_do_rodadas_gratis(): Section
     {
-        return Section::make("Pop-up de Rodadas Grátis")
-            ->description('Configurações do Pop-up de Rodadas Grátis')
-            ->label(__('Rodadas Grátis'))
+        return Section::make(__('Free Rounds Pop-up'))
+            ->description(__('Settings for the Free Rounds Pop-up'))
+            ->label(__('Free Rounds'))
             ->schema([
                 Toggle::make('rodadas_gratis_status')
-                    ->label(__('Ativar Pop-up de Rodadas Grátis'))
+                    ->label(__('Enable Free Rounds Pop-up'))
                     ->onColor('success')
                     ->offColor('danger')
                     ->inline(false)
                     ->default(false)
                     ->reactive(),
-                FileUpload::make('rodadas_gratis_imagem')->label(__('Imagem do Pop-up 1536 × 1024'))->image()->placeholder(__('Carregue uma imagem')),
-                ColorPicker::make('rodadas_gratis_background')->label(__('Cor de Fundo'))->required(),
-                ColorPicker::make('rodadas_gratis_border_color')->label(__('Cor da Borda'))->required(),
+                FileUpload::make('rodadas_gratis_imagem')->label(__('Pop-up Image 1536 × 1024'))->image()->placeholder(__('Upload an image')),
+                ColorPicker::make('rodadas_gratis_background')->label(__('Background Color'))->required(),
+                ColorPicker::make('rodadas_gratis_border_color')->label(__('Border Color'))->required(),
 
-                TextInput::make('rodadas_gratis_titulo_texto')->label(__('Título'))->maxLength(90),
-                ColorPicker::make('rodadas_gratis_titulo_color')->label(__('Cor do Título'))->required(),
-                ColorPicker::make('rodadas_gratis_titulo_background')->label(__('Cor de Fundo do Título'))->required(),
+                TextInput::make('rodadas_gratis_titulo_texto')->label(__('Title'))->maxLength(90),
+                ColorPicker::make('rodadas_gratis_titulo_color')->label(__('Title Color'))->required(),
+                ColorPicker::make('rodadas_gratis_titulo_background')->label(__('Title Background Color'))->required(),
 
-                ColorPicker::make('rodadas_gratis_botao_color')->label(__('Cor do Texto do Botão'))->required(),
-                ColorPicker::make('rodadas_gratis_botao_background')->label(__('Cor de Fundo do Botão'))->required(),
+                ColorPicker::make('rodadas_gratis_botao_color')->label(__('Button Text Color'))->required(),
+                ColorPicker::make('rodadas_gratis_botao_background')->label(__('Button Background Color'))->required(),
 
-                ColorPicker::make('rodadas_gratis_border_color_tabelas')->label(__('Cor da Borda das Tabelas'))->required(),
-                ColorPicker::make('rodadas_gratis_color_texto1')->label(__('Cor do Texto 1'))->required(),
-                ColorPicker::make('rodadas_gratis_color_texto2')->label(__('Cor do Texto 2'))->required(),
+                ColorPicker::make('rodadas_gratis_border_color_tabelas')->label(__('Tables Border Color'))->required(),
+                ColorPicker::make('rodadas_gratis_color_texto1')->label(__('Text 1 Color'))->required(),
+                ColorPicker::make('rodadas_gratis_color_texto2')->label(__('Text 2 Color'))->required(),
 
-                TextInput::make('rodadas_gratis_tabela1_texto1')->label(__('Tabela 1 - Texto 1'))->maxLength(90),
-                TextInput::make('rodadas_gratis_tabela1_texto2')->label(__('Tabela 1 - Texto 2'))->maxLength(90),
+                TextInput::make('rodadas_gratis_tabela1_texto1')->label(__('Table 1 - Text 1'))->maxLength(90),
+                TextInput::make('rodadas_gratis_tabela1_texto2')->label(__('Table 1 - Text 2'))->maxLength(90),
 
-                TextInput::make('rodadas_gratis_tabela2_texto1')->label(__('Tabela 2 - Texto 1'))->maxLength(90),
-                TextInput::make('rodadas_gratis_tabela2_texto2')->label(__('Tabela 2 - Texto 2'))->maxLength(90),
+                TextInput::make('rodadas_gratis_tabela2_texto1')->label(__('Table 2 - Text 1'))->maxLength(90),
+                TextInput::make('rodadas_gratis_tabela2_texto2')->label(__('Table 2 - Text 2'))->maxLength(90),
 
-                TextInput::make('rodadas_gratis_tabela3_texto1')->label(__('Tabela 3 - Texto 1'))->maxLength(90),
-                TextInput::make('rodadas_gratis_tabela3_texto2')->label(__('Tabela 3 - Texto 2'))->maxLength(90),
+                TextInput::make('rodadas_gratis_tabela3_texto1')->label(__('Table 3 - Text 1'))->maxLength(90),
+                TextInput::make('rodadas_gratis_tabela3_texto2')->label(__('Table 3 - Text 2'))->maxLength(90),
             ])->columns(3);
     }
     // PAGINA FOOTER   | FICA EM BAIXO DO SITE
@@ -471,37 +471,37 @@ class LayoutCssCustom extends Page implements HasForms
     protected function css_do_footer(): Section
     {
 
-        return Section::make("Pagina de Rodapé")
-            ->description('Você pode alterar as cores do rodapé')
-            ->label(__('Rodapé'))
+        return Section::make(__('Footer Page'))
+            ->description(__('You can change the colors of the footer'))
+            ->label(__('Footer'))
             ->schema([
-            ColorPicker::make('footer_background')->label(__('Cor de fundo do Rodapé'))->required(),
-            ColorPicker::make('footer_text_color')->label(__('Cor do Texto do Rodapé'))->required(),
-            ColorPicker::make('footer_links')->label(__('Links do Rodapé'))->required(),
-            ColorPicker::make('footer_button_background')->label(__('Cor de fundo do Botão do Rodapé'))->required(),
-            ColorPicker::make('footer_button_text')->label(__('Cor Texto do Botão do Rodapé'))->required(),
-            ColorPicker::make('footer_button_border')->label(__('Cor da Borda do Botão do Rodapé'))->required(),
-            ColorPicker::make('footer_icons')->label(__('Cor dos Ícones do Rodapé'))->required(),
-            ColorPicker::make('footer_titulos')->label(__('Cor dos Títulos do Rodapé'))->required(),
-            ColorPicker::make('footer_button_hover_language')->label(__('Cor do Hover do Botão do Rodapé'))->required(),
-            ColorPicker::make('footer_button_color_language')->label(__('Cor do Texto do Botão do Rodapé (Idioma)'))->required(),
-            ColorPicker::make('footer_button_background_language')->label(__('Cor de Fundo do Botão do Rodapé (Idioma)'))->required(),
-            ColorPicker::make('footer_button_border_language')->label(__('Cor da Borda do Botão do Rodapé (Idioma)'))->required(),
-            ColorPicker::make('footer_background_language')->label(__('Cor de Fundo do Rodapé (Idioma)'))->required(),
+            ColorPicker::make('footer_background')->label(__('Footer background color'))->required(),
+            ColorPicker::make('footer_text_color')->label(__('Footer text color'))->required(),
+            ColorPicker::make('footer_links')->label(__('Footer links color'))->required(),
+            ColorPicker::make('footer_button_background')->label(__('Footer button background color'))->required(),
+            ColorPicker::make('footer_button_text')->label(__('Footer button text color'))->required(),
+            ColorPicker::make('footer_button_border')->label(__('Footer button border color'))->required(),
+            ColorPicker::make('footer_icons')->label(__('Footer icons color'))->required(),
+            ColorPicker::make('footer_titulos')->label(__('Footer titles color'))->required(),
+            ColorPicker::make('footer_button_hover_language')->label(__('Footer button hover color (Language)'))->required(),
+            ColorPicker::make('footer_button_color_language')->label(__('Footer button text color (Language)'))->required(),
+            ColorPicker::make('footer_button_background_language')->label(__('Footer button background color (Language)'))->required(),
+            ColorPicker::make('footer_button_border_language')->label(__('Footer button border color (Language)'))->required(),
+            ColorPicker::make('footer_background_language')->label(__('Footer background color (Language)'))->required(),
             ])->columns(4);
     }
     // PAGINA DE TERMOS E SPORT
     protected function css_do_termos_sport(): Section
     {
-        return Section::make("Pagina do Termos e Sport")
-            ->description('Você pode alterar as cores da página de Termos e Sport')
-            ->label(__('Termos e Sport'))
+        return Section::make(__('Terms and Sports Page'))
+            ->description(__('You can change the colors of the Terms and Sports page'))
+            ->label(__('Terms and Sports'))
             ->schema([
-                ColorPicker::make('aviso_sport_background')->label(__('Cor de fundo do aviso Sport'))->required(),
-                ColorPicker::make('aviso_sport_text_color')->label(__('Cor do texto do aviso Sport'))->required(),
-                ColorPicker::make('titulo_principal_termos')->label(__('Cor do título principal dos Termos'))->required(),
-                ColorPicker::make('titulo_segundario_termos')->label(__('Cor do título secundário dos Termos'))->required(),
-                ColorPicker::make('descriçao_segundario_termos')->label(__('Cor da descrição secundária dos Termos'))->required(),
+                ColorPicker::make('aviso_sport_background')->label(__('Sports warning background color'))->required(),
+                ColorPicker::make('aviso_sport_text_color')->label(__('Sports warning text color'))->required(),
+                ColorPicker::make('titulo_principal_termos')->label(__('Terms main title color'))->required(),
+                ColorPicker::make('titulo_segundario_termos')->label(__('Terms secondary title color'))->required(),
+                ColorPicker::make('descriçao_segundario_termos')->label(__('Terms secondary description color'))->required(),
             ])->columns(2);
     }
 
@@ -509,84 +509,84 @@ class LayoutCssCustom extends Page implements HasForms
     // Modal MINHA CONTA | FICA NA PAGINA DE MINHA CONTA
     protected function css_do_myconta(): Section
     {
-        return Section::make("Modal Minha Conta")
-            ->description('Você pode alterar as cores da página Minha Conta')
-            ->label(__('Minha Conta'))
+        return Section::make(__('My Account Modal'))
+            ->description(__('You can change the colors of the My Account page'))
+            ->label(__('My Account'))
             ->schema([
-                ColorPicker::make('myconta_background')->label(__('Cor de fundo da Minha Conta'))->required(),
-                ColorPicker::make('myconta_sub_background')->label(__('Cor de fundo secundária da Minha Conta'))->required(),
-                ColorPicker::make('myconta_text_color')->label(__('Cor do texto da Minha Conta'))->required(),
-                ColorPicker::make('myconta_button_background')->label(__('Cor de fundo do botão da Minha Conta'))->required(),
-                ColorPicker::make('myconta_button_icon_color')->label(__('Cor do ícone do botão da Minha Conta'))->required(),
+                ColorPicker::make('myconta_background')->label(__('My Account background color'))->required(),
+                ColorPicker::make('myconta_sub_background')->label(__('My Account secondary background color'))->required(),
+                ColorPicker::make('myconta_text_color')->label(__('My Account text color'))->required(),
+                ColorPicker::make('myconta_button_background')->label(__('My Account button background color'))->required(),
+                ColorPicker::make('myconta_button_icon_color')->label(__('My Account button icon color'))->required(),
             ])->columns(2);
     }
 
     // PAGINA CENTRAL SUPORTE | FICA NA PAGINA DE CENTRAL DE SUPORTE
     protected function central_suporte(): Section
     {
-        return Section::make('Central de Suporte')
-            ->description('Você pode alterar as cores e estilos da Central de Suporte')
+        return Section::make(__('Support Center'))
+            ->description(__('You can change the colors and styles of the Support Center'))
             ->schema([
-                ColorPicker::make('central_suporte_background')->label(__('Fundo da Central de Suporte'))->required(),
-                ColorPicker::make('central_suporte_sub_background')->label(__('Sub Fundo'))->required(),
-                ColorPicker::make('central_suporte_button_background_ao_vivo')->label(__('Fundo do Botão Ao Vivo'))->required(),
-                ColorPicker::make('central_suporte_button_texto_ao_vivo')->label(__('Texto do Botão Ao Vivo'))->required(),
-                ColorPicker::make('central_suporte_button_icon_ao_vivo')->label(__('Ícone do Botão Ao Vivo'))->required(),
-                ColorPicker::make('central_suporte_button_background_denuncia')->label(__('Fundo do Botão de Denúncia'))->required(),
-                ColorPicker::make('central_suporte_button_texto_denuncia')->label(__('Texto do Botão de Denúncia'))->required(),
-                ColorPicker::make('central_suporte_button_icon_denuncia')->label(__('Ícone do Botão de Denúncia'))->required(),
-                ColorPicker::make('central_suporte_title_text_color')->label(__('Cor do Título'))->required(),
-                ColorPicker::make('central_suporte_icon_title_text_color')->label(__('Cor do Ícone do Título'))->required(),
-                ColorPicker::make('central_suporte_info_text_color')->label(__('Cor do Texto de Informação'))->required(),
-                ColorPicker::make('central_suporte_info_icon_color')->label(__('Cor do Ícone de Informação'))->required(),
-                ColorPicker::make('central_suporte_aviso_title_color')->label(__('Cor do Título do Aviso'))->required(),
-                ColorPicker::make('central_suporte_aviso_text_color')->label(__('Cor do Texto do Aviso'))->required(),
-                ColorPicker::make('central_suporte_aviso_text_negrito_color')->label(__('Cor do Texto Negrito do Aviso'))->required(),
-                ColorPicker::make('central_suporte_aviso_icon_color')->label(__('Cor do Ícone do Aviso'))->required(),
+                ColorPicker::make('central_suporte_background')->label(__('Support Center Background'))->required(),
+                ColorPicker::make('central_suporte_sub_background')->label(__('Secondary Background'))->required(),
+                ColorPicker::make('central_suporte_button_background_ao_vivo')->label(__('Live Button Background'))->required(),
+                ColorPicker::make('central_suporte_button_texto_ao_vivo')->label(__('Live Button Text'))->required(),
+                ColorPicker::make('central_suporte_button_icon_ao_vivo')->label(__('Live Button Icon'))->required(),
+                ColorPicker::make('central_suporte_button_background_denuncia')->label(__('Report Button Background'))->required(),
+                ColorPicker::make('central_suporte_button_texto_denuncia')->label(__('Report Button Text'))->required(),
+                ColorPicker::make('central_suporte_button_icon_denuncia')->label(__('Report Button Icon'))->required(),
+                ColorPicker::make('central_suporte_title_text_color')->label(__('Title Color'))->required(),
+                ColorPicker::make('central_suporte_icon_title_text_color')->label(__('Title Icon Color'))->required(),
+                ColorPicker::make('central_suporte_info_text_color')->label(__('Information Text Color'))->required(),
+                ColorPicker::make('central_suporte_info_icon_color')->label(__('Information Icon Color'))->required(),
+                ColorPicker::make('central_suporte_aviso_title_color')->label(__('Warning Title Color'))->required(),
+                ColorPicker::make('central_suporte_aviso_text_color')->label(__('Warning Text Color'))->required(),
+                ColorPicker::make('central_suporte_aviso_text_negrito_color')->label(__('Warning Bold Text Color'))->required(),
+                ColorPicker::make('central_suporte_aviso_icon_color')->label(__('Warning Icon Color'))->required(),
             ])->columns(2);
     }
     // PAGINA LOGIN - RESGISTRO E ESQUECI A SENHA
 
     protected function css_do_login_registro_esquci(): Section
     {
-        return Section::make("Página Login, Registro e Esqueci a Senha")
-            ->description('Você pode alterar as cores das páginas de Login, Registro e Esqueci a Senha')
-            ->label(__('Login, Registro e Esqueci a Senha'))
+        return Section::make(__('Login, Register and Forgot Password Page'))
+            ->description(__('You can change the colors of the Login, Register and Forgot Password pages'))
+            ->label(__('Login, Register and Forgot Password'))
             ->schema([
-                ColorPicker::make('register_background')->label(__('Cor de fundo do Registro'))->required(),
-                ColorPicker::make('register_text_color')->label(__('Cor do texto do Registro'))->required(),
-                ColorPicker::make('register_links_color')->label(__('Cor dos links do Registro'))->required(),
-                ColorPicker::make('register_input_background')->label(__('Cor de fundo do Input do Registro'))->required(),
-                ColorPicker::make('register_input_text_color')->label(__('Cor do texto do Input do Registro'))->required(),
-                ColorPicker::make('register_input_border_color')->label(__('Cor da borda do Input do Registro'))->required(),
-                ColorPicker::make('register_button_text_color')->label(__('Cor do texto do botão do Registro'))->required(),
-                ColorPicker::make('register_button_background')->label(__('Cor de fundo do botão do Registro'))->required(),
-                ColorPicker::make('register_button_border_color')->label(__('Cor da borda do botão do Registro'))->required(),
-                ColorPicker::make('register_security_color')->label(__('Cor do bloco de segurança do Registro'))->required(),
-                ColorPicker::make('register_security_background')->label(__('Cor de fundo do bloco de segurança do Registro'))->required(),
-                ColorPicker::make('register_security_border_color')->label(__('Cor da borda de segurança do Registro'))->required(),
-                ColorPicker::make('geral_icons_color')->label(__('Cor dos ícones gerais'))->required(),
+                ColorPicker::make('register_background')->label(__('Registration Background'))->required(),
+                ColorPicker::make('register_text_color')->label(__('Registration Text Color'))->required(),
+                ColorPicker::make('register_links_color')->label(__('Registration Links Color'))->required(),
+                ColorPicker::make('register_input_background')->label(__('Registration Input Background'))->required(),
+                ColorPicker::make('register_input_text_color')->label(__('Registration Input Text Color'))->required(),
+                ColorPicker::make('register_input_border_color')->label(__('Registration Input Border Color'))->required(),
+                ColorPicker::make('register_button_text_color')->label(__('Registration Button Text Color'))->required(),
+                ColorPicker::make('register_button_background')->label(__('Registration Button Background'))->required(),
+                ColorPicker::make('register_button_border_color')->label(__('Registration Button Border Color'))->required(),
+                ColorPicker::make('register_security_color')->label(__('Registration Security Block Color'))->required(),
+                ColorPicker::make('register_security_background')->label(__('Registration Security Block Background'))->required(),
+                ColorPicker::make('register_security_border_color')->label(__('Registration Security Block Border Color'))->required(),
+                ColorPicker::make('geral_icons_color')->label(__('General Icons Color'))->required(),
 
 
 
-                ColorPicker::make('login_background')->label(__('Cor de fundo do Login'))->required(),
-                ColorPicker::make('login_text_color')->label(__('Cor do texto do Login'))->required(),
-                ColorPicker::make('login_links_color')->label(__('Cor dos links do Login'))->required(),
-                ColorPicker::make('login_input_background')->label(__('Cor de fundo do Input do Login'))->required(),
-                ColorPicker::make('login_input_text_color')->label(__('Cor do texto do Input do Login'))->required(),
-                ColorPicker::make('login_input_border_color')->label(__('Cor da borda do Input do Login'))->required(),
-                ColorPicker::make('login_button_text_color')->label(__('Cor do texto do botão do Login'))->required(),
-                ColorPicker::make('login_button_background')->label(__('Cor de fundo do botão do Login'))->required(),
-                ColorPicker::make('login_button_border_color')->label(__('Cor da borda do botão do Login'))->required(),
+                ColorPicker::make('login_background')->label(__('Login Background'))->required(),
+                ColorPicker::make('login_text_color')->label(__('Login Text Color'))->required(),
+                ColorPicker::make('login_links_color')->label(__('Login Links Color'))->required(),
+                ColorPicker::make('login_input_background')->label(__('Login Input Background'))->required(),
+                ColorPicker::make('login_input_text_color')->label(__('Login Input Text Color'))->required(),
+                ColorPicker::make('login_input_border_color')->label(__('Login Input Border Color'))->required(),
+                ColorPicker::make('login_button_text_color')->label(__('Login Button Text Color'))->required(),
+                ColorPicker::make('login_button_background')->label(__('Login Button Background'))->required(),
+                ColorPicker::make('login_button_border_color')->label(__('Login Button Border Color'))->required(),
 
-                ColorPicker::make('esqueci_background')->label(__('Cor de fundo do Esqueci a Senha'))->required(),
-                ColorPicker::make('esqueci_text_color')->label(__('Cor do texto do Esqueci a Senha'))->required(),
-                ColorPicker::make('esqueci_input_background')->label(__('Cor de fundo do Input do Esqueci a Senha'))->required(),
-                ColorPicker::make('esqueci_input_text_color')->label(__('Cor do texto do Input do Esqueci a Senha'))->required(),
-                ColorPicker::make('esqueci_input_border_color')->label(__('Cor da borda do Input do Esqueci a Senha'))->required(),
-                ColorPicker::make('esqueci_button_text_color')->label(__('Cor do texto do botão do Esqueci a Senha'))->required(),
-                ColorPicker::make('esqueci_button_background')->label(__('Cor de fundo do botão do Esqueci a Senha'))->required(),
-                ColorPicker::make('esqueci_button_border_color')->label(__('Cor da borda do botão do Esqueci a Senha'))->required(),
+                ColorPicker::make('esqueci_background')->label(__('Forgot Password Background'))->required(),
+                ColorPicker::make('esqueci_text_color')->label(__('Forgot Password Text Color'))->required(),
+                ColorPicker::make('esqueci_input_background')->label(__('Forgot Password Input Background'))->required(),
+                ColorPicker::make('esqueci_input_text_color')->label(__('Forgot Password Input Text Color'))->required(),
+                ColorPicker::make('esqueci_input_border_color')->label(__('Forgot Password Input Border Color'))->required(),
+                ColorPicker::make('esqueci_button_text_color')->label(__('Forgot Password Button Text Color'))->required(),
+                ColorPicker::make('esqueci_button_background')->label(__('Forgot Password Button Background'))->required(),
+                ColorPicker::make('esqueci_button_border_color')->label(__('Forgot Password Button Border Color'))->required(),
             ])->columns(4);
     }
 
@@ -595,18 +595,18 @@ class LayoutCssCustom extends Page implements HasForms
 
     protected function css_do_listgames(): Section
     {
-        return Section::make("Página de Lista de Jogos")
-            ->description('Você pode alterar as cores da Lista de Jogos')
-            ->label(__('Lista de Jogos'))
+        return Section::make(__('Game List Page'))
+            ->description(__('You can change the colors of the Game List'))
+            ->label(__('Game List'))
             ->schema([
-                ColorPicker::make('gamelist_background')->label(__('Cor de fundo da Lista de Jogos'))->required(),
-                ColorPicker::make('gamelist_input_background')->label(__('Cor de fundo do Input da Lista de Jogos'))->required(),
-                ColorPicker::make('gamelist_input_text_color')->label(__('Cor do texto do Input da Lista de Jogos'))->required(),
-                ColorPicker::make('gamelist_input_border_color')->label(__('Cor da borda do Input da Lista de Jogos'))->required(),
-                ColorPicker::make('gamelist_text_color')->label(__('Cor do texto da Lista de Jogos'))->required(),
-                ColorPicker::make('gamelist_button_background')->label(__('Cor de fundo do botão da Lista de Jogos'))->required(),
-                ColorPicker::make('gamelist_button_text_color')->label(__('Cor do texto do botão da Lista de Jogos'))->required(),
-                ColorPicker::make('gamelist_button_border_color')->label(__('Cor da borda do botão da Lista de Jogos'))->required(),
+                ColorPicker::make('gamelist_background')->label(__('Game List Background'))->required(),
+                ColorPicker::make('gamelist_input_background')->label(__('Game List Input Background'))->required(),
+                ColorPicker::make('gamelist_input_text_color')->label(__('Game List Input Text Color'))->required(),
+                ColorPicker::make('gamelist_input_border_color')->label(__('Game List Input Border Color'))->required(),
+                ColorPicker::make('gamelist_text_color')->label(__('Game List Text Color'))->required(),
+                ColorPicker::make('gamelist_button_background')->label(__('Game List Button Background'))->required(),
+                ColorPicker::make('gamelist_button_text_color')->label(__('Game List Button Text Color'))->required(),
+                ColorPicker::make('gamelist_button_border_color')->label(__('Game List Button Border Color'))->required(),
             ])->columns(4);
     }
 
@@ -614,24 +614,24 @@ class LayoutCssCustom extends Page implements HasForms
 
     protected function css_do_bonus_diario(): Section
     {
-        return Section::make("Página de Bônus Diário")
-            ->description('Você pode alterar as cores da página de Bônus Diário')
-            ->label(__('Bônus Diário'))
+        return Section::make(__('Daily Bonus Page'))
+            ->description(__('You can change the colors of the Daily Bonus page'))
+            ->label(__('Daily Bonus'))
             ->schema([
-                ColorPicker::make('bonus_diario_background')->label(__('Cor de fundo do Bônus Diário'))->required(),
-                ColorPicker::make('bonus_diario_sub_background')->label(__('Cor de fundo secundária do Bônus Diário'))->required(),
-                ColorPicker::make('bonus_diario_texto')->label(__('Cor do texto do Bônus Diário'))->required(),
-                ColorPicker::make('bonus_diario_texto_icon')->label(__('Cor do ícone do texto do Bônus Diário'))->required(),
-                ColorPicker::make('bonus_diario_texto_valor_bonus')->label(__('Cor do valor do bônus do texto do Bônus Diário'))->required(),
-                ColorPicker::make('bonus_diario_aviso')->label(__('Cor do aviso do Bônus Diário'))->required(),
-                ColorPicker::make('bonus_diario_botao_backgroud')->label(__('Cor de fundo do botão do Bônus Diário'))->required(),
-                ColorPicker::make('bonus_diario_botao_texto_color')->label(__('Cor do texto do botão do Bônus Diário'))->required(),
-                ColorPicker::make('bonus_diario_regras_title')->label(__('Cor do título das regras do Bônus Diário'))->required(),
-                ColorPicker::make('bonus_diario_regras_titulo')->label(__('Cor do título das regras do Bônus Diário'))->required(),
-                ColorPicker::make('bonus_diario_bola_interna')->label(__('Cor da bola interna do Bônus Diário'))->required(),
-                ColorPicker::make('bonus_diario_bola_fora_')->label(__('Cor da bola externa do Bônus Diário'))->required(),
-                ColorPicker::make('bonus_diario_bola_carregamento')->label(__('Cor da bola de carregamento do Bônus Diário'))->required(),
-                ColorPicker::make('bonus_diario_texto_bola')->label(__('Cor do texto da bola do Bônus Diário'))->required(),
+                ColorPicker::make('bonus_diario_background')->label(__('Daily Bonus Background'))->required(),
+                ColorPicker::make('bonus_diario_sub_background')->label(__('Daily Bonus Secondary Background'))->required(),
+                ColorPicker::make('bonus_diario_texto')->label(__('Daily Bonus Text Color'))->required(),
+                ColorPicker::make('bonus_diario_texto_icon')->label(__('Daily Bonus Text Icon Color'))->required(),
+                ColorPicker::make('bonus_diario_texto_valor_bonus')->label(__('Daily Bonus Text Bonus Value Color'))->required(),
+                ColorPicker::make('bonus_diario_aviso')->label(__('Daily Bonus Warning Color'))->required(),
+                ColorPicker::make('bonus_diario_botao_backgroud')->label(__('Daily Bonus Button Background'))->required(),
+                ColorPicker::make('bonus_diario_botao_texto_color')->label(__('Daily Bonus Button Text Color'))->required(),
+                ColorPicker::make('bonus_diario_regras_title')->label(__('Daily Bonus Rules Title Color'))->required(),
+                ColorPicker::make('bonus_diario_regras_titulo')->label(__('Daily Bonus Rules Heading Color'))->required(),
+                ColorPicker::make('bonus_diario_bola_interna')->label(__('Daily Bonus Internal Ball Color'))->required(),
+                ColorPicker::make('bonus_diario_bola_fora_')->label(__('Daily Bonus External Ball Color'))->required(),
+                ColorPicker::make('bonus_diario_bola_carregamento')->label(__('Daily Bonus Loading Ball Color'))->required(),
+                ColorPicker::make('bonus_diario_texto_bola')->label(__('Daily Bonus Ball Text Color'))->required(),
             ])->columns(4);
     }
 
@@ -648,16 +648,16 @@ class LayoutCssCustom extends Page implements HasForms
 
     protected function css_do_WalletDashboard(): Section
     {
-        return Section::make('Carteira Dashboard')
-            ->description('Você pode alterar as cores do Dashboard da Carteira')
-            ->label(__('Carteira Dashboard'))
+        return Section::make(__('Wallet Dashboard'))
+            ->description(__('You can change the colors of the Wallet Dashboard'))
+            ->label(__('Wallet Dashboard'))
             ->schema([
-                ColorPicker::make('carteira_background')->label(__('Cor de fundo da Carteira'))->required(),
-                ColorPicker::make('carteira_button_background')->label(__('Cor de fundo do botão da Carteira'))->required(),
-                ColorPicker::make('carteira_button_text_color')->label(__('Cor do texto do botão da Carteira'))->required(),
-                ColorPicker::make('carteira_button_border_color')->label(__('Cor da borda do botão da Carteira'))->required(),
-                ColorPicker::make('carteira_icon_color')->label(__('Cor dos ícones da Carteira'))->required(),
-                ColorPicker::make('carteira_text_color')->label(__('Cor do texto da Carteira'))->required(),
+                ColorPicker::make('carteira_background')->label(__('Wallet Background Color'))->required(),
+                ColorPicker::make('carteira_button_background')->label(__('Wallet Button Background Color'))->required(),
+                ColorPicker::make('carteira_button_text_color')->label(__('Wallet Button Text Color'))->required(),
+                ColorPicker::make('carteira_button_border_color')->label(__('Wallet Button Border Color'))->required(),
+                ColorPicker::make('carteira_icon_color')->label(__('Wallet Icons Color'))->required(),
+                ColorPicker::make('carteira_text_color')->label(__('Wallet Text Color'))->required(),
             ])->columns(4);
     }
 
@@ -665,20 +665,20 @@ class LayoutCssCustom extends Page implements HasForms
 
     protected function css_do_WalletBalance(): Section
     {
-        return Section::make('Carteira de Saldo')
-            ->description('Você pode alterar as cores do saldo da Carteira')
-            ->label(__('Saldo da Carteira'))
+        return Section::make(__('Wallet Balance'))
+            ->description(__('You can change the colors of the Wallet Balance'))
+            ->label(__('Wallet Balance'))
             ->schema([
-                ColorPicker::make('carteira_saldo_background')->label(__('Cor de fundo do saldo da Carteira'))->required(),
-                ColorPicker::make('carteira_saldo_text_color')->label(__('Cor do texto do saldo da Carteira'))->required(),
-                ColorPicker::make('carteira_saldo_border_color')->label(__('Cor da borda do saldo da Carteira'))->required(),
-                ColorPicker::make('carteira_saldo_title_color')->label(__('Cor do título do saldo da Carteira'))->required(),
-                ColorPicker::make('carteira_saldo_icon_color')->label(__('Cor dos ícones do saldo da Carteira'))->required(),
-                ColorPicker::make('carteira_saldo_number_color')->label(__('Cor dos números do saldo da Carteira'))->required(),
-                ColorPicker::make('carteira_saldo_button_deposito_background')->label(__('Cor de fundo do botão de Depósito do saldo da Carteira'))->required(),
-                ColorPicker::make('carteira_saldo_button_saque_background')->label(__('Cor de fundo do botão de Saque do saldo da Carteira'))->required(),
-                ColorPicker::make('carteira_saldo_button_deposito_text_color')->label(__('Cor do texto do botão de Depósito do saldo da Carteira'))->required(),
-                ColorPicker::make('carteira_saldo_button_saque_text_color')->label(__('Cor do texto do botão de Saque do saldo da Carteira'))->required(),
+                ColorPicker::make('carteira_saldo_background')->label(__('Wallet Balance Background color'))->required(),
+                ColorPicker::make('carteira_saldo_text_color')->label(__('Wallet Balance Text color'))->required(),
+                ColorPicker::make('carteira_saldo_border_color')->label(__('Wallet Balance Border color'))->required(),
+                ColorPicker::make('carteira_saldo_title_color')->label(__('Wallet Balance Title color'))->required(),
+                ColorPicker::make('carteira_saldo_icon_color')->label(__('Wallet Balance Icons color'))->required(),
+                ColorPicker::make('carteira_saldo_number_color')->label(__('Wallet Balance Numbers color'))->required(),
+                ColorPicker::make('carteira_saldo_button_deposito_background')->label(__('Wallet Balance Deposit Button Background color'))->required(),
+                ColorPicker::make('carteira_saldo_button_saque_background')->label(__('Wallet Balance Withdrawal Button Background color'))->required(),
+                ColorPicker::make('carteira_saldo_button_deposito_text_color')->label(__('Wallet Balance Deposit Button Text color'))->required(),
+                ColorPicker::make('carteira_saldo_button_saque_text_color')->label(__('Wallet Balance Withdrawal Button Text color'))->required(),
             ])->columns(3);
     }
 
@@ -686,45 +686,45 @@ class LayoutCssCustom extends Page implements HasForms
 
     protected function css_do_WalletDeposit(): Section
     {
-        return Section::make('Carteira de Depósito')
-            ->description('Você pode alterar as cores do depósito da Carteira')
-            ->label(__('Depósito da Carteira'))
+        return Section::make(__('Wallet Deposit'))
+            ->description(__('You can change the colors of the Wallet Deposit'))
+            ->label(__('Wallet Deposit'))
             ->schema([
-                ColorPicker::make('carteira_deposito_background')->label(__('Cor de fundo do Depósito da Carteira'))->required(),
-                ColorPicker::make('carteira_deposito_contagem_background')->label(__('Cor de fundo da contagem do Depósito da Carteira'))->required(),
-                ColorPicker::make('carteira_deposito_contagem_text_color')->label(__('Cor do texto da contagem do Depósito da Carteira'))->required(),
-                ColorPicker::make('carteira_deposito_contagem_number_color')->label(__('Cor dos números da contagem do Depósito da Carteira'))->required(),
-                ColorPicker::make('carteira_deposito_contagem_quadrado_background')->label(__('Cor de fundo do quadrado da contagem do Depósito da Carteira'))->required(),
-                ColorPicker::make('carteira_deposito_input_background')->label(__('Cor de fundo do Input do Depósito da Carteira'))->required(),
-                ColorPicker::make('carteira_deposito_input_text_color')->label(__('Cor do texto do Input do Depósito da Carteira'))->required(),
-                ColorPicker::make('carteira_deposito_input_number_color')->label(__('Cor dos números do Input do Depósito da Carteira'))->required(),
-                ColorPicker::make('carteira_deposito_input_border_color')->label(__('Cor da borda do Input do Depósito da Carteira'))->required(),
-                ColorPicker::make('carteira_deposito_title_color')->label(__('Cor do título do Depósito da Carteira'))->required(),
-                ColorPicker::make('carteira_deposito_number_color')->label(__('Cor dos números do Depósito da Carteira'))->required(),
-                ColorPicker::make('carteira_deposito_number_background')->label(__('Cor de fundo dos números do Depósito da Carteira'))->required(),
-                ColorPicker::make('carteira_deposito_button_background')->label(__('Cor de fundo do botão do Depósito da Carteira'))->required(),
-                ColorPicker::make('carteira_deposito_button_text_color')->label(__('Cor do texto do botão do Depósito da Carteira'))->required(),
+                ColorPicker::make('carteira_deposito_background')->label(__('Wallet Deposit Background Color'))->required(),
+                ColorPicker::make('carteira_deposito_contagem_background')->label(__('Wallet Deposit Count Background Color'))->required(),
+                ColorPicker::make('carteira_deposito_contagem_text_color')->label(__('Wallet Deposit Count Text Color'))->required(),
+                ColorPicker::make('carteira_deposito_contagem_number_color')->label(__('Wallet Deposit Count Number Color'))->required(),
+                ColorPicker::make('carteira_deposito_contagem_quadrado_background')->label(__('Wallet Deposit Count Box Background Color'))->required(),
+                ColorPicker::make('carteira_deposito_input_background')->label(__('Wallet Deposit Input Background Color'))->required(),
+                ColorPicker::make('carteira_deposito_input_text_color')->label(__('Wallet Deposit Input Text Color'))->required(),
+                ColorPicker::make('carteira_deposito_input_number_color')->label(__('Wallet Deposit Input Number Color'))->required(),
+                ColorPicker::make('carteira_deposito_input_border_color')->label(__('Wallet Deposit Input Border Color'))->required(),
+                ColorPicker::make('carteira_deposito_title_color')->label(__('Wallet Deposit Title Color'))->required(),
+                ColorPicker::make('carteira_deposito_number_color')->label(__('Wallet Deposit Number Color'))->required(),
+                ColorPicker::make('carteira_deposito_number_background')->label(__('Wallet Deposit Number Background Color'))->required(),
+                ColorPicker::make('carteira_deposito_button_background')->label(__('Wallet Deposit Button Background Color'))->required(),
+                ColorPicker::make('carteira_deposito_button_text_color')->label(__('Wallet Deposit Button Text Color'))->required(),
             ])->columns(3);
     }
 
 
 
 
-    protected function css_do_PixWallet(): Section
+    protected function css_do_CryptoWallet(): Section
     {
-        return Section::make('Carteira PIX Copia e Cola')
-            ->description('Você pode alterar as cores da Carteira PIX Copia e Cola')
-            ->label(__('Carteira PIX Copia e Cola'))
+        return Section::make(__('Crypto Wallet Copy and Paste'))
+            ->description(__('You can change the colors of the Crypto Wallet'))
+            ->label(__('Crypto Wallet'))
             ->schema([
-                ColorPicker::make('carteira_saldo_pix_Texot_color')->label(__('Cor do texto do saldo PIX da Carteira'))->required(),
-                ColorPicker::make('carteira_saldo_pix_sub_text_color')->label(__('Cor do subtexto do saldo copiar PIX da Carteira'))->required(),
-                ColorPicker::make('carteira_saldo_pix_button_background')->label(__('Cor de fundo do botão do copiar PIX da Carteira'))->required(),
-                ColorPicker::make('carteira_saldo_pix_button_text_color')->label(__('Cor do texto do botão do copiar PIX da Carteira'))->required(),
-                ColorPicker::make('carteira_saldo_pix_input_background')->label(__('Cor de fundo do input do PIX da Carteira'))->required(),
-                ColorPicker::make('carteira_saldo_pix_input_text_color')->label(__('Cor do texto do input do PIX da Carteira'))->required(),
-                ColorPicker::make('carteira_saldo_pix_border_color')->label(__('Cor da borda do copiar PIX da Carteira'))->required(),
-                ColorPicker::make('carteira_saldo_pix_icon_color')->label(__('Cor dos ícones do copiar PIX da Carteira'))->required(),
-                ColorPicker::make('carteira_saldo_pix_background')->label(__('Cor de fundo do copiar PIX da Carteira'))->required(),
+                ColorPicker::make('carteira_saldo_pix_Texot_color')->label(__('Wallet Crypto Balance Text Color'))->required(),
+                ColorPicker::make('carteira_saldo_pix_sub_text_color')->label(__('Wallet Crypto Copy Subtext Color'))->required(),
+                ColorPicker::make('carteira_saldo_pix_button_background')->label(__('Wallet Crypto Copy Button Background Color'))->required(),
+                ColorPicker::make('carteira_saldo_pix_button_text_color')->label(__('Wallet Crypto Copy Button Text Color'))->required(),
+                ColorPicker::make('carteira_saldo_pix_input_background')->label(__('Wallet Crypto Input Background Color'))->required(),
+                ColorPicker::make('carteira_saldo_pix_input_text_color')->label(__('Wallet Crypto Input Text Color'))->required(),
+                ColorPicker::make('carteira_saldo_pix_border_color')->label(__('Wallet Crypto Copy Border Color'))->required(),
+                ColorPicker::make('carteira_saldo_pix_icon_color')->label(__('Wallet Crypto Copy Icon Color'))->required(),
+                ColorPicker::make('carteira_saldo_pix_background')->label(__('Wallet Crypto Copy Background Color'))->required(),
             ])->columns(2);
     }
 
@@ -735,19 +735,19 @@ class LayoutCssCustom extends Page implements HasForms
 
     protected function css_do_WalletWithdrawal(): Section
     {
-        return Section::make('Carteira de Saque')
-            ->description('Você pode alterar as cores do saque da Carteira')
-            ->label(__('Saque da Carteira'))
+        return Section::make(__('Wallet Withdrawal'))
+            ->description(__('You can change the colors of the Wallet Withdrawal'))
+            ->label(__('Wallet Withdrawal'))
             ->schema([
-                ColorPicker::make('carteira_saque_background')->label(__('Cor de fundo do Saque da Carteira'))->required(),
-                ColorPicker::make('carteira_saque_text_color')->label(__('Cor do texto do Saque da Carteira'))->required(),
-                ColorPicker::make('carteira_saque_number_color')->label(__('Cor dos números do Saque da Carteira'))->required(),
-                ColorPicker::make('carteira_saque_input_background')->label(__('Cor de fundo do Input do Saque da Carteira'))->required(),
-                ColorPicker::make('carteira_saque_input_text_color')->label(__('Cor do texto do Input do Saque da Carteira'))->required(),
-                ColorPicker::make('carteira_saque_input_border_color')->label(__('Cor da borda do Input do Saque da Carteira'))->required(),
-                ColorPicker::make('carteira_saque_button_text_color')->label(__('Cor do texto do botão do Saque da Carteira'))->required(),
-                ColorPicker::make('carteira_saque_button_background')->label(__('Cor de fundo do botão do Saque da Carteira'))->required(),
-                ColorPicker::make('carteira_saque_icon_color')->label(__('Cor dos ícones do Saque da Carteira'))->required(),
+                ColorPicker::make('carteira_saque_background')->label(__('Wallet Withdrawal Background Color'))->required(),
+                ColorPicker::make('carteira_saque_text_color')->label(__('Wallet Withdrawal Text Color'))->required(),
+                ColorPicker::make('carteira_saque_number_color')->label(__('Wallet Withdrawal Number Color'))->required(),
+                ColorPicker::make('carteira_saque_input_background')->label(__('Wallet Withdrawal Input Background Color'))->required(),
+                ColorPicker::make('carteira_saque_input_text_color')->label(__('Wallet Withdrawal Input Text Color'))->required(),
+                ColorPicker::make('carteira_saque_input_border_color')->label(__('Wallet Withdrawal Input Border Color'))->required(),
+                ColorPicker::make('carteira_saque_button_text_color')->label(__('Wallet Withdrawal Button Text Color'))->required(),
+                ColorPicker::make('carteira_saque_button_background')->label(__('Wallet Withdrawal Button Background Color'))->required(),
+                ColorPicker::make('carteira_saque_icon_color')->label(__('Wallet Withdrawal Icons Color'))->required(),
             ])->columns(2);
     }
 
@@ -755,22 +755,22 @@ class LayoutCssCustom extends Page implements HasForms
 
     protected function css_do_BetHistory(): Section
     {
-        return Section::make('Histórico de Apostas')
-            ->description('Você pode alterar as cores do Histórico de Apostas')
-            ->label(__('Histórico de Apostas'))
+        return Section::make(__('Bet History'))
+            ->description(__('You can change the colors of the Bet History'))
+            ->label(__('Bet History'))
             ->schema([
-                ColorPicker::make('carteira_history_background')->label(__('Cor de fundo do Histórico da Carteira'))->required(),
-                ColorPicker::make('carteira_history_title_color')->label(__('Cor do título do Histórico da Carteira'))->required(),
-                ColorPicker::make('carteira_history_text_color')->label(__('Cor do texto do Histórico da Carteira'))->required(),
-                ColorPicker::make('carteira_history_number_color')->label(__('Cor dos números do Histórico da Carteira'))->required(),
-                ColorPicker::make('carteira_history_status_finalizado_color')->label(__('Cor do status finalizado do Histórico da Carteira'))->required(),
-                ColorPicker::make('carteira_history_status_finalizado_background')->label(__('Cor de fundo do status finalizado do Histórico da Carteira'))->required(),
-                ColorPicker::make('carteira_history_status_pedente_color')->label(__('Cor do status pendente do Histórico da Carteira'))->required(),
-                ColorPicker::make('carteira_history_status_pedente_background')->label(__('Cor de fundo do status pendente do Histórico da Carteira'))->required(),
-                ColorPicker::make('carteira_history_barra_color')->label(__('Cor da barra do Histórico da Carteira'))->required(),
-                ColorPicker::make('carteira_history_barra_text_color')->label(__('Cor do texto da barra do Histórico da Carteira'))->required(),
-                ColorPicker::make('carteira_history_icon_color')->label(__('Cor dos ícones do Histórico da Carteira'))->required(),
-                ColorPicker::make('carteira_history_barra_background')->label(__('Cor de fundo da barra do Histórico da Carteira'))->required(),
+                ColorPicker::make('carteira_history_background')->label(__('Wallet History Background Color'))->required(),
+                ColorPicker::make('carteira_history_title_color')->label(__('Wallet History Title Color'))->required(),
+                ColorPicker::make('carteira_history_text_color')->label(__('Wallet History Text Color'))->required(),
+                ColorPicker::make('carteira_history_number_color')->label(__('Wallet History Number Color'))->required(),
+                ColorPicker::make('carteira_history_status_finalizado_color')->label(__('Wallet History Finalized Status Color'))->required(),
+                ColorPicker::make('carteira_history_status_finalizado_background')->label(__('Wallet History Finalized Status Background Color'))->required(),
+                ColorPicker::make('carteira_history_status_pedente_color')->label(__('Wallet History Pending Status Color'))->required(),
+                ColorPicker::make('carteira_history_status_pedente_background')->label(__('Wallet History Pending Status Background Color'))->required(),
+                ColorPicker::make('carteira_history_barra_color')->label(__('Wallet History Bar Color'))->required(),
+                ColorPicker::make('carteira_history_barra_text_color')->label(__('Wallet History Bar Text Color'))->required(),
+                ColorPicker::make('carteira_history_icon_color')->label(__('Wallet History Icons Color'))->required(),
+                ColorPicker::make('carteira_history_barra_background')->label(__('Wallet History Bar Background Color'))->required(),
             ])->columns(4);
     }
 
@@ -781,19 +781,19 @@ class LayoutCssCustom extends Page implements HasForms
 
     protected function css_do_affiliates(): Section
     {
-        return Section::make("Página de Afiliados")
-            ->description('Você pode alterar as cores da página de Afiliados')
-            ->label(__('Afiliados'))
+        return Section::make(__('Affiliates Page'))
+            ->description(__('You can change the colors of the Affiliates page'))
+            ->label(__('Affiliates'))
             ->schema([
-                ColorPicker::make('affiliates_background')->label(__('Cor de fundo dos Afiliados'))->required(),
-                ColorPicker::make('affiliates_sub_background')->label(__('Cor de fundo secundária dos Afiliados'))->required(),
-                ColorPicker::make('affiliates_text_color')->label(__('Cor do texto dos Afiliados'))->required(),
-                ColorPicker::make('affiliates_numero_color')->label(__('Cor do número dos Afiliados'))->required(),
-                ColorPicker::make('affiliates_button_saque_background')->label(__('Cor de fundo do botão de Saque'))->required(),
-                ColorPicker::make('affiliates_button_saque_text')->label(__('Cor do texto do botão de Saque'))->required(),
-                ColorPicker::make('affiliates_button_copie_background')->label(__('Cor de fundo do botão de Copiar'))->required(),
-                ColorPicker::make('affiliates_button_copie_text')->label(__('Cor do icon do botão de Copiar'))->required(),
-                ColorPicker::make('affiliates_icom_color')->label(__('Cor dos ícones dos Afiliados'))->required(),
+                ColorPicker::make('affiliates_background')->label(__('Affiliates Background Color'))->required(),
+                ColorPicker::make('affiliates_sub_background')->label(__('Affiliates Secondary Background Color'))->required(),
+                ColorPicker::make('affiliates_text_color')->label(__('Affiliates Text Color'))->required(),
+                ColorPicker::make('affiliates_numero_color')->label(__('Affiliates Number Color'))->required(),
+                ColorPicker::make('affiliates_button_saque_background')->label(__('Withdrawal Button Background Color'))->required(),
+                ColorPicker::make('affiliates_button_saque_text')->label(__('Withdrawal Button Text Color'))->required(),
+                ColorPicker::make('affiliates_button_copie_background')->label(__('Copy Button Background Color'))->required(),
+                ColorPicker::make('affiliates_button_copie_text')->label(__('Copy Button Icon Color'))->required(),
+                ColorPicker::make('affiliates_icom_color')->label(__('Affiliates Icons Color'))->required(),
             ])->columns(4);
     }
 
@@ -808,28 +808,28 @@ class LayoutCssCustom extends Page implements HasForms
     // PAGINA VIP | FICA NA PAGINA DE VIP
     protected function css_do_vips(): Section
     {
-        return Section::make("Página VIP")
-            ->description('Você pode alterar as cores da página VIP')
+        return Section::make(__('VIP Page'))
+            ->description(__('You can change the colors of the VIP page'))
             ->label(__('VIP'))
             ->schema([
-                ColorPicker::make('vips_background')->label(__('Cor de fundo dos VIPs'))->required(),
-                ColorPicker::make('vips_title_color')->label(__('Cor do título dos VIPs'))->required(),
-                ColorPicker::make('vips_text_color')->label(__('Cor do texto dos VIPs'))->required(),
-                ColorPicker::make('vips_description_color')->label(__('Cor da descrição dos VIPs'))->required(),
-                ColorPicker::make('vips_button_background')->label(__('Cor de fundo do botão dos VIPs'))->required(),
-                ColorPicker::make('vips_button_text_color')->label(__('Cor do texto do botão dos VIPs'))->required(),
-                ColorPicker::make('vips_progress_background')->label(__('Cor de fundo do progresso dos VIPs'))->required(),
-                ColorPicker::make('vips_progress_text_color')->label(__('Cor do texto do progresso dos VIPs'))->required(),
-                ColorPicker::make('vips_progress_prenchimento_background')->label(__('Cor de preenchimento do progresso dos VIPs'))->required(),
-                ColorPicker::make('vips_icons_text_color')->label(__('Cor do texto dos ícones dos VIPs'))->required(),
-                ColorPicker::make('vips_icons_background')->label(__('Cor de fundo dos ícones dos VIPs'))->required(),
-                ColorPicker::make('vips_icons_sub_text_color')->label(__('Cor do subtexto dos ícones dos VIPs'))->required(),
-                ColorPicker::make('vips_background_profile_vip')->label(__('Cor de fundo do perfil VIP'))->required(),
-                ColorPicker::make('vips_icon_mover_color')->label(__('Cor do ícone de mover dos VIPs'))->required(),
-                ColorPicker::make('vip_atual_background')->label(__('Cor de fundo do VIP atual'))->required(),
-                ColorPicker::make('vip_atual_text_color')->label(__('Cor do texto do VIP atual'))->required(),
-                ColorPicker::make('vip_proximo_background')->label(__('Cor de fundo do próximo VIP'))->required(),
-                ColorPicker::make('vip_proximo_text_color')->label(__('Cor do texto do próximo VIP'))->required(),
+                ColorPicker::make('vips_background')->label(__('VIPs Background Color'))->required(),
+                ColorPicker::make('vips_title_color')->label(__('VIPs Title Color'))->required(),
+                ColorPicker::make('vips_text_color')->label(__('VIPs Text Color'))->required(),
+                ColorPicker::make('vips_description_color')->label(__('VIPs Description Color'))->required(),
+                ColorPicker::make('vips_button_background')->label(__('VIPs Button Background Color'))->required(),
+                ColorPicker::make('vips_button_text_color')->label(__('VIPs Button Text Color'))->required(),
+                ColorPicker::make('vips_progress_background')->label(__('VIPs Progress Background Color'))->required(),
+                ColorPicker::make('vips_progress_text_color')->label(__('VIPs Progress Text Color'))->required(),
+                ColorPicker::make('vips_progress_prenchimento_background')->label(__('VIPs Progress Fill Color'))->required(),
+                ColorPicker::make('vips_icons_text_color')->label(__('VIPs Icons Text Color'))->required(),
+                ColorPicker::make('vips_icons_background')->label(__('VIPs Icons Background Color'))->required(),
+                ColorPicker::make('vips_icons_sub_text_color')->label(__('VIPs Icons Subtext Color'))->required(),
+                ColorPicker::make('vips_background_profile_vip')->label(__('VIP Profile Background Color'))->required(),
+                ColorPicker::make('vips_icon_mover_color')->label(__('VIPs Move Icon Color'))->required(),
+                ColorPicker::make('vip_atual_background')->label(__('Current VIP Background Color'))->required(),
+                ColorPicker::make('vip_atual_text_color')->label(__('Current VIP Text Color'))->required(),
+                ColorPicker::make('vip_proximo_background')->label(__('Next VIP Background Color'))->required(),
+                ColorPicker::make('vip_proximo_text_color')->label(__('Next VIP Text Color'))->required(),
             ])->columns(4);
     }
 
@@ -839,21 +839,21 @@ class LayoutCssCustom extends Page implements HasForms
     // PAGINA DE MISSOES | FICA NA PAGINA DE MISSOES
     protected function css_do_missoes(): Section
     {
-        return Section::make("Página de Missões")
-            ->description('Você pode alterar as cores da página de Missões')
-            ->label(__('Missões'))
+        return Section::make(__('Missions Page'))
+            ->description(__('You can change the colors of the Missions page'))
+            ->label(__('Missions'))
             ->schema([
-                ColorPicker::make('missoes_background')->label(__('Cor de fundo das Missões'))->required(),
-                ColorPicker::make('missoes_sub_background')->label(__('Cor de fundo secundária das Missões'))->required(),
-                ColorPicker::make('missoes_text_color')->label(__('Cor do texto das Missões'))->required(),
-                ColorPicker::make('missoes_title_color')->label(__('Cor do título das Missões'))->required(),
-                ColorPicker::make('missoes_bonus_background')->label(__('Cor de fundo do bônus das Missões'))->required(),
-                ColorPicker::make('missoes_bonus_text_color')->label(__('Cor do texto do bônus das Missões'))->required(),
-                ColorPicker::make('missoes_button_background')->label(__('Cor de fundo do botão das Missões'))->required(),
-                ColorPicker::make('missoes_button_text_color')->label(__('Cor do texto do botão das Missões'))->required(),
-                ColorPicker::make('missoes_barraprogresso_background')->label(__('Cor de fundo da barra de progresso das Missões'))->required(),
-                ColorPicker::make('missoes_barraprogresso_prenchimento_background')->label(__('Cor de preenchimento da barra de progresso das Missões'))->required(),
-                ColorPicker::make('missoes_barraprogresso_text_color')->label(__('Cor do texto da barra de progresso das Missões'))->required(),
+                ColorPicker::make('missoes_background')->label(__('Missions Background Color'))->required(),
+                ColorPicker::make('missoes_sub_background')->label(__('Missions Secondary Background Color'))->required(),
+                ColorPicker::make('missoes_text_color')->label(__('Missions Text Color'))->required(),
+                ColorPicker::make('missoes_title_color')->label(__('Missions Title Color'))->required(),
+                ColorPicker::make('missoes_bonus_background')->label(__('Missions Bonus Background Color'))->required(),
+                ColorPicker::make('missoes_bonus_text_color')->label(__('Missions Bonus Text Color'))->required(),
+                ColorPicker::make('missoes_button_background')->label(__('Missions Button Background Color'))->required(),
+                ColorPicker::make('missoes_button_text_color')->label(__('Missions Button Text Color'))->required(),
+                ColorPicker::make('missoes_barraprogresso_background')->label(__('Missions Progress Bar Background Color'))->required(),
+                ColorPicker::make('missoes_barraprogresso_prenchimento_background')->label(__('Missions Progress Bar Fill Color'))->required(),
+                ColorPicker::make('missoes_barraprogresso_text_color')->label(__('Missions Progress Bar Text Color'))->required(),
             ])->columns(4);
     }
 
@@ -862,19 +862,19 @@ class LayoutCssCustom extends Page implements HasForms
     // PAGINA DE PROMOÇÕES | FICA NA PAGINA DE PROMOÇÕES
     protected function css_do_promocoes(): Section
     {
-        return Section::make("Página de Promoções")
-            ->description('Você pode alterar as cores da página de Promoções')
-            ->label(__('Promoções'))
+        return Section::make(__('Promotions Page'))
+            ->description(__('You can change the colors of the Promotions page'))
+            ->label(__('Promotions'))
             ->schema([
-                ColorPicker::make('promocoes_background')->label(__('Cor de fundo das Promoções'))->required(),
-                ColorPicker::make('promocoes_title_color')->label(__('Cor do título das Promoções'))->required(),
-                ColorPicker::make('promocoes_text_color')->label(__('Cor do texto das Promoções'))->required(),
-                ColorPicker::make('promocoes_sub_background')->label(__('Cor de fundo secundária das Promoções'))->required(),
-                ColorPicker::make('promocoes_button_background')->label(__('Cor de fundo do botão das Promoções'))->required(),
-                ColorPicker::make('promocoes_button_text_color')->label(__('Cor do texto do botão das Promoções'))->required(),
-                ColorPicker::make('promocoes_pupup_background')->label(__('Cor de fundo do popup das Promoções'))->required(),
-                ColorPicker::make('promocoes_pupup_text_color')->label(__('Cor do texto do popup das Promoções'))->required(),
-                ColorPicker::make('promocoes_icon_color')->label(__('Cor dos ícones das Promoções'))->required(),
+                ColorPicker::make('promocoes_background')->label(__('Promotions Background Color'))->required(),
+                ColorPicker::make('promocoes_title_color')->label(__('Promotions Title Color'))->required(),
+                ColorPicker::make('promocoes_text_color')->label(__('Promotions Text Color'))->required(),
+                ColorPicker::make('promocoes_sub_background')->label(__('Promotions Secondary Background Color'))->required(),
+                ColorPicker::make('promocoes_button_background')->label(__('Promotions Button Background Color'))->required(),
+                ColorPicker::make('promocoes_button_text_color')->label(__('Promotions Button Text Color'))->required(),
+                ColorPicker::make('promocoes_pupup_background')->label(__('Promotions Popup Background Color'))->required(),
+                ColorPicker::make('promocoes_pupup_text_color')->label(__('Promotions Popup Text Color'))->required(),
+                ColorPicker::make('promocoes_icon_color')->label(__('Promotions Icons Color'))->required(),
             ])->columns(4);
     }
 
@@ -882,27 +882,27 @@ class LayoutCssCustom extends Page implements HasForms
     // PAGINA DE POPUP DE COOKIES | FICA NA PAGINA DE POPUP DE COOKIES
     protected function css_do_popup_cookies(): Section
     {
-        return Section::make("Popup de Cookies")
-            ->description('Você pode alterar as cores do Popup de Cookies')
-            ->label(__('Popup de Cookies'))
+        return Section::make(__('Cookie Popup'))
+            ->description(__('You can change the colors of the Cookie Popup'))
+            ->label(__('Cookie Popup'))
             ->schema([
-                ColorPicker::make('popup_cookies_background')->label(__('Cor de fundo do Popup de Cookies'))->required(),
-                ColorPicker::make('popup_cookies_text_color')->label(__('Cor do texto do Popup de Cookies'))->required(),
-                ColorPicker::make('popup_cookies_button_background')->label(__('Cor de fundo do botão do Popup de Cookies'))->required(),
-                ColorPicker::make('popup_cookies_button_text_color')->label(__('Cor do texto do botão do Popup de Cookies'))->required(),
-                ColorPicker::make('popup_cookies_button_border_color')->label(__('Cor da borda do botão do Popup de Cookies'))->required(),
+                ColorPicker::make('popup_cookies_background')->label(__('Cookie Popup Background Color'))->required(),
+                ColorPicker::make('popup_cookies_text_color')->label(__('Cookie Popup Text Color'))->required(),
+                ColorPicker::make('popup_cookies_button_background')->label(__('Cookie Popup Button Background Color'))->required(),
+                ColorPicker::make('popup_cookies_button_text_color')->label(__('Cookie Popup Button Text Color'))->required(),
+                ColorPicker::make('popup_cookies_button_border_color')->label(__('Cookie Popup Button Border Color'))->required(),
             ])->columns(2);
     }
 
     // PAGINA DE MENU CELL | FICA NA PAGINA DE MENU CELULAR
     protected function css_do_menu_cell(): Section
     {
-        return Section::make("Página de Menu Cell")
-            ->description('Você pode alterar as cores do Menu Cell')
-            ->label(__('Menu Cell'))
+        return Section::make(__('Mobile Menu Page'))
+            ->description(__('You can change the colors of the Mobile Menu'))
+            ->label(__('Mobile Menu'))
             ->schema([
-                ColorPicker::make('menu_cell_background')->label(__('Cor de fundo do Menu Cell'))->required(),
-                ColorPicker::make('menu_cell_text_color')->label(__('Cor do texto do Menu Cell'))->required(),
+                ColorPicker::make('menu_cell_background')->label(__('Mobile Menu Background Color'))->required(),
+                ColorPicker::make('menu_cell_text_color')->label(__('Mobile Menu Text Color'))->required(),
             ])->columns(2);
     }
 
@@ -912,24 +912,24 @@ class LayoutCssCustom extends Page implements HasForms
     // GERAL
     protected function css_do_geral(): Section
     {
-        return Section::make("Geral")
-            ->description('Você pode alterar as cores gerais')
-            ->label(__('Geral'))
+        return Section::make(__('General Settings'))
+            ->description(__('You can change general colors'))
+            ->label(__('General'))
             ->schema([
-                ColorPicker::make('background_geral')->label(__('Cor de fundo geral'))->required(),
-                ColorPicker::make('background_geral_text_color')->label(__('Cor do texto geral'))->required(),
+                ColorPicker::make('background_geral')->label(__('General Background Color'))->required(),
+                ColorPicker::make('background_geral_text_color')->label(__('General Text Color'))->required(),
             ])->columns(2);
     }
 
     // CARREGANDO
     protected function css_do_carregando(): Section
     {
-        return Section::make("Carregando")
-            ->description('Você pode alterar as cores da tela de carregamento')
-            ->label(__('Carregando'))
+        return Section::make(__('Loading Screen'))
+            ->description(__('You can change the colors of the loading screen'))
+            ->label(__('Loading'))
             ->schema([
-                ColorPicker::make('carregando_background')->label(__('Cor de fundo do carregamento'))->required(),
-                ColorPicker::make('carregando_text_color')->label(__('Cor do texto do carregamento'))->required(),
+                ColorPicker::make('carregando_background')->label(__('Loading Background Color'))->required(),
+                ColorPicker::make('carregando_text_color')->label(__('Loading Text Color'))->required(),
             ])->columns(2);
     }
 
@@ -951,24 +951,24 @@ class LayoutCssCustom extends Page implements HasForms
 
     protected function css_do_maior_de_18(): Section
     {
-        return Section::make("Pop-up Maior de 18")
-            ->description('Você pode alterar as cores do Pop-up de confirmação de maioridade')
-            ->label(__('Maior de 18'))
+        return Section::make(__('Over 18 Popup'))
+            ->description(__('You can change colors for the age confirmation popup'))
+            ->label(__('Over 18'))
             ->schema([
                 Toggle::make('maior_de_18_status')
-                    ->label(__('Ativar Pop-up Maior de 18'))
+                    ->label(__('Enable Over 18 Popup'))
                     ->onColor('success')
                     ->offColor('danger')
                     ->inline(false)
                     ->default(false)
                     ->reactive(),
-                ColorPicker::make('maior_de_18_background')->label(__('Cor de fundo do Pop-up'))->required(),
-                ColorPicker::make('maior_de_18_sub_background')->label(__('Cor de fundo secundária'))->required(),
-                ColorPicker::make('maior_de_18_texto_color')->label(__('Cor do texto'))->required(),
-                ColorPicker::make('maior_de_18_botao_sim_background')->label(__('Cor de fundo do botão "Sim"'))->required(),
-                ColorPicker::make('maior_de_18_botao_sim_texto_color')->label(__('Cor do texto do botão "Sim"'))->required(),
-                ColorPicker::make('maior_de_18_botao_nao_background')->label(__('Cor de fundo do botão "Não"'))->required(),
-                ColorPicker::make('maior_de_18_botao_nao_texto_color')->label(__('Cor do texto do botão "Não"'))->required(),
+                ColorPicker::make('maior_de_18_background')->label(__('Popup Background Color'))->required(),
+                ColorPicker::make('maior_de_18_sub_background')->label(__('Secondary Background Color'))->required(),
+                ColorPicker::make('maior_de_18_texto_color')->label(__('Text Color'))->required(),
+                ColorPicker::make('maior_de_18_botao_sim_background')->label(__('Background color for "Yes" button'))->required(),
+                ColorPicker::make('maior_de_18_botao_sim_texto_color')->label(__('Text color for "Yes" button'))->required(),
+                ColorPicker::make('maior_de_18_botao_nao_background')->label(__('Background color for "No" button'))->required(),
+                ColorPicker::make('maior_de_18_botao_nao_texto_color')->label(__('Text color for "No" button'))->required(),
             ])->columns(2);
     }
 
@@ -977,14 +977,14 @@ class LayoutCssCustom extends Page implements HasForms
     /////////////////////////////////////////////////////////////////////
     protected function getSectionPlatformTexts(): Section
     {
-        return Section::make('TEXTOS DA PLATAFORMA')
-            ->label(__('Altere os textos da plataforma'))
+        return Section::make(__('PLATFORM TEXTS'))
+            ->label(__('Change platform texts'))
             ->schema([
-                TextInput::make('homepage_jogos_em_destaque')->label(__('Jogos em Destaque na Homepage')),
-                TextInput::make('vip_titulo')->label(__('Título VIP')),
-                TextInput::make('vip_descriçao')->label(__('Descrição VIP')),
-                TextInput::make('vip_sub_texto')->label(__('Subtexto VIP')),
-                TextInput::make('vip_sub_titulo')->label(__('Subtítulo VIP')),
+                TextInput::make('homepage_jogos_em_destaque')->label(__('Featured Games on Homepage')),
+                TextInput::make('vip_titulo')->label(__('VIP Title')),
+                TextInput::make('vip_descriçao')->label(__('VIP Description')),
+                TextInput::make('vip_sub_texto')->label(__('VIP Subtext')),
+                TextInput::make('vip_sub_titulo')->label(__('VIP Subtitle')),
             ])->columns(2);
     }
 
@@ -997,8 +997,8 @@ class LayoutCssCustom extends Page implements HasForms
         try {
             if (env('APP_DEMO')) {
                 Notification::make()
-                    ->title(__('Atenção'))
-                    ->body('Você não pode realizar esta alteração na versão demo')
+                    ->title(__('Attention'))
+                    ->body(__('You cannot perform this change in the demo version'))
                     ->danger()
                     ->send();
                 return;
@@ -1022,8 +1022,8 @@ class LayoutCssCustom extends Page implements HasForms
                 Cache::forever('asset_version', (string) Str::uuid());
 
                 Notification::make()
-                    ->title(__('Customização salva'))
-                    ->body('Dados alterados e cache limpo com sucesso!')
+                    ->title(__('Customization saved'))
+                    ->body(__('Data changed and cache cleared successfully!'))
                     ->success()
                     ->send();
 
@@ -1031,15 +1031,14 @@ class LayoutCssCustom extends Page implements HasForms
             }
 
             Notification::make()
-                ->title(__('Erro'))
-                ->body('Erro interno!')
+                ->title(__('Error'))
+                ->body(__('Internal error!'))
                 ->danger()
                 ->send();
-
         } catch (\Throwable $e) {
             Notification::make()
-                ->title(__('Erro ao alterar dados!'))
-                ->body('Erro ao alterar dados!')
+                ->title(__('Error changing data!'))
+                ->body(__('Error changing data!'))
                 ->danger()
                 ->send();
         }

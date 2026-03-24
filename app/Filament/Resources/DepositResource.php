@@ -25,7 +25,7 @@ class DepositResource extends Resource
 
     protected static ?string $navigationGroup = 'Administration';
 
-    protected static ?string $slug = 'todos-depositos';
+    protected static ?string $slug = 'all-deposits';
 
     protected static ?int $navigationSort = 2;
 
@@ -48,31 +48,30 @@ class DepositResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('Deposit Registration')
+                Forms\Components\Section::make(__('Deposit Registration'))
                     ->schema([
                         Forms\Components\Select::make('user_id')
-                            ->label('Users')
-                            ->placeholder('Select a user')
+                            ->label(__('Users'))
+                            ->placeholder(__('Select a user'))
                             ->options(
-                                fn($get) => User::query()
-                                    ->pluck('name', 'id')
+                                User::query()->pluck('name', 'id')->toArray()
                             )
                             ->searchable()
                             ->preload()
                             ->live()
                             ->required(),
                         Forms\Components\TextInput::make('amount')
-                            ->label('Amount')
+                            ->label(__('Amount'))
                             ->required()
                             ->default(0.00),
                         Forms\Components\FileUpload::make('proof')
-                            ->label('Proof')
-                            ->placeholder('Upload proof image')
+                            ->label(__('Proof'))
+                            ->placeholder(__('Upload proof image'))
                             ->image()
                             ->columnSpanFull()
                             ->required(),
                         Forms\Components\Toggle::make('status')
-                            ->label('Paid')
+                            ->label(__('Paid'))
                             ->required(),
                     ])
             ]);
@@ -91,8 +90,8 @@ class DepositResource extends Resource
                     ->label('PAYMENT ID')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('amount')
-                    ->label('AMOUNT')
-                    ->formatStateUsing(fn(Deposit $record): string => '€ ' . number_format($record->amount, 2, ',', '.'))
+                    ->label(__('AMOUNT'))
+                    ->formatStateUsing(fn(Deposit $record): string => \App\Helpers\CurrencyHelper::format($record->amount))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status')
                     ->label('STATUS')
@@ -122,15 +121,15 @@ class DepositResource extends Resource
                             ->when($data['created_until'], fn($query, $date) => $query->whereDate('created_at', '<=', $date));
                     }),
                 Filter::make('status')
-                    ->label('Status')
+                    ->label(__('Status'))
                     ->default(null) // Define "Todos" como padrão
                     ->form([
                         Forms\Components\Select::make('status')
-                            ->label('Status')
+                            ->label(__('Status'))
                             ->options([
-                                '' => 'All',
-                                '1' => 'Paid',
-                                '0' => 'Unpaid',
+                                '' => __('All'),
+                                '1' => __('Paid'),
+                                '0' => __('Unpaid'),
                             ])
                             ->default(''), // Define "All" como padrão
                     ])

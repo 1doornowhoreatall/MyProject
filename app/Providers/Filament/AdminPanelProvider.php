@@ -125,7 +125,7 @@ class AdminPanelProvider extends PanelProvider
 
                             NavigationItem::make('custom-layout')
                                 ->icon('heroicon-o-paint-brush')
-                                ->label(fn (): string => 'DEFINIÇÕES DE CSS E PIXELS')
+                                ->label(fn (): string => __('CSS AND PIXELS SETTINGS'))
                                 ->url(fn (): string => LayoutCssCustom::getUrl())
                                 ->isActiveWhen(fn () => request()->routeIs('filament.pages.layout-css-custom')),
 

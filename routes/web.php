@@ -86,7 +86,6 @@ Route::get('api/distribution/manual-update', [DistributionController::class, 'ch
 include_once(__DIR__ . '/groups/provider/playFiver.php');
 // GATEWAYS
 include_once(__DIR__ . '/groups/gateways/stripe.php');
-include_once(__DIR__ . '/groups/gateways/cryptocloud.php'); // Ensure this is here if not already
 
 /// SOCIAL
 /// include_once(__DIR__ . '/groups/auth/social.php');

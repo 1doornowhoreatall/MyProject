@@ -27,7 +27,7 @@ class DashboardAdmin extends \Filament\Pages\Dashboard
      */
     public function getSubheading(): string|\Illuminate\Contracts\Support\Htmlable|null
     {
-        return "Bem-vindo(a) de volta, Admin! Seu painel está pronto para você.";
+        return __("Welcome back, Admin! Your dashboard is ready for you.");
     }
 
     /**
@@ -37,23 +37,23 @@ class DashboardAdmin extends \Filament\Pages\Dashboard
     {
         return $form
             ->schema([
-                Section::make('OBETZERA CRIOU ESSA PLATAFORMA PARA VOCÊ')
+                Section::make(__('FITOREBET PLATFORM'))
                     ->description(new HtmlString('
                         <div style="font-weight: 600; display: flex; align-items: center; flex-wrap: wrap; gap: 10px;">
-                            SAIBA MAIS SOBRE NÓS. PARTICIPE DA NOSSA COMUNIDADE IGAMING. ACESSE AGORA!
+                            ' . __('LEARN MORE ABOUT US. JOIN OUR IGAMING COMMUNITY. ACCESS NOW!') . '
                             <a class="dark:text-white"
                                style="font-size: 14px; font-weight: 600; min-width: 127px; display: inline-flex; background-color: #00b91e; padding: 10px; border-radius: 11px; justify-content: center;"
-                               href="https://obetzera.com" target="_blank">SITE OFICIAL</a>
+                               href="https://obetzera.com" target="_blank">' . __('OFFICIAL SITE') . '</a>
                             <a class="dark:text-white"
                                style="font-size: 14px; font-weight: 600; min-width: 127px; display: inline-flex; background-color: #00b91e; padding: 10px; border-radius: 11px; justify-content: center;"
-                               href="https://t.me/obetzera01" target="_blank">GRUPO TELEGRAM</a>
+                               href="https://t.me/obetzera01" target="_blank">' . __('TELEGRAM GROUP') . '</a>
                         </div>
                     ')),
 
-                Section::make('Filtros do painel')
+                Section::make(__('Dashboard Filters'))
                     ->schema([
-                        DatePicker::make('startDate')->label(__('Data Inicial')),
-                        DatePicker::make('endDate')->label(__('Data Final')),
+                        DatePicker::make('startDate')->label(__('Start Date')),
+                        DatePicker::make('endDate')->label(__('End Date')),
                     ])
                     ->columns(2),
             ]);
@@ -66,10 +66,10 @@ class DashboardAdmin extends \Filament\Pages\Dashboard
     {
         return [
             FilterAction::make()
-                ->label(__('Filtro'))
+                ->label(__('Filter'))
                 ->form([
-                    DatePicker::make('startDate')->label(__('Data Inicial')),
-                    DatePicker::make('endDate')->label(__('Data Final')),
+                    DatePicker::make('startDate')->label(__('Start Date')),
+                    DatePicker::make('endDate')->label(__('End Date')),
                 ]),
         ];
     }

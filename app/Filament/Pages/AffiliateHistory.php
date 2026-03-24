@@ -29,7 +29,7 @@ class AffiliateHistory extends Page implements HasTable
     protected static ?string $title = 'Affiliates';
     protected static ?string $model = User::class;
 
-    protected static ?string $slug = 'afiliado';
+    protected static ?string $slug = 'affiliates';
 
     /**
      * @dev  

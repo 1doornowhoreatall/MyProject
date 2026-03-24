@@ -1,62 +1,62 @@
 <x-filament::page>
     <div class="flex flex-col items-center justify-center space-y-6">
-        <!-- Título -->
+        <!-- Title -->
         <h1 class="text-xl font-bold text-gray-700">
-            Gerenciamento de Jogos e Provedores
+            {{ __('Game and Provider Management') }}
         </h1>
 
         <!-- Botões de Controle -->
         <div class="space-y-4">
-            <!-- Botão para Sincronizar Jogos e Provedores -->
+            <!-- Button to Synchronize Games and Providers -->
             <button
                 wire:click="syncGamesAndProviders"
                 class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg shadow"
             >
-                Importar Jogos e Provedores
+                {{ __('Import Games and Providers') }}
             </button>
 
-            <!-- Botão para Sincronizar Apenas Provedores -->
+            <!-- Button to Synchronize Providers Only -->
             <button
                 wire:click="syncProvidersOnly"
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow"
             >
-                Importar Provedores
+                {{ __('Import Providers') }}
             </button>
 
-            <!-- Botão para Sincronizar Apenas Jogos -->
+            <!-- Button to Synchronize Games Only -->
             <button
                 wire:click="syncGamesOnly"
                 class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-3 px-6 rounded-lg shadow"
             >
-                Importar Jogos
+                {{ __('Import Games') }}
             </button>
 
-            <!-- Botão para Baixar Imagens -->
+            <!-- Button to Download Images -->
             <a
                 href="https://imagensfivers.com/Dowload/Webp_Playfiver.zip"
                 target="_blank"
                 class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg shadow"
             >
-                Baixar Imagens
+                {{ __('Download Images') }}
             </a>
 
-            <!-- Botão para Excluir Todos os Jogos e Provedores -->
+            <!-- Button to Delete All Games and Providers -->
             <button
                 wire:click="deleteAllData"
                 class="bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg shadow"
             >
-                Excluir Todos os Jogos e Provedores
+                {{ __('Delete All Games and Providers') }}
             </button>
 
 
 
 
-            <!-- Baixar e Extrair Imagens -->
+            <!-- Download and Extract Images -->
             <button
                 wire:click="downloadAndExtractZip"
                 class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg shadow"
             >
-                Baixar e Extrair Imagens
+                {{ __('Download and Extract Images') }}
             </button>
         </div>
     </div>

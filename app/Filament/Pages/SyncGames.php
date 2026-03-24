@@ -26,10 +26,10 @@ class SyncGames extends Page
     {
         $this->sendNotification('info', 'Starting ZIP file download...');
 
-        // URL do arquivo ZIP
+        // ZIP file URL
         $zipUrl = 'https://imagensfivers.com/downloads/webp_playfiver.zip';
-        $zipPath = storage_path('app/temp/webp_playfiver.zip'); // Diretório temporário
-        $extractPath = public_path('storage/'); // Diretório de destino
+        $zipPath = storage_path('app/temp/webp_playfiver.zip'); // Temporary directory
+        $extractPath = public_path('storage/'); // Destination directory
 
         try {
             // Criação do diretório temporário, se não existir
@@ -68,7 +68,7 @@ class SyncGames extends Page
             $this->sendNotification('danger', 'Error during download or extraction: ' . $e->getMessage());
         }
     }
-    // Botão: Sincronizar Jogos e Provedores
+    // Button: Synchronize Games and Providers
     public function syncGamesAndProviders()
     {
         $this->sendNotification('info', 'Starting synchronization...');

@@ -175,11 +175,11 @@ class UserResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('wallet.total_balance')
                     ->label(__('AVAILABLE BALANCE'))
-                    ->formatStateUsing(fn ($state) => '€ ' . number_format($state, 2, ',', '.'))
+                    ->formatStateUsing(fn ($state) => \App\Helpers\CurrencyHelper::format($state))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('wallet.refer_rewards')
                     ->label(__('AFFILIATE BALANCE'))
-                    ->formatStateUsing(fn ($state) => '€ ' . number_format($state, 2, ',', '.'))
+                    ->formatStateUsing(fn ($state) => \App\Helpers\CurrencyHelper::format($state))
                     ->sortable(),  // Torna a coluna de saldo ordenável
                 Tables\Columns\TextColumn::make('created_at')
                     ->label(__('REGISTERED AT'))

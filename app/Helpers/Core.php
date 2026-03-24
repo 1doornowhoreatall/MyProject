@@ -352,15 +352,15 @@ class Core
     {
         switch ($key) {
             case 'document':
-                return 'Document';
+                return __('Document');
             case 'phoneNumber':
-                return 'Phone Number';
+                return __('Phone Number');
             case 'email':
-                return 'E-mail';
+                return __('E-mail');
             case 'randomKey':
-                return 'Random Key';
+                return __('Random Key');
             case 'crypto':
-                return 'Crypto Wallet';
+                return __('Crypto Wallet');
             default:
                 return $key;
         }

@@ -19,7 +19,7 @@ class LogsRoundsFreePage extends Page implements HasTable
     protected static string $view = 'filament.pages.logs-rounds-free-page';
 
 
-    protected static ?string $title = 'HISTORICO FREE BETS';
+    protected static ?string $title = 'FREE BETS HISTORY';
 
     protected static ?string $slug = 'logs-rounds-free';
     public function table(Table $table): Table
@@ -27,11 +27,11 @@ class LogsRoundsFreePage extends Page implements HasTable
         return $table
             ->query(LogsRoundsFree::query()) 
             ->columns([
-                TextColumn::make('username')->label(__('Usuário'))->searchable(),
-                TextColumn::make('game_code')->label(__('Jogo'))->searchable(),
+                TextColumn::make('username')->label(__('User'))->searchable(),
+                TextColumn::make('game_code')->label(__('Game'))->searchable(),
                 CheckboxColumn::make('status')->label(__("Status"))->disabled(),
-                TextColumn::make('message')->label(__('Mensagem')),
-                TextColumn::make('created_at')->label(__('Data'))->dateTime('d/m/Y H:i'),
+                TextColumn::make('message')->label(__('Message')),
+                TextColumn::make('created_at')->label(__('Date'))->dateTime('d/m/Y H:i'),
             ])
             ->defaultSort('created_at', 'desc');
     }

@@ -28,7 +28,7 @@ class WithdrawalResource extends Resource
 
     protected static ?string $navigationGroup = 'MANAGEMENT & FINANCE';
 
-    protected static ?string $slug = 'todos-saques';
+    protected static ?string $slug = 'all-withdrawals';
 
     protected static ?int $navigationSort = 3;
 
@@ -59,34 +59,34 @@ class WithdrawalResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label('USER')
+                    ->label(__('USER'))
                     ->searchable(['users.name', 'users.last_name'])
                     ->sortable(),
                 Tables\Columns\TextColumn::make('amount')
-                    ->label('AMOUNT')
-                    ->formatStateUsing(fn(Withdrawal $record): string => '€ ' . number_format($record->amount, 2, ',', '.'))
+                    ->label(__('AMOUNT'))
+                    ->formatStateUsing(fn(Withdrawal $record): string => \App\Helpers\CurrencyHelper::format($record->amount))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('pix_type')
-                    ->label('CRYPTO TYPE')
+                    ->label(__('CRYPTO TYPE'))
                     ->formatStateUsing(fn(string $state): string => \Helper::formatPixType($state))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('pix_key')
-                    ->label('WALLET ADDRESS'),
+                    ->label(__('WALLET ADDRESS')),
                 Tables\Columns\TextColumn::make('status')
-                    ->label('STATUS')
+                    ->label(__('STATUS'))
                     ->formatStateUsing(fn(Withdrawal $record): string => match ($record->status) {
-                        0 => 'Pending',
-                        1 => 'Approved',
-                        2 => 'Canceled',
-                        default => 'Unknown'
+                        0 => __('Pending'),
+                        1 => __('Approved'),
+                        2 => __('Canceled'),
+                        default => __('Unknown')
                     })
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('CREATED AT')
+                    ->label(__('CREATED AT'))
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label('UPDATED AT')
+                    ->label(__('UPDATED AT'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -127,9 +127,9 @@ class WithdrawalResource extends Resource
                     ->action(function (Withdrawal $withdrawal) {
                         $withdrawal->update(['status' => 2]); // Mark as Canceled/Refunded
                         Notification::make()
-                            ->title('Withdrawal Refunded')
+                            ->title(__('Withdrawal Refunded'))
                             ->success()
-                            ->body('The withdrawal was refunded successfully.')
+                            ->body(__('The withdrawal was refunded successfully.'))
                             ->send();
                     }),
 
