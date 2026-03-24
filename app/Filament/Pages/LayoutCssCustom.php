@@ -314,7 +314,7 @@ class LayoutCssCustom extends Page implements HasForms
                 ColorPicker::make('navbar_perfil_modal_hover_modal')->label(__('Profile modal hover color'))->required(),
 
 
-            ])->columns(4);
+            ])->columns(['default' => 4]);
     }
  
 
@@ -339,8 +339,8 @@ class LayoutCssCustom extends Page implements HasForms
             ColorPicker::make('sidebar_text_color')->label(__('Text color'))->required(),
             ColorPicker::make('sidebar_border')->label(__('Border color'))->required(),
             ColorPicker::make('sidebar_icons')->label(__('Icons color'))->required(),
-            ColorPicker::make('sidebar_icons_background')->label(__('Icons background color'))->required(),
-            ])->columns(4);
+                ColorPicker::make('sidebar_icons_background')->label(__('Icons background color'))->required(),
+            ])->columns(['default' => 4]);
     }
     // PAGINA HOMEPAGE | FICA NA PAGINA INICIAL DO SITE
 
@@ -425,7 +425,7 @@ class LayoutCssCustom extends Page implements HasForms
                 ColorPicker::make('live_ganhos_ganhos_color')->label(__('Wins Color'))->required(),
                 ColorPicker::make('live_ganhos_border_color')->label(__('Border Color'))->required(),
                 ColorPicker::make('live_ganhos_box_shadow_color')->label(__('Shadow Color'))->required(),
-            ])->columns(3);
+            ])->columns(['default' => 3]);
     }
 
     // POP-UP de Rodadas Grátis
@@ -465,7 +465,7 @@ class LayoutCssCustom extends Page implements HasForms
 
                 TextInput::make('rodadas_gratis_tabela3_texto1')->label(__('Table 3 - Text 1'))->maxLength(90),
                 TextInput::make('rodadas_gratis_tabela3_texto2')->label(__('Table 3 - Text 2'))->maxLength(90),
-            ])->columns(3);
+            ])->columns(['default' => 3]);
     }
     // PAGINA FOOTER   | FICA EM BAIXO DO SITE
 
@@ -488,8 +488,8 @@ class LayoutCssCustom extends Page implements HasForms
             ColorPicker::make('footer_button_color_language')->label(__('Footer button text color (Language)'))->required(),
             ColorPicker::make('footer_button_background_language')->label(__('Footer button background color (Language)'))->required(),
             ColorPicker::make('footer_button_border_language')->label(__('Footer button border color (Language)'))->required(),
-            ColorPicker::make('footer_background_language')->label(__('Footer background color (Language)'))->required(),
-            ])->columns(4);
+                ColorPicker::make('footer_background_language')->label(__('Footer background color (Language)'))->required(),
+            ])->columns(['default' => 4]);
     }
     // PAGINA DE TERMOS E SPORT
     protected function css_do_termos_sport(): Section
@@ -503,7 +503,7 @@ class LayoutCssCustom extends Page implements HasForms
                 ColorPicker::make('titulo_principal_termos')->label(__('Terms main title color'))->required(),
                 ColorPicker::make('titulo_segundario_termos')->label(__('Terms secondary title color'))->required(),
                 ColorPicker::make('descriçao_segundario_termos')->label(__('Terms secondary description color'))->required(),
-            ])->columns(2);
+            ])->columns(['default' => 2]);
     }
 
 
@@ -519,7 +519,7 @@ class LayoutCssCustom extends Page implements HasForms
                 ColorPicker::make('myconta_text_color')->label(__('My Account text color'))->required(),
                 ColorPicker::make('myconta_button_background')->label(__('My Account button background color'))->required(),
                 ColorPicker::make('myconta_button_icon_color')->label(__('My Account button icon color'))->required(),
-            ])->columns(2);
+            ])->columns(['default' => 2]);
     }
 
     // PAGINA CENTRAL SUPORTE | FICA NA PAGINA DE CENTRAL DE SUPORTE
@@ -544,7 +544,7 @@ class LayoutCssCustom extends Page implements HasForms
                 ColorPicker::make('central_suporte_aviso_text_color')->label(__('Warning Text Color'))->required(),
                 ColorPicker::make('central_suporte_aviso_text_negrito_color')->label(__('Warning Bold Text Color'))->required(),
                 ColorPicker::make('central_suporte_aviso_icon_color')->label(__('Warning Icon Color'))->required(),
-            ])->columns(2);
+            ])->columns(['default' => 2]);
     }
     // PAGINA LOGIN - RESGISTRO E ESQUECI A SENHA
 
@@ -588,7 +588,7 @@ class LayoutCssCustom extends Page implements HasForms
                 ColorPicker::make('esqueci_button_text_color')->label(__('Forgot Password Button Text Color'))->required(),
                 ColorPicker::make('esqueci_button_background')->label(__('Forgot Password Button Background'))->required(),
                 ColorPicker::make('esqueci_button_border_color')->label(__('Forgot Password Button Border Color'))->required(),
-            ])->columns(4);
+            ])->columns(['default' => 4]);
     }
 
 
@@ -608,7 +608,7 @@ class LayoutCssCustom extends Page implements HasForms
                 ColorPicker::make('gamelist_button_background')->label(__('Game List Button Background'))->required(),
                 ColorPicker::make('gamelist_button_text_color')->label(__('Game List Button Text Color'))->required(),
                 ColorPicker::make('gamelist_button_border_color')->label(__('Game List Button Border Color'))->required(),
-            ])->columns(4);
+            ])->columns(['default' => 4]);
     }
 
     // PAGINA BONUS DIARIO | FICA NA PAGINA DE BONUS DIARIO
@@ -633,7 +633,7 @@ class LayoutCssCustom extends Page implements HasForms
                 ColorPicker::make('bonus_diario_bola_fora_')->label(__('Daily Bonus External Ball Color'))->required(),
                 ColorPicker::make('bonus_diario_bola_carregamento')->label(__('Daily Bonus Loading Ball Color'))->required(),
                 ColorPicker::make('bonus_diario_texto_bola')->label(__('Daily Bonus Ball Text Color'))->required(),
-            ])->columns(4);
+            ])->columns(['default' => 4]);
     }
 
 
@@ -659,7 +659,7 @@ class LayoutCssCustom extends Page implements HasForms
                 ColorPicker::make('carteira_button_border_color')->label(__('Wallet Button Border Color'))->required(),
                 ColorPicker::make('carteira_icon_color')->label(__('Wallet Icons Color'))->required(),
                 ColorPicker::make('carteira_text_color')->label(__('Wallet Text Color'))->required(),
-            ])->columns(4);
+            ])->columns(['default' => 4]);
     }
 
 
@@ -680,7 +680,7 @@ class LayoutCssCustom extends Page implements HasForms
                 ColorPicker::make('carteira_saldo_button_saque_background')->label(__('Wallet Balance Withdrawal Button Background color'))->required(),
                 ColorPicker::make('carteira_saldo_button_deposito_text_color')->label(__('Wallet Balance Deposit Button Text color'))->required(),
                 ColorPicker::make('carteira_saldo_button_saque_text_color')->label(__('Wallet Balance Withdrawal Button Text color'))->required(),
-            ])->columns(3);
+            ])->columns(['default' => 3]);
     }
 
 
@@ -705,7 +705,7 @@ class LayoutCssCustom extends Page implements HasForms
                 ColorPicker::make('carteira_deposito_number_background')->label(__('Wallet Deposit Number Background Color'))->required(),
                 ColorPicker::make('carteira_deposito_button_background')->label(__('Wallet Deposit Button Background Color'))->required(),
                 ColorPicker::make('carteira_deposito_button_text_color')->label(__('Wallet Deposit Button Text Color'))->required(),
-            ])->columns(3);
+            ])->columns(['default' => 3]);
     }
 
 
@@ -726,7 +726,7 @@ class LayoutCssCustom extends Page implements HasForms
                 ColorPicker::make('carteira_saldo_pix_border_color')->label(__('Wallet Crypto Copy Border Color'))->required(),
                 ColorPicker::make('carteira_saldo_pix_icon_color')->label(__('Wallet Crypto Copy Icon Color'))->required(),
                 ColorPicker::make('carteira_saldo_pix_background')->label(__('Wallet Crypto Copy Background Color'))->required(),
-            ])->columns(2);
+            ])->columns(['default' => 2]);
     }
 
 
@@ -749,7 +749,7 @@ class LayoutCssCustom extends Page implements HasForms
                 ColorPicker::make('carteira_saque_button_text_color')->label(__('Wallet Withdrawal Button Text Color'))->required(),
                 ColorPicker::make('carteira_saque_button_background')->label(__('Wallet Withdrawal Button Background Color'))->required(),
                 ColorPicker::make('carteira_saque_icon_color')->label(__('Wallet Withdrawal Icons Color'))->required(),
-            ])->columns(2);
+            ])->columns(['default' => 2]);
     }
 
 
@@ -772,7 +772,7 @@ class LayoutCssCustom extends Page implements HasForms
                 ColorPicker::make('carteira_history_barra_text_color')->label(__('Wallet History Bar Text Color'))->required(),
                 ColorPicker::make('carteira_history_icon_color')->label(__('Wallet History Icons Color'))->required(),
                 ColorPicker::make('carteira_history_barra_background')->label(__('Wallet History Bar Background Color'))->required(),
-            ])->columns(4);
+            ])->columns(['default' => 4]);
     }
 
 
@@ -795,7 +795,7 @@ class LayoutCssCustom extends Page implements HasForms
                 ColorPicker::make('affiliates_button_copie_background')->label(__('Copy Button Background Color'))->required(),
                 ColorPicker::make('affiliates_button_copie_text')->label(__('Copy Button Icon Color'))->required(),
                 ColorPicker::make('affiliates_icom_color')->label(__('Affiliates Icons Color'))->required(),
-            ])->columns(4);
+            ])->columns(['default' => 4]);
     }
 
     
@@ -831,7 +831,7 @@ class LayoutCssCustom extends Page implements HasForms
                 ColorPicker::make('vip_atual_text_color')->label(__('Current VIP Text Color'))->required(),
                 ColorPicker::make('vip_proximo_background')->label(__('Next VIP Background Color'))->required(),
                 ColorPicker::make('vip_proximo_text_color')->label(__('Next VIP Text Color'))->required(),
-            ])->columns(4);
+            ])->columns(['default' => 4]);
     }
 
 
@@ -855,7 +855,7 @@ class LayoutCssCustom extends Page implements HasForms
                 ColorPicker::make('missoes_barraprogresso_background')->label(__('Missions Progress Bar Background Color'))->required(),
                 ColorPicker::make('missoes_barraprogresso_prenchimento_background')->label(__('Missions Progress Bar Fill Color'))->required(),
                 ColorPicker::make('missoes_barraprogresso_text_color')->label(__('Missions Progress Bar Text Color'))->required(),
-            ])->columns(4);
+            ])->columns(['default' => 4]);
     }
 
     
@@ -876,7 +876,7 @@ class LayoutCssCustom extends Page implements HasForms
                 ColorPicker::make('promocoes_pupup_background')->label(__('Promotions Popup Background Color'))->required(),
                 ColorPicker::make('promocoes_pupup_text_color')->label(__('Promotions Popup Text Color'))->required(),
                 ColorPicker::make('promocoes_icon_color')->label(__('Promotions Icons Color'))->required(),
-            ])->columns(4);
+            ])->columns(['default' => 4]);
     }
 
 
@@ -892,7 +892,7 @@ class LayoutCssCustom extends Page implements HasForms
                 ColorPicker::make('popup_cookies_button_background')->label(__('Cookie Popup Button Background Color'))->required(),
                 ColorPicker::make('popup_cookies_button_text_color')->label(__('Cookie Popup Button Text Color'))->required(),
                 ColorPicker::make('popup_cookies_button_border_color')->label(__('Cookie Popup Button Border Color'))->required(),
-            ])->columns(2);
+            ])->columns(['default' => 2]);
     }
 
     // PAGINA DE MENU CELL | FICA NA PAGINA DE MENU CELULAR
@@ -904,7 +904,7 @@ class LayoutCssCustom extends Page implements HasForms
             ->schema([
                 ColorPicker::make('menu_cell_background')->label(__('Mobile Menu Background Color'))->required(),
                 ColorPicker::make('menu_cell_text_color')->label(__('Mobile Menu Text Color'))->required(),
-            ])->columns(2);
+            ])->columns(['default' => 2]);
     }
 
 
@@ -919,7 +919,7 @@ class LayoutCssCustom extends Page implements HasForms
             ->schema([
                 ColorPicker::make('background_geral')->label(__('General Background Color'))->required(),
                 ColorPicker::make('background_geral_text_color')->label(__('General Text Color'))->required(),
-            ])->columns(2);
+            ])->columns(['default' => 2]);
     }
 
     // CARREGANDO
@@ -931,7 +931,7 @@ class LayoutCssCustom extends Page implements HasForms
             ->schema([
                 ColorPicker::make('carregando_background')->label(__('Loading Background Color'))->required(),
                 ColorPicker::make('carregando_text_color')->label(__('Loading Text Color'))->required(),
-            ])->columns(2);
+            ])->columns(['default' => 2]);
     }
 
     /////////////////////////////////////////////////////////////////////
@@ -970,7 +970,7 @@ class LayoutCssCustom extends Page implements HasForms
                 ColorPicker::make('maior_de_18_botao_sim_texto_color')->label(__('Text color for "Yes" button'))->required(),
                 ColorPicker::make('maior_de_18_botao_nao_background')->label(__('Background color for "No" button'))->required(),
                 ColorPicker::make('maior_de_18_botao_nao_texto_color')->label(__('Text color for "No" button'))->required(),
-            ])->columns(2);
+            ])->columns(['default' => 2]);
     }
 
     /////////////////////////////////////////////////////////////////////
@@ -986,7 +986,7 @@ class LayoutCssCustom extends Page implements HasForms
                 TextInput::make('vip_descriçao')->label(__('VIP Description')),
                 TextInput::make('vip_sub_texto')->label(__('VIP Subtext')),
                 TextInput::make('vip_sub_titulo')->label(__('VIP Subtitle')),
-            ])->columns(2);
+            ])->columns(['default' => 2]);
     }
 
 
