@@ -55,7 +55,7 @@ class DashboardAdmin extends \Filament\Pages\Dashboard
                         DatePicker::make('startDate')->label(__('Start Date')),
                         DatePicker::make('endDate')->label(__('End Date')),
                     ])
-                    ->columns(2),
+                    ->columns(['default' => 2]),
             ]);
     }
 

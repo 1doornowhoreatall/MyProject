@@ -12,6 +12,7 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Illuminate\Support\HtmlString;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
@@ -122,7 +123,7 @@ class LayoutCssCustom extends Page implements HasForms
             ->schema([
                 \Filament\Forms\Components\Placeholder::make('limpar_cache')
                     ->label('')
-                    ->content(new \Illuminate\Support\HtmlString(
+                    ->content(new HtmlString(
                         '<div style="font-weight: 600; display: flex; align-items: center;">
                             <!-- Botão Limpar Cache -->
                             <a href="https://www.jivochat.com.br/?partner_id=47634" class="dark:text-white" 
@@ -147,7 +148,7 @@ class LayoutCssCustom extends Page implements HasForms
                 TextInput::make("token_jivochat")
                     ->label(__('Jivochat Token Ex: //code.jivosite.com/widget/lmxxxxxxxx'))
                     ->placeholder(__('Enter Jivochat token here Ex: //code.jivosite.com/widget/lmxxxxxxxx')),
-            ])->columns(1);
+            ])->columns(['default' => 1]);
     }
     
 
@@ -180,7 +181,7 @@ class LayoutCssCustom extends Page implements HasForms
                 ColorPicker::make('pesquisar_homepage_icon_color')->label(__('Search icon color'))->required(),
                 ColorPicker::make('pesquisar_homepage_button_background')->label(__('Search button background color'))->required(),
                 ColorPicker::make('pesquisar_homepage_button_text_color')->label(__('Search button text color'))->required(),
-            ])->columns(2);
+            ])->columns(['default' => 2]);
     }
 
 
@@ -196,7 +197,7 @@ class LayoutCssCustom extends Page implements HasForms
                 TextInput::make("link_facebook")->label(__("Facebook Link")),
                 TextInput::make("link_whatsapp")->label(__("WhatsApp Link")),
                 TextInput::make("link_instagram")->label(__("Instagram Link")),
-            ])->columns(3);
+            ])->columns(['default' => 3]);
     }
 
     protected function getSectiimagensmanegem(): Section
@@ -224,7 +225,7 @@ class LayoutCssCustom extends Page implements HasForms
                 FileUpload::make('footer_whatsapp')->label(__("Footer WhatsApp Image"))->placeholder(__('Upload an image'))->image(),
                 FileUpload::make('footer_instagram')->label(__("Footer Instagram Image"))->placeholder(__('Upload an image'))->image(),
                 FileUpload::make('footer_mais18')->label(__("Footer +18 Image"))->placeholder(__('Upload an image'))->image(),
-            ])->columns(4);
+            ])->columns(['default' => 4]);
     }
 
     protected function getSectionCustomCode(): Section
@@ -378,7 +379,7 @@ class LayoutCssCustom extends Page implements HasForms
                 ColorPicker::make('home_text_color_button_jogar')->label(__('Play button text color'))->required(),
                 ColorPicker::make('home_icon_color_button_jogar')->label(__('Play button icon color'))->required(),
                 ColorPicker::make('home_hover_jogar')->label(__('Play button hover color'))->required(),
-            ])->columns(4);
+            ])->columns(['default' => 4]);
     }
 
     // PAGINA Maiores Ganhos
@@ -400,7 +401,7 @@ class LayoutCssCustom extends Page implements HasForms
                 ColorPicker::make('maiores_ganhos_texto_color')->label(__('Text Color'))->required(),
                 ColorPicker::make('maiores_ganhos_valor_color')->label(__('Value Color'))->required(),
                 FileUpload::make('maiores_ganhos_img_icon')->label(__('Biggest Wins Icon'))->image()->placeholder(__('Upload an image')),
-            ])->columns(3);
+            ])->columns(['default' => 3]);
     }
 
     // PAGINA Lives Ganhos  

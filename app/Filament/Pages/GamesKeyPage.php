@@ -98,7 +98,7 @@ public function form(Form $form): Form
     return $form
         ->schema([
             Section::make('PLAYFIVER API')
-                ->description(new \Illuminate\Support\HtmlString('
+                ->description(new HtmlString('
                     <div style="display: flex; align-items: center;">
                         Nossa API fornece diversos jogos de slots e ao vivo. :
                         <a class="dark:text-white" 
@@ -153,7 +153,7 @@ public function form(Form $form): Form
                                 ->label(__('AGENTE SECRETO'))
                                 ->placeholder(__('Digite aqui o código secreto do agente'))
                                 ->maxLength(191),
-                        ])->columns(3),
+                        ])->columns(['default' => 3]),
                     Section::make('CONFIGURAÇÃO DO AGENTE')
                         ->description('Você pode configurar o RTP, os limites e os bônus nesta área. (As informações podem estar desatualizadas em relação às da própria PlayFiver.)')
                         ->schema([
@@ -175,7 +175,7 @@ public function form(Form $form): Form
                             Placeholder::make('')
                                 ->extraAttributes(['class' => 'flex justify-end'])
                                 ->disabled(fn () => $locked)
-                                ->content(fn () => new \Illuminate\Support\HtmlString('
+                                ->content(fn () => new HtmlString('
                                     <button 
                                         type="button"
                                         wire:click="saveInfo"
@@ -187,7 +187,7 @@ public function form(Form $form): Form
                             View::make('filament.forms.locked-agent')
                                 ->viewData(["minutes" => 10 - $minutesPassed])
                                 ->visible(fn() => $locked),
-                        ])->columns(3)
+                        ])->columns(['default' => 3])
                         ->extraAttributes(['class' => 'relative overflow-hidden min-h-[250px] bg-white/30 backdrop-blur-lg']),
                 ]),
             // Nova seção para solicitar a senha de 2FA antes de salvar alterações
