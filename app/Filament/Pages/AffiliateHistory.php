@@ -12,7 +12,7 @@ use Filament\Tables\Contracts\HasTable;
 
 use Filament\Pages\Page;
 use Filament\Tables\Actions\Action;
-use Filament\Tables\Actions\DetailsActin;
+use App\Filament\Tables\Actions\DetailsAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Tables\Concerns\InteractsWithTable;
